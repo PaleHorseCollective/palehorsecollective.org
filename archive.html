@@ -416,13 +416,290 @@
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MOBILE MENU ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: crosshair;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 200;
+  }
+
+  .hamburger .bar {
+    width: 24px;
+    height: 1px;
+    background: var(--bone-dim);
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hamburger.open .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    background: var(--bone);
+  }
+
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.open .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    background: var(--bone);
+  }
+
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--void);
+    z-index: 150;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 2.5rem 3rem;
+  }
+
+  .mobile-overlay.open {
+    display: flex;
+  }
+
+  .mobile-overlay::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .mobile-nav-ref {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    color: var(--bone-dim);
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    position: relative;
+  }
+
+  .mobile-nav-links li {
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.25s; }
+
+  .mobile-nav-links a {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 8vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--bone-dim);
+    text-decoration: none;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.2s;
+  }
+
+  .mobile-nav-links a:hover,
+  .mobile-nav-links a.active { color: var(--bone); }
+
+  .mobile-nav-links a .mn-num {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.5;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+
+  .mobile-nav-footer {
+    position: relative;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(232,224,208,0.06);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-nav-footer-text {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--bone-dim);
+    text-transform: uppercase;
+    opacity: 0.25;
+  }
+
+  .mobile-nav-signal {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .mobile-nav-signal::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-signal { display: none; }
+  }
+
+
+  /* ─── MOBILE READABILITY FIXES ─── */
+  @media (max-width: 768px) {
+
+    /* Nav mark — truncate on mobile */
+    .nav-mark {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-mark::after {
+      content: '';
+    }
+
+    /* Footer — clean centered stack */
+    footer {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-mark {
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      opacity: 0.5;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.6rem;
+      opacity: 0.5;
+      letter-spacing: 0.15em;
+    }
+
+    .footer-doctrine {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      opacity: 0.4;
+      line-height: 2;
+    }
+
+    /* General mono text — bump up on mobile */
+    .filter-label,
+    .strip-label,
+    .fund-label,
+    .fund-text,
+    .fund-figure,
+    .page-header-meta,
+    .hero-file-ref,
+    .hero-tagline,
+    .hero-cta,
+    .portal-num,
+    .portal-link,
+    .entry-ref,
+    .entry-cta,
+    .source-tag,
+    .doctrine-num,
+    .signal-note,
+    .manifesto-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* Body text — more readable */
+    .portal-body,
+    .entry-body,
+    .inversion-body,
+    .statement-body,
+    .tier-description,
+    .founding-body,
+    .fund-subtitle,
+    .receive-body,
+    .notice-body,
+    .not-item-body,
+    .lineage-bio p,
+    .d-body,
+    .about-text,
+    .opening-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* Fund strip */
+    #fund, #fund-strip {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .fund-text {
+      font-size: 0.6rem;
+      line-height: 1.8;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .nav-mark-full { display: none; }
+    .nav-mark-sep { display: none; }
+  }
+
 </style>
 </head>
 <body>
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <a href="/" class="nav-mark">PHC <span class="nav-mark-sep">//</span><span class="nav-mark-full"> PALE HORSE COLLECTIVE</span></a>
   <ul class="nav-links">
     <li><a href="/archive.html" class="active">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
@@ -431,7 +708,29 @@
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
   <div class="nav-signal">TRANSMISSION ACTIVE</div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 </nav>
+
+<!-- ─── MOBILE OVERLAY ─── -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <div class="mobile-nav-ref">PHC // NAV // OUTER COURT ACCESS</div>
+  <ul class="mobile-nav-links">
+    <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
+    <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
+    <li><a href="/collective.html"><span>Collective</span><span class="mn-num">03</span></a></li>
+    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
+    <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
+  </ul>
+  <div class="mobile-nav-footer">
+    <span class="mobile-nav-footer-text">Not left. Not right. Awake.</span>
+    <span class="mobile-nav-signal">Signal active</span>
+  </div>
+</div>
+
 
 <!-- ─── PAGE HEADER ─── -->
 <header class="page-header">
@@ -780,6 +1079,27 @@
 
     document.getElementById('entry-count').textContent = visible + ' ' + (visible === 1 ? 'entry' : 'entries');
   }
+
+
+  // ─── MOBILE MENU ───
+  function toggleMenu() {
+    const overlay = document.getElementById('mobile-overlay');
+    const burger = document.getElementById('hamburger');
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+
+  // Close on link click
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
 </script>
 
 </body>
