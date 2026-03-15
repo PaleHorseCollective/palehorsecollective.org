@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Collective — Pale Horse Collective</title>
+<meta name="description" content="This brand has no single owner. No founder whose face represents it. The Collective is the author. The community is the archive.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease; }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    padding: 9rem 3rem 5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+
+  /* Concentric circles background */
+  .page-header::after {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    border: 1px solid rgba(184,150,12,0.04);
+    pointer-events: none;
+  }
+
+  .header-circle-2 {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; height: 500px; border-radius: 50%;
+    border: 1px solid rgba(184,150,12,0.06);
+    pointer-events: none;
+  }
+
+  .header-circle-3 {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 1px solid rgba(184,150,12,0.08);
+    pointer-events: none;
+  }
+
+  .page-header-meta {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--bone-dim);
+    max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.9;
+    position: relative;
+  }
+
+  .page-opening-statement {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    position: relative; max-width: 400px; margin: 0 auto;
+    line-height: 2;
+  }
+
+  /* ─── STRUCTURE STATEMENT ─── */
+  .structure-statement {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+
+  .statement-text {}
+
+  .statement-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: block;
+  }
+
+  .statement-heading {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.05; margin-bottom: 1.8rem;
+  }
+
+  .statement-heading em { color: var(--red); font-style: normal; }
+
+  .statement-body {
+    font-family: var(--font-body); font-style: italic; font-size: 1rem;
+    color: var(--bone-dim); line-height: 1.85;
+  }
+
+  .statement-quote {
+    border-left: 2px solid var(--gold); padding-left: 1.5rem; margin-top: 2rem;
+  }
+
+  .statement-quote p {
+    font-family: var(--font-body); font-style: italic; font-size: 1rem;
+    color: var(--bone); line-height: 1.8; margin-bottom: 0.8rem;
+  }
+
+  .statement-quote cite {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; font-style: normal; opacity: 0.6;
+  }
+
+  .statement-visual {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .sv-row {
+    background: var(--void); padding: 1.4rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .sv-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+  }
+
+  .sv-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .sv-value.highlight { color: var(--gold); }
+  .sv-value.live { color: var(--green); }
+
+  /* ─── THREE TIERS ─── */
+  .tiers-section {
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .tiers-header {
+    padding: 3rem 3rem 2rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .tiers-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 0.8rem; display: block;
+  }
+
+  .tiers-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .tiers-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tier-panel {
+    padding: 3.5rem 3rem;
+    border-right: 1px solid rgba(232,224,208,0.06);
+    position: relative; overflow: hidden;
+  }
+
+  .tier-panel:last-child { border-right: none; }
+
+  .tier-panel::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .tier-panel.t1::before { background: var(--bone-dim); opacity: 0.3; }
+  .tier-panel.t2::before { background: var(--gold); }
+  .tier-panel.t3::before { background: var(--green); }
+
+  .tier-number {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    text-transform: uppercase; margin-bottom: 0.6rem; display: block;
+  }
+  .t1 .tier-number { color: var(--bone-dim); opacity: 0.5; }
+  .t2 .tier-number { color: var(--gold); opacity: 0.7; }
+  .t3 .tier-number { color: var(--green); opacity: 0.8; }
+
+  .tier-name {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.1; margin-bottom: 1.5rem;
+  }
+
+  .tier-access-method {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 1.5rem; display: block;
+    padding: 0.4em 0.8em; border: 1px solid currentColor; display: inline-block;
+  }
+  .t1 .tier-access-method { color: var(--bone-dim); border-color: rgba(160,152,144,0.3); }
+  .t2 .tier-access-method { color: var(--gold); border-color: rgba(184,150,12,0.4); }
+  .t3 .tier-access-method { color: var(--green); border-color: rgba(74,255,145,0.4); }
+
+  .tier-description {
+    font-family: var(--font-body); font-style: italic; font-size: 0.9rem;
+    color: var(--bone-dim); line-height: 1.75; margin-bottom: 2rem;
+  }
+
+  .tier-perks {
+    display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem;
+  }
+
+  .tier-perk {
+    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.6;
+    display: flex; align-items: flex-start; gap: 0.8rem;
+  }
+
+  .tier-perk::before {
+    content: '→'; opacity: 0.5; flex-shrink: 0; margin-top: 0.05em;
+  }
+
+  .t2 .tier-perk::before { color: var(--gold); }
+  .t3 .tier-perk::before { color: var(--green); }
+
+  .tier-cta {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(232,224,208,0.15); color: var(--bone-dim);
+    text-decoration: none; display: inline-block; transition: all 0.2s;
+  }
+
+  .tier-cta:hover { color: var(--bone); border-color: rgba(232,224,208,0.4); background: rgba(232,224,208,0.03); }
+
+  .t1 .tier-cta-primary { color: var(--bone); border-color: rgba(232,224,208,0.3); }
+  .t2 .tier-cta-primary { color: var(--gold); border-color: rgba(184,150,12,0.4); }
+  .t3 .tier-cta-primary { color: var(--green); border-color: rgba(74,255,145,0.3); cursor: not-allowed; opacity: 0.5; }
+
+  /* ─── FOUNDING 100 ─── */
+  .founding-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+
+  .founding-left {}
+
+  .founding-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--green); text-transform: uppercase; margin-bottom: 1.5rem; display: block;
+  }
+
+  .founding-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem;
+  }
+
+  .founding-body {
+    font-family: var(--font-body); font-style: italic; font-size: 1rem;
+    color: var(--bone-dim); line-height: 1.85; margin-bottom: 2rem;
+  }
+
+  .founding-note {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    border-left: 1px solid rgba(74,255,145,0.3); padding-left: 1rem; line-height: 1.8;
+  }
+
+  .founding-right {}
+
+  /* Counter display */
+  .founding-counter {
+    background: rgba(232,224,208,0.02);
+    border: 1px solid rgba(232,224,208,0.08);
+    padding: 3rem; text-align: center; margin-bottom: 1px;
+  }
+
+  .counter-number {
+    font-family: var(--font-display); font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 700; color: var(--bone); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .counter-slash {
+    font-family: var(--font-mono); font-size: 1.5rem;
+    color: var(--bone-dim); opacity: 0.3; margin: 0 0.3rem;
+  }
+
+  .counter-total {
+    font-family: var(--font-display); font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 700; color: var(--bone-dim); opacity: 0.2; line-height: 1;
+  }
+
+  .counter-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--green); text-transform: uppercase; margin-top: 1rem; display: block;
+    opacity: 0.7;
+  }
+
+  .counter-status {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-top: 0.5rem; display: block;
+  }
+
+  /* Progress bar */
+  .founding-progress {
+    background: rgba(232,224,208,0.06);
+    height: 2px; margin-bottom: 1px;
+  }
+
+  .founding-progress-fill {
+    height: 100%; background: var(--green);
+    width: 0%; transition: width 1s ease;
+  }
+
+  .founding-stats {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .founding-stat {
+    background: var(--void); padding: 1.1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .fstat-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .fstat-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .fstat-value.open { color: var(--green); }
+  .fstat-value.highlight { color: var(--gold); }
+
+  /* ─── THE FUND ─── */
+  .fund-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .fund-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    margin-bottom: 3rem; padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    align-items: end;
+  }
+
+  .fund-label-large {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; margin-bottom: 1rem; display: block;
+  }
+
+  .fund-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 1rem;
+  }
+
+  .fund-subtitle {
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); line-height: 1.75;
+  }
+
+  .fund-commitment {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    line-height: 2; border-left: 1px solid var(--red); padding-left: 1.2rem;
+  }
+
+  .fund-live-ledger {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(232,224,208,0.06); margin-bottom: 3rem;
+  }
+
+  .ledger-cell {
+    background: var(--void); padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .ledger-figure {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700; color: var(--bone); margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .ledger-figure.zeroed { color: var(--bone-dim); opacity: 0.3; }
+  .ledger-figure.percent { color: var(--red); }
+
+  .ledger-cell-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .fund-recipients {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .recipient-row {
+    background: var(--void); padding: 1.2rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .recipient-name {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+  }
+
+  .recipient-status {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+
+  .recipient-status.pending { color: var(--gold); opacity: 0.5; }
+
+  /* ─── INITIATION PATH ─── */
+  .path-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .path-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 1rem; display: block;
+  }
+
+  .path-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); margin-bottom: 3rem;
+  }
+
+  .path-steps {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .path-step {
+    background: var(--void); padding: 2rem 1.5rem; position: relative;
+  }
+
+  .path-step::after {
+    content: '→';
+    position: absolute; top: 50%; right: -0.6rem;
+    transform: translateY(-50%);
+    font-family: var(--font-mono); font-size: 0.6rem;
+    color: var(--bone-dim); opacity: 0.2; z-index: 2;
+  }
+
+  .path-step:last-child::after { display: none; }
+
+  .step-num {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.7rem; display: block;
+  }
+
+  .step-name {
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.3; margin-bottom: 0.6rem;
+  }
+
+  .step-desc {
+    font-family: var(--font-body); font-style: italic; font-size: 0.75rem;
+    color: var(--bone-dim); line-height: 1.55; opacity: 0.7;
+  }
+
+  /* ─── FUND FOOTER ─── */
+  #fund-strip { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
+  .fund-strip-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
+  .fund-strip-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
+  .fund-strip-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+
+  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .structure-statement { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .tiers-grid { grid-template-columns: 1fr; }
+    .tier-panel { border-right: none; border-bottom: 1px solid rgba(232,224,208,0.06); }
+    .founding-section { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .fund-header { grid-template-columns: 1fr; gap: 2rem; }
+    .fund-live-ledger { grid-template-columns: repeat(2, 1fr); }
+    .path-steps { grid-template-columns: repeat(2, 1fr); }
+    .path-section, .fund-section { padding: 3rem 1.5rem; }
+    #fund-strip { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html" class="active">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="nav-signal">TRANSMISSION ACTIVE</div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<header class="page-header">
+  <div class="header-circle-2"></div>
+  <div class="header-circle-3"></div>
+  <div class="page-header-meta">FILE REF: PHC-COL-001 // NODE-05 // COMMUNITY ARCHITECTURE</div>
+  <h1 class="page-title">The Collective</h1>
+  <p class="page-subtitle">This brand has no single owner. No founder whose face represents it. No individual whose removal would end it. The Collective is the author. The community is the archive.</p>
+  <div class="page-opening-statement">
+    Every contribution has value.<br>
+    Every valuable contribution is rewarded.<br>
+    This is how it works.
+  </div>
+</header>
+
+<!-- ─── STRUCTURE STATEMENT ─── -->
+<section class="structure-statement">
+  <div class="statement-text reveal">
+    <span class="statement-label">Doctrine 08 // The Collective Owns This</span>
+    <h2 class="statement-heading">A decentralised organism<br>cannot be <em>beheaded</em>.</h2>
+    <p class="statement-body">No single individual controls this brand. No single face represents it. The mythology is larger than any founder. The community is the author. Contributions are rewarded. Revenue is shared. The fund is public. This structure is not idealistic — it is strategic.</p>
+    <div class="statement-quote">
+      <p>The most dangerous thing is not the information itself. It is the moment when enough people possess it simultaneously that concealment becomes impossible.</p>
+      <cite>— PHC Founding Doctrine</cite>
+    </div>
+  </div>
+
+  <div class="statement-visual reveal">
+    <div class="sv-row">
+      <span class="sv-label">Structure</span>
+      <span class="sv-value">Decentralised</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Founder</span>
+      <span class="sv-value">None named</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Revenue Share</span>
+      <span class="sv-value highlight">Yes — structural</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Community Voting</span>
+      <span class="sv-value highlight">Inner Court +</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Fund Transparency</span>
+      <span class="sv-value live">Public ledger</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Infrastructure</span>
+      <span class="sv-value">Decentralised stack</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Platform dependency</span>
+      <span class="sv-value">None</span>
+    </div>
+    <div class="sv-row">
+      <span class="sv-label">Can be deplatformed</span>
+      <span class="sv-value" style="color:var(--red); opacity:0.6">No</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THREE TIERS ─── -->
+<section class="tiers-section">
+  <div class="tiers-header">
+    <span class="tiers-label">Community Architecture // Three-Tier Initiation System</span>
+    <h2 class="tiers-title">How The Collective Works</h2>
+  </div>
+
+  <div class="tiers-grid">
+
+    <div class="tier-panel t1 reveal">
+      <span class="tier-number">Tier One // The Outer Court</span>
+      <h3 class="tier-name">Outer Court</h3>
+      <span class="tier-access-method">Open to all</span>
+      <p class="tier-description">Anyone who acquires a file enters the Outer Court. Access to the community Discord. Drop previews. Archive content. The first level of initiation — open, accessible, no gatekeeping beyond the first file acquisition.</p>
+      <div class="tier-perks">
+        <span class="tier-perk">Discord Outer Court access</span>
+        <span class="tier-perk">Drop previews and advance notice</span>
+        <span class="tier-perk">Full Tier One archive access</span>
+        <span class="tier-perk">Community voting participation</span>
+        <span class="tier-perk">Transmission list priority</span>
+      </div>
+      <a href="/files.html" class="tier-cta tier-cta-primary">Acquire First File →</a>
+    </div>
+
+    <div class="tier-panel t2 reveal">
+      <span class="tier-number">Tier Two // The Inner Court</span>
+      <h3 class="tier-name">Inner Court</h3>
+      <span class="tier-access-method">Contribution required</span>
+      <p class="tier-description">Active contributors — those whose research, symbols, or lore has been accepted into the archive. Early access to all files. Tier Two archive content. Voice in creative direction. The Inner Court is where the brand lives.</p>
+      <div class="tier-perks">
+        <span class="tier-perk">Everything in Outer Court</span>
+        <span class="tier-perk">Tier Two archive unlocked</span>
+        <span class="tier-perk">Early access to all file releases</span>
+        <span class="tier-perk">Direct input into creative direction</span>
+        <span class="tier-perk">Contribution voting rights</span>
+        <span class="tier-perk">Inner Court Discord channels</span>
+      </div>
+      <a href="/transmissions.html" class="tier-cta tier-cta-primary">Contribute to the Archive →</a>
+    </div>
+
+    <div class="tier-panel t3 reveal">
+      <span class="tier-number">Tier Three // The Initiated</span>
+      <h3 class="tier-name">The Initiated</h3>
+      <span class="tier-access-method">Invitation only — 100 max</span>
+      <p class="tier-description">The founding 100. Permanent revenue share on any drop they contributed to. Full archive access. Direct line to creative direction. These are the co-owners in practice. This tier closes permanently at 100.</p>
+      <div class="tier-perks">
+        <span class="tier-perk">Everything in Inner Court</span>
+        <span class="tier-perk">Permanent revenue share on contributed drops</span>
+        <span class="tier-perk">Full Tier Three archive access</span>
+        <span class="tier-perk">Direct creative co-ownership</span>
+        <span class="tier-perk">Record of founding preserved permanently</span>
+        <span class="tier-perk">Tier Three file access — 33 editions</span>
+      </div>
+      <span class="tier-cta tier-cta-primary" style="display:inline-block; opacity:0.4; cursor:not-allowed;">Invitation Only</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOUNDING 100 ─── -->
+<section class="founding-section">
+  <div class="founding-left reveal">
+    <span class="founding-label">// Founding 100 // Status: Open</span>
+    <h2 class="founding-title">The First Hundred</h2>
+    <p class="founding-body">The Initiated tier is limited to the first 100 deep contributors. When 100 is reached, this tier closes permanently. The record will show who was here first — preserved and public. Their handles, their contributions, their place in the archive. Permanent. Unalterable.</p>
+    <div class="founding-note">
+      Founding members receive permanent revenue share on any drop they contributed to. Not a one-time payment. Permanent. Structural. For the life of the Collective. This is not a loyalty programme. It is co-ownership.
+    </div>
+  </div>
+
+  <div class="founding-right reveal">
+    <div class="founding-counter">
+      <div style="display:flex; align-items:baseline; justify-content:center; gap:0.3rem;">
+        <span class="counter-number" id="founding-count">0</span>
+        <span class="counter-slash">/</span>
+        <span class="counter-total">100</span>
+      </div>
+      <span class="counter-label">Founding Members</span>
+      <span class="counter-status">Status: OPEN — 100 remaining</span>
+    </div>
+    <div class="founding-progress">
+      <div class="founding-progress-fill" id="founding-bar"></div>
+    </div>
+    <div class="founding-stats">
+      <div class="founding-stat">
+        <span class="fstat-label">Tier Status</span>
+        <span class="fstat-value open">Open</span>
+      </div>
+      <div class="founding-stat">
+        <span class="fstat-label">Spots Remaining</span>
+        <span class="fstat-value open">100</span>
+      </div>
+      <div class="founding-stat">
+        <span class="fstat-label">Revenue Share</span>
+        <span class="fstat-value highlight">10% of contributed drops</span>
+      </div>
+      <div class="founding-stat">
+        <span class="fstat-label">Closes At</span>
+        <span class="fstat-value">100 — permanent</span>
+      </div>
+      <div class="founding-stat">
+        <span class="fstat-label">Record</span>
+        <span class="fstat-value">Public — permanent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE FUND ─── -->
+<section class="fund-section">
+  <div class="fund-header reveal">
+    <div>
+      <span class="fund-label-large">// The Fund // 15% // Always</span>
+      <h2 class="fund-title">The Public Ledger</h2>
+      <p class="fund-subtitle">15% of every acquisition flows here. Always. From the first file to the last. Distributed to independent journalism, FOIA infrastructure, and open-source research tools. Left and right both value this. Bipartisan by design.</p>
+    </div>
+    <div class="fund-commitment">
+      The ledger is open.<br>
+      The commitment is structural, not optional.<br>
+      No exceptions have been made.<br>
+      No exceptions will be made.<br>
+      This is in the doctrine.<br>
+      The doctrine does not change.
+    </div>
+  </div>
+
+  <div class="fund-live-ledger reveal">
+    <div class="ledger-cell">
+      <div class="ledger-figure zeroed">$0.00</div>
+      <div class="ledger-cell-label">Total Generated</div>
+    </div>
+    <div class="ledger-cell">
+      <div class="ledger-figure zeroed">$0.00</div>
+      <div class="ledger-cell-label">Total Disbursed</div>
+    </div>
+    <div class="ledger-cell">
+      <div class="ledger-figure percent">15%</div>
+      <div class="ledger-cell-label">Revenue Allocation</div>
+    </div>
+    <div class="ledger-cell">
+      <div class="ledger-figure zeroed">0</div>
+      <div class="ledger-cell-label">Recipients</div>
+    </div>
+  </div>
+
+  <div class="fund-recipients reveal">
+    <div class="recipient-row">
+      <span class="recipient-name">Independent journalism infrastructure</span>
+      <span class="recipient-status pending">Pending first disbursement</span>
+    </div>
+    <div class="recipient-row">
+      <span class="recipient-name">FOIA request infrastructure</span>
+      <span class="recipient-status pending">Pending first disbursement</span>
+    </div>
+    <div class="recipient-row">
+      <span class="recipient-name">Open-source research tooling</span>
+      <span class="recipient-status pending">Pending first disbursement</span>
+    </div>
+    <div class="recipient-row" style="opacity:0.3">
+      <span class="recipient-name">Further recipients determined by community vote</span>
+      <span class="recipient-status">Inner Court voting</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INITIATION PATH ─── -->
+<section class="path-section">
+  <span class="path-label">The Initiation Path // How You Move Through The Collective</span>
+  <h2 class="path-title">The Journey</h2>
+  <div class="path-steps">
+    <div class="path-step reveal">
+      <span class="step-num">01 // Discovery</span>
+      <div class="step-name">You Find It</div>
+      <p class="step-desc">A TikTok decode. An Instagram symbol. A question you can't un-ask. The archive is there when you arrive.</p>
+    </div>
+    <div class="path-step reveal">
+      <span class="step-num">02 // The Archive</span>
+      <div class="step-name">You Read</div>
+      <p class="step-desc">The research library pulls you in. An hour passes. The pattern becomes visible. You find the source citations.</p>
+    </div>
+    <div class="path-step reveal">
+      <span class="step-num">03 // First File</span>
+      <div class="step-name">You Acquire</div>
+      <p class="step-desc">First file acquired. Outer Court access unlocked. You enter the community. The garment is the document.</p>
+    </div>
+    <div class="path-step reveal">
+      <span class="step-num">04 // Contribution</span>
+      <div class="step-name">You Build</div>
+      <p class="step-desc">You vote on the next drop. You submit research. You become a co-creator. The archive carries your work.</p>
+    </div>
+    <div class="path-step reveal">
+      <span class="step-num">05 // Initiation</span>
+      <div class="step-name">You're Invited</div>
+      <p class="step-desc">Deep contributors are invited into the Initiated tier. Revenue share begins. Ownership is real.</p>
+    </div>
+    <div class="path-step reveal">
+      <span class="step-num">06 // Evangelism</span>
+      <div class="step-name">You Tell Others</div>
+      <p class="step-desc">Not because you were asked to. Because you feel you discovered something real. That is the only marketing that works.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FUND STRIP ─── -->
+<div id="fund-strip">
+  <div class="fund-strip-label">// The Fund // Live</div>
+  <div class="fund-strip-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-strip-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> PALE HORSE COLLECTIVE <em>·</em> Est. when you found this</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Animate founding counter on scroll
+  const counterEl = document.getElementById('founding-count');
+  const barEl = document.getElementById('founding-bar');
+  const foundingCount = 0; // update this as members join
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let current = 0;
+        const target = foundingCount;
+        if (target === 0) return;
+        const interval = setInterval(() => {
+          current++;
+          counterEl.textContent = current;
+          barEl.style.width = (current / 100 * 100) + '%';
+          if (current >= target) clearInterval(interval);
+        }, 30);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  if (counterEl) counterObserver.observe(counterEl);
+</script>
+
+</body>
+</html>
