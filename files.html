@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Files — Pale Horse Collective</title>
+<meta name="description" content="Declassified documents made wearable. Each file is a numbered release. Limited edition. Never reprinted.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease; }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    padding: 9rem 3rem 4rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+
+  .header-left {}
+
+  .page-header-meta {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 1.5rem; display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--bone-dim);
+    line-height: 1.8; max-width: 440px;
+  }
+
+  .header-right {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .header-stat {
+    background: var(--void); padding: 1.2rem 1.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .stat-value {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .stat-value.live { color: var(--green); }
+  .stat-value.closed { color: var(--red); opacity: 0.7; }
+
+  /* ─── DOCTRINE BAR ─── */
+  .doctrine-bar {
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    background: rgba(139,26,26,0.03);
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    display: flex; gap: 3rem;
+  }
+
+  /* ─── FILES GRID ─── */
+  .files-container { padding: 3rem; }
+
+  .files-section { margin-bottom: 5rem; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 2rem; padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .section-tier-badge {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.25em 0.7em; border: 1px solid currentColor;
+  }
+  .tier-1-badge { color: var(--bone-dim); }
+  .tier-2-badge { color: var(--gold); }
+  .tier-3-badge { color: var(--green); }
+
+  .section-title {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .section-edition-note {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-left: auto;
+  }
+
+  /* ─── FILE CARD ─── */
+  .files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1px; background: rgba(232,224,208,0.06);
+  }
+
+  .file-card {
+    background: var(--void); display: block; text-decoration: none; color: inherit;
+    position: relative; overflow: hidden; transition: background 0.2s;
+  }
+
+  .file-card:hover { background: rgba(232,224,208,0.02); }
+
+  /* The garment visual area */
+  .file-visual {
+    aspect-ratio: 4/3;
+    position: relative;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    background: #080806;
+  }
+
+  /* SVG placeholder garment graphics */
+  .file-visual svg {
+    width: 60%; height: 60%;
+    opacity: 0.6;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .file-card:hover .file-visual svg {
+    opacity: 0.9; transform: scale(1.03);
+  }
+
+  .file-status-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.25em 0.6em;
+    border: 1px solid currentColor;
+  }
+
+  .status-open { color: var(--green); border-color: var(--green); }
+  .status-coming { color: var(--gold); border-color: var(--gold); }
+  .status-closed { color: var(--red); border-color: var(--red); opacity: 0.6; }
+
+  .file-num-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .file-edition-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: rgba(232,224,208,0.06);
+  }
+
+  .file-edition-fill {
+    height: 100%; background: var(--red);
+    transition: width 0.5s ease;
+  }
+
+  .file-card.tier-2 .file-edition-fill { background: var(--gold); }
+  .file-card.tier-3 .file-edition-fill { background: var(--green); }
+
+  /* Card body */
+  .file-body { padding: 1.8rem; }
+
+  .file-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; margin-bottom: 0.5rem;
+  }
+
+  .file-name {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.1; margin-bottom: 0.6rem;
+  }
+
+  .file-decode-link {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6; margin-bottom: 1rem;
+    display: block;
+  }
+
+  .file-desc {
+    font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
+    color: var(--bone-dim); line-height: 1.6; margin-bottom: 1.5rem;
+  }
+
+  .file-meta {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.8rem; margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(232,224,208,0.06);
+    background: rgba(232,224,208,0.02);
+  }
+
+  .file-meta-item {}
+
+  .meta-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 0.3rem; display: block;
+  }
+
+  .meta-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .meta-value.remaining { color: var(--green); }
+  .meta-value.sold-out { color: var(--red); opacity: 0.7; }
+
+  .file-cta {
+    display: flex; align-items: center; justify-content: center;
+    padding: 0.9rem; font-family: var(--font-mono); font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid rgba(232,224,208,0.15); color: var(--bone);
+    transition: all 0.2s; text-decoration: none;
+  }
+
+  .file-cta:hover {
+    background: rgba(232,224,208,0.05); border-color: rgba(232,224,208,0.4);
+  }
+
+  .file-cta.coming-soon {
+    color: var(--bone-dim); opacity: 0.4; cursor: not-allowed;
+    border-color: rgba(232,224,208,0.06);
+  }
+
+  .file-cta.coming-soon:hover { background: transparent; border-color: rgba(232,224,208,0.06); }
+
+  /* ─── NOTICE ─── */
+  .files-notice {
+    padding: 3rem;
+    border-top: 1px solid rgba(232,224,208,0.08);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .notice-item {
+    background: var(--void); padding: 2rem;
+  }
+
+  .notice-num {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 0.7rem; display: block; opacity: 0.6;
+  }
+
+  .notice-title {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.6rem;
+  }
+
+  .notice-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
+    color: var(--bone-dim); line-height: 1.65; opacity: 0.7;
+  }
+
+  /* ─── FUND / FOOTER ─── */
+  #fund { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
+  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
+  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
+  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+
+  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+    .doctrine-bar { padding: 1rem 1.5rem; gap: 1.5rem; flex-wrap: wrap; }
+    .files-container { padding: 2rem 1.5rem; }
+    .files-notice { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .section-edition-note { display: none; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html" class="active">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="nav-signal">TRANSMISSION ACTIVE</div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<header class="page-header">
+  <div class="header-left">
+    <div class="page-header-meta">
+      <span>FILE REF: PHC-FILES-001</span>
+      <span>//</span>
+      <span>NODE-08</span>
+      <span>//</span>
+      <span>DROP INDEX</span>
+    </div>
+    <h1 class="page-title">The Files</h1>
+    <p class="page-subtitle">Each file is a declassified document made wearable. Limited edition. Numbered. Never reprinted. The archive of what has been released is permanent. The editions are not.</p>
+  </div>
+
+  <div class="header-right">
+    <div class="header-stat">
+      <span class="stat-label">Files Released</span>
+      <span class="stat-value">001</span>
+    </div>
+    <div class="header-stat">
+      <span class="stat-label">Current File</span>
+      <span class="stat-value live">FILE 001 — OPEN</span>
+    </div>
+    <div class="header-stat">
+      <span class="stat-label">Tier 1 Edition Size</span>
+      <span class="stat-value">500 max</span>
+    </div>
+    <div class="header-stat">
+      <span class="stat-label">Tier 2 Edition Size</span>
+      <span class="stat-value">100 max</span>
+    </div>
+    <div class="header-stat">
+      <span class="stat-label">Tier 3 Edition Size</span>
+      <span class="stat-value">33 max</span>
+    </div>
+    <div class="header-stat">
+      <span class="stat-label">Reprints</span>
+      <span class="stat-value closed">Never</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── DOCTRINE BAR ─── -->
+<div class="doctrine-bar">
+  <span>File releases. Not drops.</span>
+  <span>//</span>
+  <span>Documents. Not products.</span>
+  <span>//</span>
+  <span>Archivists. Not customers.</span>
+  <span>//</span>
+  <span>The edition closes when it closes.</span>
+</div>
+
+<!-- ─── FILES ─── -->
+<main class="files-container">
+
+  <!-- TIER ONE -->
+  <div class="files-section">
+    <div class="section-header">
+      <span class="section-tier-badge tier-1-badge">Tier One</span>
+      <span class="section-title">Outer Court — File Releases</span>
+      <span class="section-edition-note">Up to 500 per file // POD // Never reprinted</span>
+    </div>
+
+    <div class="files-grid">
+
+      <!-- FILE 001 — ACTIVE -->
+      <a href="#acquire" class="file-card tier-1 reveal">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pyramid with floating capstone on garment graphic -->
+            <polygon points="100,30 155,130 45,130" stroke="#e8e0d0" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <!-- Floating capstone -->
+            <polygon points="100,10 113,30 87,30" stroke="#e8e0d0" stroke-width="1.2" fill="none" opacity="0.8"/>
+            <!-- Eye -->
+            <ellipse cx="100" cy="20" rx="6" ry="3.5" stroke="#e8e0d0" stroke-width="1" fill="none" opacity="0.9"/>
+            <circle cx="100" cy="20" r="2" fill="#e8e0d0" opacity="1"/>
+            <!-- Radiant lines -->
+            <line x1="100" y1="10" x2="100" y2="2" stroke="#8b1a1a" stroke-width="0.8" opacity="0.7"/>
+            <line x1="107" y1="12" x2="112" y2="5" stroke="#8b1a1a" stroke-width="0.6" opacity="0.5"/>
+            <line x1="93" y1="12" x2="88" y2="5" stroke="#8b1a1a" stroke-width="0.6" opacity="0.5"/>
+            <!-- Base text -->
+            <text x="100" y="150" font-family="Oswald" font-size="8" letter-spacing="3" fill="#e8e0d0" text-anchor="middle" opacity="0.5">THE CAPSTONE</text>
+            <text x="100" y="162" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#a09890" text-anchor="middle" opacity="0.35">FILE 001 // OUTER COURT</text>
+            <!-- Distress marks -->
+            <line x1="40" y1="135" x2="160" y2="135" stroke="#e8e0d0" stroke-width="0.4" opacity="0.15"/>
+            <line x1="40" y1="138" x2="160" y2="138" stroke="#e8e0d0" stroke-width="0.2" opacity="0.08"/>
+          </svg>
+          <span class="file-status-badge status-open">Open</span>
+          <span class="file-num-badge">FILE 001</span>
+          <div class="file-edition-bar">
+            <div class="file-edition-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div class="file-ref">FILE 001 // OUTER COURT // DECLASSIFIED</div>
+          <h2 class="file-name">The Capstone</h2>
+          <span class="file-decode-link">Decode document → SYM-01 in archive</span>
+          <p class="file-desc">The unfinished pyramid — inverted, decoded, documented. The capstone floats because it was never meant to land. The eye is not watching from above. It is the eye of every person who wakes to see the structure for what it is.</p>
+          <div class="file-meta">
+            <div class="file-meta-item">
+              <span class="meta-label">Edition</span>
+              <span class="meta-value">500 max</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Remaining</span>
+              <span class="meta-value remaining">500 available</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Classification</span>
+              <span class="meta-value">Outer Court</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Reprint</span>
+              <span class="meta-value">Never</span>
+            </div>
+          </div>
+          <span class="file-cta">Acquire This File</span>
+        </div>
+      </a>
+
+      <!-- FILE 002 — COMING -->
+      <div class="file-card tier-1 reveal">
+        <div class="file-visual" style="opacity:0.4">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Signal tower -->
+            <line x1="100" y1="20" x2="100" y2="140" stroke="#e8e0d0" stroke-width="1.5" opacity="0.6"/>
+            <line x1="80" y1="80" x2="100" y2="60" stroke="#e8e0d0" stroke-width="1" opacity="0.5"/>
+            <line x1="120" y1="80" x2="100" y2="60" stroke="#e8e0d0" stroke-width="1" opacity="0.5"/>
+            <line x1="70" y1="110" x2="100" y2="80" stroke="#e8e0d0" stroke-width="1" opacity="0.4"/>
+            <line x1="130" y1="110" x2="100" y2="80" stroke="#e8e0d0" stroke-width="1" opacity="0.4"/>
+            <!-- Signal rings -->
+            <path d="M 82 35 Q 100 25 118 35" stroke="#8b1a1a" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <path d="M 74 28 Q 100 14 126 28" stroke="#8b1a1a" stroke-width="0.6" fill="none" opacity="0.3"/>
+            <text x="100" y="158" font-family="Oswald" font-size="7" letter-spacing="3" fill="#e8e0d0" text-anchor="middle" opacity="0.4">THE SIGNAL TOWER</text>
+            <text x="100" y="170" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#a09890" text-anchor="middle" opacity="0.25">FILE 002 // OUTER COURT</text>
+          </svg>
+          <span class="file-status-badge status-coming">Incoming</span>
+          <span class="file-num-badge">FILE 002</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref">FILE 002 // OUTER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="opacity:0.5">The Signal Tower</h2>
+          <span class="file-decode-link" style="opacity:0.3">Decode document → SYM-02 in archive</span>
+          <p class="file-desc" style="opacity:0.4">Control of the electromagnetic spectrum. Who controls the signal controls the message. Broadcast as domination — until it isn't. File 002 is in preparation. Transmission date to be announced.</p>
+          <div class="file-meta" style="opacity:0.4">
+            <div class="file-meta-item">
+              <span class="meta-label">Edition</span>
+              <span class="meta-value">500 max</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Status</span>
+              <span class="meta-value" style="color:var(--gold)">Pending</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Classification</span>
+              <span class="meta-value">Outer Court</span>
+            </div>
+            <div class="file-meta-item">
+              <span class="meta-label">Reprint</span>
+              <span class="meta-value">Never</span>
+            </div>
+          </div>
+          <span class="file-cta coming-soon">Pending Declassification</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIER TWO — COMING -->
+  <div class="files-section">
+    <div class="section-header">
+      <span class="section-tier-badge tier-2-badge">Tier Two</span>
+      <span class="section-title">Inner Court — File Releases</span>
+      <span class="section-edition-note">Up to 100 per file // Small batch // Screen printed // Never reprinted</span>
+    </div>
+
+    <div class="files-grid">
+      <div class="file-card tier-2 reveal" style="opacity:0.5">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ouroboros broken loop -->
+            <path d="M 100 40 A 60 60 0 1 1 99 40" stroke="#b8960c" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5 3"/>
+            <text x="100" y="108" font-family="Oswald" font-size="7" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.4">INNER COURT</text>
+            <text x="100" y="120" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#a09890" text-anchor="middle" opacity="0.2">TIER TWO // PENDING</text>
+          </svg>
+          <span class="file-status-badge status-coming">Incoming</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref">TIER TWO // INNER COURT // PENDING</div>
+          <h2 class="file-name" style="opacity:0.4">Inner Court Files</h2>
+          <p class="file-desc" style="opacity:0.4">Tier Two file releases require Inner Court access. First purchase of any Tier One file unlocks Inner Court membership and Discord access. Tier Two drops are small batch, screen printed, heavyweight. The quality is the message.</p>
+          <span class="file-cta coming-soon">Inner Court Access Required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER THREE — LOCKED -->
+  <div class="files-section">
+    <div class="section-header">
+      <span class="section-tier-badge tier-3-badge">Tier Three</span>
+      <span class="section-title">Initiated — File Releases</span>
+      <span class="section-edition-note">33 max // The number is not arbitrary</span>
+    </div>
+
+    <div class="files-grid">
+      <div class="file-card tier-3 reveal" style="opacity:0.4">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Black sun geometry -->
+            <circle cx="100" cy="100" r="30" stroke="#4aff91" stroke-width="0.8" fill="none" opacity="0.2"/>
+            <circle cx="100" cy="100" r="20" stroke="#4aff91" stroke-width="0.5" fill="none" opacity="0.15"/>
+            <!-- 12 spokes -->
+            <g opacity="0.2" stroke="#4aff91" stroke-width="0.8">
+              <line x1="100" y1="60" x2="100" y2="45"/>
+              <line x1="119.6" y1="65" x2="130.2" y2="53.5"/>
+              <line x1="135" y1="80.4" x2="147.5" y2="73.5"/>
+              <line x1="140" y1="100" x2="155" y2="100"/>
+              <line x1="135" y1="119.6" x2="147.5" y2="126.5"/>
+              <line x1="119.6" y1="135" x2="130.2" y2="146.5"/>
+              <line x1="100" y1="140" x2="100" y2="155"/>
+              <line x1="80.4" y1="135" x2="69.8" y2="146.5"/>
+              <line x1="65" y1="119.6" x2="52.5" y2="126.5"/>
+              <line x1="60" y1="100" x2="45" y2="100"/>
+              <line x1="65" y1="80.4" x2="52.5" y2="73.5"/>
+              <line x1="80.4" y1="65" x2="69.8" y2="53.5"/>
+            </g>
+            <text x="100" y="108" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.3">INITIATED ONLY</text>
+          </svg>
+          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.5">Initiated</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref">TIER THREE // INITIATED // EYES ONLY</div>
+          <h2 class="file-name" style="opacity:0.35">Initiated Files</h2>
+          <p class="file-desc" style="opacity:0.35">Tier Three file releases are limited to 33. The number is not arbitrary. Access is by invitation only — extended to deep contributors of the Collective. These files are extremely limited and will not be announced publicly.</p>
+          <span class="file-cta coming-soon">Initiated Access Only</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── ACQUISITION NOTICE ─── -->
+<div id="acquire" class="files-notice">
+  <div class="notice-item reveal">
+    <span class="notice-num">01 // HOW ACQUISITION WORKS</span>
+    <h3 class="notice-title">Each File Is A Document</h3>
+    <p class="notice-body">Every file has a number, a classification, a full decode document in the archive, and an edition status. You are not buying merchandise. You are acquiring a numbered edition of a wearable document. The intellectual lineage of every symbol is published at release.</p>
+  </div>
+  <div class="notice-item reveal">
+    <span class="notice-num">02 // EDITION INTEGRITY</span>
+    <h3 class="notice-title">Never Reprinted</h3>
+    <p class="notice-body">When an edition closes, it is closed permanently. The file number remains in the archive as a historical record. The edition exists only in the hands of those who acquired it. Scarcity here is structural, not manufactured. The archive is permanent. The editions are not.</p>
+  </div>
+  <div class="notice-item reveal">
+    <span class="notice-num">03 // AFTER ACQUISITION</span>
+    <h3 class="notice-title">What Unlocks</h3>
+    <p class="notice-body">First acquisition of any Tier One file unlocks Outer Court Discord access and drop previews. Active contributors are invited into Inner Court. Deep contributors are extended Initiated invitations. The tier system mirrors actual esoteric initiation structures. This is intentional.</p>
+  </div>
+</div>
+
+<!-- ─── FUND ─── -->
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> PALE HORSE COLLECTIVE <em>·</em> Est. when you found this</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
