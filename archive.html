@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Archive — Pale Horse Collective</title>
+<meta name="description" content="Every symbol decoded. Every source cited. Every pattern documented. The record that was not meant to be assembled in one place.">
+<meta name="keywords" content="William Cooper, Behold a Pale Horse, symbol decode, sacred geometry, Anthony Sutton, Carroll Quigley, Jordan Maxwell, occult symbols, secret societies, Freemasonry">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+
+  .nav-mark {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+  }
+  .nav-mark span { color: var(--red); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+  .nav-signal {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--green); display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-signal::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    padding: 9rem 3rem 4rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .page-header-meta {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 1.5rem; display: flex; gap: 2rem; align-items: center;
+  }
+
+  .page-header-meta .sep { opacity: 0.3; }
+
+  .page-title {
+    font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem); color: var(--bone-dim);
+    max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem;
+  }
+
+  .page-doctrine {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    border-left: 1px solid var(--gold); padding-left: 1rem;
+  }
+
+  /* ─── FILTER BAR ─── */
+  .filter-bar {
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    position: sticky; top: 68px; z-index: 50;
+    background: rgba(10,10,8,0.95); backdrop-filter: blur(8px);
+  }
+
+  .filter-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; background: transparent;
+    border: 1px solid rgba(232,224,208,0.12); padding: 0.4em 0.9em;
+    cursor: crosshair; transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    color: var(--bone); border-color: rgba(232,224,208,0.4);
+    background: rgba(232,224,208,0.04);
+  }
+
+  .filter-btn.tier-1.active { border-color: var(--bone-dim); color: var(--bone); }
+  .filter-btn.tier-2.active { border-color: var(--gold); color: var(--gold); }
+  .filter-btn.tier-3.active { border-color: var(--green); color: var(--green); }
+
+  .filter-count {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); opacity: 0.3; margin-left: auto;
+  }
+
+  /* ─── ARCHIVE GRID ─── */
+  .archive-container {
+    padding: 3rem;
+  }
+
+  .archive-section {
+    margin-bottom: 4rem;
+  }
+
+  .section-header {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .section-tier-badge {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.25em 0.7em;
+    border: 1px solid currentColor;
+  }
+
+  .tier-1-badge { color: var(--bone-dim); }
+  .tier-2-badge { color: var(--gold); }
+  .tier-3-badge { color: var(--green); }
+
+  .section-title {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .section-desc {
+    font-family: var(--font-body); font-style: italic; font-size: 0.8rem;
+    color: var(--bone-dim); margin-left: auto; max-width: 340px; opacity: 0.6;
+  }
+
+  /* ─── ENTRY CARDS ─── */
+  .entries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .entry-card {
+    background: var(--void);
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .entry-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--red);
+    transition: height 0.3s ease;
+  }
+
+  .entry-card:hover { background: rgba(232,224,208,0.02); }
+  .entry-card:hover::before { height: 100%; }
+
+  .entry-card.tier-2::before { background: var(--gold); }
+  .entry-card.tier-3::before { background: var(--green); }
+
+  .entry-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .entry-title {
+    font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.2; margin-bottom: 0.8rem;
+  }
+
+  .entry-origin {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .entry-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
+    color: var(--bone-dim); line-height: 1.65; margin-bottom: 1.2rem;
+  }
+
+  .entry-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .entry-source-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  }
+
+  .source-tag {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    border: 1px solid rgba(232,224,208,0.1); padding: 0.15em 0.4em;
+  }
+
+  .entry-cta {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .entry-card:hover .entry-cta { opacity: 0.6; }
+
+  /* Gated tier 3 */
+  .entry-card.gated {
+    position: relative;
+  }
+
+  .entry-card.gated .entry-body {
+    filter: blur(3px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .gated-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(to top, rgba(10,10,8,0.95), transparent);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
+  }
+
+  .gated-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--green); text-transform: uppercase;
+    border: 1px solid var(--green); padding: 0.2em 0.6em; opacity: 0.7;
+  }
+
+  .gated-text {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  /* ─── SOURCES SECTION ─── */
+  .sources-section {
+    padding: 5rem 3rem;
+    border-top: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .sources-header {
+    margin-bottom: 3rem;
+  }
+
+  .sources-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; display: block;
+  }
+
+  .sources-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone);
+  }
+
+  .sources-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px; background: rgba(232,224,208,0.06);
+  }
+
+  .source-card {
+    background: var(--void); padding: 2rem;
+  }
+
+  .source-name {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.4rem;
+  }
+
+  .source-work {
+    font-family: var(--font-body); font-style: italic; font-size: 0.8rem;
+    color: var(--gold); margin-bottom: 0.8rem; opacity: 0.8;
+  }
+
+  .source-desc {
+    font-family: var(--font-body); font-style: italic; font-size: 0.8rem;
+    color: var(--bone-dim); line-height: 1.6; opacity: 0.7;
+  }
+
+  /* ─── GROWING NOTE ─── */
+  .archive-note {
+    padding: 3rem;
+    border-top: 1px solid rgba(232,224,208,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .archive-note-text {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    max-width: 500px; line-height: 1.8;
+  }
+
+  .archive-note-count {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    text-align: right; white-space: nowrap;
+  }
+
+  /* ─── FUND FOOTER ─── */
+  #fund {
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding: 2.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(139,26,26,0.04);
+  }
+  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
+  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
+  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding: 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .filter-bar { padding: 1rem 1.5rem; top: 58px; }
+    .archive-container { padding: 2rem 1.5rem; }
+    .sources-section { padding: 3rem 1.5rem; }
+    .archive-note { flex-direction: column; padding: 2rem 1.5rem; }
+    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .section-desc { display: none; }
+    .section-header { flex-wrap: wrap; }
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html" class="active">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="nav-signal">TRANSMISSION ACTIVE</div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<header class="page-header">
+  <div class="page-header-meta">
+    <span>FILE REF: PHC-ARCH-001</span>
+    <span class="sep">//</span>
+    <span>NODE-03</span>
+    <span class="sep">//</span>
+    <span>THE DECODE LIBRARY</span>
+    <span class="sep">//</span>
+    <span>PUBLIC ACCESS</span>
+  </div>
+  <h1 class="page-title">The Archive</h1>
+  <p class="page-subtitle">
+    The record that was not meant to be assembled in one place. Every symbol decoded. Every source cited. Every pattern documented. This is what separates the Collective from merchandise.
+  </p>
+  <div class="page-doctrine">
+    Doctrine 03 — The Symbol Is The Confession
+  </div>
+</header>
+
+<!-- ─── FILTER BAR ─── -->
+<div class="filter-bar">
+  <span class="filter-label">Filter //</span>
+  <button class="filter-btn active" data-filter="all" onclick="filterEntries('all', this)">All Entries</button>
+  <button class="filter-btn tier-1" data-filter="tier-1" onclick="filterEntries('tier-1', this)">Outer Court</button>
+  <button class="filter-btn tier-2" data-filter="tier-2" onclick="filterEntries('tier-2', this)">Inner Court</button>
+  <button class="filter-btn tier-3" data-filter="tier-3" onclick="filterEntries('tier-3', this)">Initiated</button>
+  <button class="filter-btn" data-filter="cooper" onclick="filterEntries('cooper', this)">Cooper</button>
+  <button class="filter-btn" data-filter="maxwell" onclick="filterEntries('maxwell', this)">Maxwell</button>
+  <button class="filter-btn" data-filter="sutton" onclick="filterEntries('sutton', this)">Sutton</button>
+  <span class="filter-count" id="entry-count">12 entries</span>
+</div>
+
+<!-- ─── ARCHIVE CONTENT ─── -->
+<main class="archive-container">
+
+  <!-- TIER ONE -->
+  <div class="archive-section" data-section="tier-1">
+    <div class="section-header">
+      <span class="section-tier-badge tier-1-badge">Tier One</span>
+      <span class="section-title">The Outer Court</span>
+      <span class="section-desc">Symbols already circulating in culture. Recognisable but not decoded.</span>
+    </div>
+
+    <div class="entries-grid">
+
+      <a href="/archive/unfinished-pyramid.html" class="entry-card tier-1 reveal" data-tags="tier-1 cooper">
+        <div class="entry-ref">SYM-01 // OUTER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Unfinished Pyramid</h2>
+        <div class="entry-origin">Origin — Reverse of the US Dollar // Novus Ordo Seclorum</div>
+        <p class="entry-body">Programme of a new secular order. The eye above the incomplete pyramid signals an unfinished project — a world still being constructed toward an endpoint. The capstone floats because it was never meant to land.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Cooper</span>
+            <span class="source-tag">US Dollar</span>
+            <span class="source-tag">Freemasonry</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/signal-tower.html" class="entry-card tier-1 reveal" data-tags="tier-1 cooper">
+        <div class="entry-ref">SYM-02 // OUTER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Signal Tower</h2>
+        <div class="entry-origin">Origin — Communications Infrastructure // Surveillance Architecture</div>
+        <p class="entry-body">Who controls the signal controls the message. The electromagnetic spectrum as broadcast domination. Those who were only receivers become broadcasters. The frequency was always available — it was merely jammed.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Cooper</span>
+            <span class="source-tag">COINTELPRO</span>
+            <span class="source-tag">FCC</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/redacted-document.html" class="entry-card tier-1 reveal" data-tags="tier-1 cooper">
+        <div class="entry-ref">SYM-03 // OUTER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Redacted Document</h2>
+        <div class="entry-origin">Origin — FOIA Releases // Declassified Government Files</div>
+        <p class="entry-body">The black bar as an instrument of concealment. Power's ability to determine what you are permitted to know about your own governance. Every redaction is a confession. The bar marks the exact location of what they feared you would find.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">FOIA</span>
+            <span class="source-tag">NSA</span>
+            <span class="source-tag">Church Committee</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/pale-horse.html" class="entry-card tier-1 reveal" data-tags="tier-1 cooper">
+        <div class="entry-ref">SYM-04 // OUTER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Pale Horse</h2>
+        <div class="entry-origin">Origin — Revelation 6:8 // William Cooper // Death Rides Pale</div>
+        <p class="entry-body">Biblical symbol of Death. The fourth seal. Pale as the colour of a corpse — chloros in the Greek, the colour of disease. Cooper chose this deliberately — not as prophecy but as documentation. The horse has always been here. Now you can see it.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Cooper</span>
+            <span class="source-tag">Revelation</span>
+            <span class="source-tag">Hour of the Time</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- TIER TWO -->
+  <div class="archive-section" data-section="tier-2">
+    <div class="section-header">
+      <span class="section-tier-badge tier-2-badge">Tier Two</span>
+      <span class="section-title">The Inner Court</span>
+      <span class="section-desc">The architecture of control made visible. For those who've read beyond the headlines.</span>
+    </div>
+
+    <div class="entries-grid">
+
+      <a href="/archive/compass-square-broken.html" class="entry-card tier-2 reveal" data-tags="tier-2 cooper">
+        <div class="entry-ref">SYM-05 // INNER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Compass & Square — Broken</h2>
+        <div class="entry-origin">Origin — Freemasonry // Sacred Geometry as Operative Tool</div>
+        <p class="entry-body">The working tools of the builder. G at centre — Geometry, God, or the Great Architect depending on the degree. Symbol of those who shape the world by design while others believe in accident. The tools are broken apart and redistributed.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Cooper</span>
+            <span class="source-tag">Freemasonry</span>
+            <span class="source-tag">33rd Degree</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/ouroboros-broken-loop.html" class="entry-card tier-2 reveal" data-tags="tier-2 cooper">
+        <div class="entry-ref">SYM-06 // INNER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Ouroboros — Broken Loop</h2>
+        <div class="entry-origin">Origin — Ancient Egypt // Alchemy // Eternal Recurrence</div>
+        <p class="entry-body">The serpent eating its own tail. Eternal cycle. Used by control systems to signal that the loop cannot be broken — debt begetting debt, war begetting war, crisis begetting crisis. The cycle is not eternal — it is manufactured. And manufactured things can be stopped.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Egypt</span>
+            <span class="source-tag">Alchemy</span>
+            <span class="source-tag">Sutton</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/central-bank-seal.html" class="entry-card tier-2 reveal" data-tags="tier-2 sutton">
+        <div class="entry-ref">SYM-07 // INNER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Central Bank Seal</h2>
+        <div class="entry-origin">Origin — Federal Reserve // BIS // Central Banking Architecture</div>
+        <p class="entry-body">The seal as legitimacy. Circular, official, heavy with implied authority. Sutton documented that the same financial architecture funded opposing sides of the Cold War. The seal transcends nation. It precedes nation. Wearing this is wearing the receipt.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Sutton</span>
+            <span class="source-tag">Federal Reserve</span>
+            <span class="source-tag">BIS</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+      <a href="/archive/double-headed-eagle.html" class="entry-card tier-2 reveal" data-tags="tier-2 cooper">
+        <div class="entry-ref">SYM-08 // INNER COURT // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Double-Headed Eagle</h2>
+        <div class="entry-origin">Origin — 33rd Degree Freemasonry // Byzantine Empire // Dual Sovereignty</div>
+        <p class="entry-body">Two heads looking in opposite directions — East and West, temporal and spiritual, visible and hidden power. Left/right, Democrat/Republican — two heads of the same body, finally forced to see each other.</p>
+        <div class="entry-footer">
+          <div class="entry-source-tags">
+            <span class="source-tag">Cooper</span>
+            <span class="source-tag">Quigley</span>
+            <span class="source-tag">Byzantine</span>
+          </div>
+          <span class="entry-cta">Read decode →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- TIER THREE -->
+  <div class="archive-section" data-section="tier-3">
+    <div class="section-header">
+      <span class="section-tier-badge tier-3-badge">Tier Three</span>
+      <span class="section-title">The Holy of Holies</span>
+      <span class="section-desc">The deepest layer. For those who have gone all the way down.</span>
+    </div>
+
+    <div class="entries-grid">
+
+      <a href="/collective.html" class="entry-card tier-3 gated reveal" data-tags="tier-3 maxwell">
+        <div class="entry-ref">SYM-09 // INITIATED // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Black Sun</h2>
+        <div class="entry-origin">Origin — Pre-Christian Solar Cults // Esoteric Tradition</div>
+        <p class="entry-body">The invisible sun behind the visible sun. The occult force behind the apparent power. Used by mystery schools to represent the source of esoteric illumination. The visible world — politics, media, markets — is the bright sun everyone looks at. The black sun is what actually drives it.</p>
+        <div class="gated-overlay">
+          <span class="gated-label">Initiated Access Required</span>
+          <span class="gated-text">Enter the collective to unlock Tier 3 archive →</span>
+        </div>
+      </a>
+
+      <a href="/collective.html" class="entry-card tier-3 gated reveal" data-tags="tier-3 maxwell">
+        <div class="entry-ref">SYM-10 // INITIATED // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Vesica Piscis</h2>
+        <div class="entry-origin">Origin — Sacred Geometry // Origin of the Christian Ichthys // Portal Geometry</div>
+        <p class="entry-body">The intersection of two circles of equal radius. The overlap — the space between two worlds. Used in church architecture, corporate logos, and religious iconography as the portal between the seen and unseen. The overlap is not a sacred space controlled by priests — it is a threshold anyone can cross.</p>
+        <div class="gated-overlay">
+          <span class="gated-label">Initiated Access Required</span>
+          <span class="gated-text">Enter the collective to unlock Tier 3 archive →</span>
+        </div>
+      </a>
+
+      <a href="/collective.html" class="entry-card tier-3 gated reveal" data-tags="tier-3 maxwell">
+        <div class="entry-ref">SYM-11 // INITIATED // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Celestial Clock</h2>
+        <div class="entry-origin">Origin — Astrotheology // Maxwell // Precession of the Equinoxes</div>
+        <p class="entry-body">Maxwell documented that most religious narrative is celestial allegory — the sun as the son, the 12 disciples as the 12 constellations, death and resurrection as the winter solstice. The sky was the original scripture. Those who could read it held power over those who couldn't.</p>
+        <div class="gated-overlay">
+          <span class="gated-label">Initiated Access Required</span>
+          <span class="gated-text">Enter the collective to unlock Tier 3 archive →</span>
+        </div>
+      </a>
+
+      <a href="/collective.html" class="entry-card tier-3 gated reveal" data-tags="tier-3 maxwell">
+        <div class="entry-ref">SYM-12 // INITIATED // ARCHIVE ENTRY</div>
+        <h2 class="entry-title">The Caduceus — Unbound</h2>
+        <div class="entry-origin">Origin — Hermes // Medical Establishment // Mercury as Messenger and Deceiver</div>
+        <p class="entry-body">Two serpents ascending a staff with wings at the top. Hermes — god of commerce, communication, and thieves. The caduceus adopted by medicine and finance. Mercury rules both the market and the message. The serpents descend now. The message is no longer controlled from above.</p>
+        <div class="gated-overlay">
+          <span class="gated-label">Initiated Access Required</span>
+          <span class="gated-text">Enter the collective to unlock Tier 3 archive →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── PRIMARY SOURCES ─── -->
+<section class="sources-section">
+  <div class="sources-header">
+    <span class="sources-label">In The Record // Primary Sources // Intellectual Lineage</span>
+    <h2 class="sources-title">The Lineage</h2>
+  </div>
+  <div class="sources-grid">
+    <div class="source-card reveal">
+      <div class="source-name">William Cooper</div>
+      <div class="source-work">Behold a Pale Horse // Hour of the Time</div>
+      <p class="source-desc">Former naval intelligence officer. Spent his life documenting the moment the architecture became visible. Called his broadcast Hour of the Time — information without timing is archaeology, but information at the right moment is detonation.</p>
+    </div>
+    <div class="source-card reveal">
+      <div class="source-name">Anthony Sutton</div>
+      <div class="source-work">Wall Street and the Bolshevik Revolution // Wall Street and the Rise of Hitler</div>
+      <p class="source-desc">Hoover Institution economist. Documented through primary source research that the same Wall Street network financed opposing sides of the Cold War simultaneously. Both sides are the same side. The evidence is in the archive.</p>
+    </div>
+    <div class="source-card reveal">
+      <div class="source-name">Carroll Quigley</div>
+      <div class="source-work">Tragedy and Hope // The Anglo-American Establishment</div>
+      <p class="source-desc">Georgetown historian and insider. Wrote from within the apparatus, describing a network whose goal transcends any political party or national interest. The significance is that he described it as real and called it good. We read the description. We differ on the conclusion.</p>
+    </div>
+    <div class="source-card reveal">
+      <div class="source-name">Jordan Maxwell</div>
+      <div class="source-work">Matrix of Power // The Dawn of a New Day</div>
+      <p class="source-desc">Fifty years documenting the astrotheological foundation of religious and corporate symbolism. The sun cult that never ended — it just changed its costume. The sky was the first scripture. Those who could read it held power. The sky belongs to everyone who looks up.</p>
+    </div>
+    <div class="source-card reveal">
+      <div class="source-name">Nesta Webster</div>
+      <div class="source-work">Secret Societies and Subversive Movements // World Revolution</div>
+      <p class="source-desc">Early 20th century historian who traced secret societies as a continuous historical thread from the ancient mystery schools through the French Revolution to the present. The continuity is documented. The methodology is consistent across centuries.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHIVE NOTE ─── -->
+<div class="archive-note">
+  <div class="archive-note-text">
+    The archive grows with each file release. Nothing is removed. The record is permanent. Every decode document published at drop time becomes part of this archive permanently. The intellectual lineage of every symbol used is documented and public.
+  </div>
+  <div class="archive-note-count">
+    ENTRIES: 12 // SOURCES: 5<br>
+    LAST UPDATED: FILE 001<br>
+    STATUS: GROWING
+  </div>
+</div>
+
+<!-- ─── FUND ─── -->
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> PALE HORSE COLLECTIVE <em>·</em> Est. when you found this</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  // ─── SCROLL REVEAL ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 60 * (Array.from(entry.target.parentElement?.children || []).indexOf(entry.target)));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── FILTER ───
+  function filterEntries(filter, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.entry-card');
+    const sections = document.querySelectorAll('.archive-section');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const tags = card.dataset.tags || '';
+      const show = filter === 'all' || tags.includes(filter);
+      card.style.display = show ? 'block' : 'none';
+      if (show) visible++;
+    });
+
+    // Show/hide sections based on visible cards
+    sections.forEach(section => {
+      const visibleCards = section.querySelectorAll('.entry-card:not([style*="none"])');
+      section.style.display = visibleCards.length > 0 ? 'block' : 'none';
+    });
+
+    document.getElementById('entry-count').textContent = visible + ' ' + (visible === 1 ? 'entry' : 'entries');
+  }
+</script>
+
+</body>
+</html>
