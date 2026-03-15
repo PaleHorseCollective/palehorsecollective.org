@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Doctrine — Pale Horse Collective</title>
+<meta name="description" content="The Collective does not ask you to believe anything. It asks you to look at the record. The nine doctrines. The manifesto. The intellectual lineage.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease; }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    padding: 9rem 3rem 5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+
+  .page-header-meta {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem); color: var(--bone-dim);
+    line-height: 1.85; margin-bottom: 2rem; max-width: 460px;
+  }
+
+  .page-transmission {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    border-left: 1px solid rgba(232,224,208,0.15); padding-left: 1.2rem;
+    line-height: 2.2;
+  }
+
+  /* Right side — nine doctrine index */
+  .header-index {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .index-item {
+    background: var(--void); padding: 0.9rem 1.5rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    text-decoration: none; color: inherit; transition: background 0.2s;
+  }
+
+  .index-item:hover { background: rgba(232,224,208,0.02); }
+
+  .index-num {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5; flex-shrink: 0; width: 2rem;
+  }
+
+  .index-name {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .index-item:hover .index-name { opacity: 1; color: var(--bone); }
+
+  /* ─── OPENING ─── */
+  .opening-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    max-width: 760px;
+  }
+
+  .opening-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 2rem; display: block;
+  }
+
+  .opening-text {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--bone);
+    line-height: 2; margin-bottom: 2rem;
+  }
+
+  .opening-transmission {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    border-top: 1px solid rgba(232,224,208,0.08); padding-top: 1.5rem;
+    line-height: 2.2;
+  }
+
+  /* ─── NINE DOCTRINES ─── */
+  .doctrines-section {
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .doctrines-header {
+    padding: 3rem 3rem 2rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+
+  .doctrines-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .doctrines-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+
+  .doctrine-entry {
+    display: grid; grid-template-columns: 120px 1fr 1fr;
+    border-bottom: 1px solid rgba(232,224,208,0.05);
+    transition: background 0.2s;
+  }
+
+  .doctrine-entry:last-child { border-bottom: none; }
+  .doctrine-entry:hover { background: rgba(232,224,208,0.015); }
+
+  .doctrine-num-col {
+    padding: 3rem 2rem 3rem 3rem;
+    border-right: 1px solid rgba(232,224,208,0.05);
+    display: flex; flex-direction: column; justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .d-num {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+  }
+
+  .d-num-large {
+    font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+    color: var(--bone); opacity: 0.06; line-height: 1; letter-spacing: -0.02em;
+  }
+
+  .doctrine-title-col {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid rgba(232,224,208,0.05);
+  }
+
+  .d-title {
+    font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.2; margin-bottom: 0.8rem;
+  }
+
+  .d-source {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+  }
+
+  .doctrine-body-col {
+    padding: 3rem 3rem 3rem 2.5rem;
+  }
+
+  .d-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.92rem;
+    color: var(--bone-dim); line-height: 1.85;
+  }
+
+  .d-evidence {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-top: 1rem; line-height: 1.8;
+  }
+
+  /* ─── WHAT WE ARE NOT ─── */
+  .not-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .not-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 1.5rem; display: block;
+  }
+
+  .not-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); margin-bottom: 3rem;
+  }
+
+  .not-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .not-item {
+    background: var(--void); padding: 2.5rem;
+  }
+
+  .not-item-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--red); text-transform: uppercase; opacity: 0.6;
+    margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+
+  .not-item-label::before {
+    content: '✕'; font-size: 0.6rem;
+  }
+
+  .not-item-title {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.8rem;
+  }
+
+  .not-item-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.88rem;
+    color: var(--bone-dim); line-height: 1.75; opacity: 0.8;
+  }
+
+  /* ─── MANIFESTO ─── */
+  .manifesto-section {
+    padding: 7rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+  }
+
+  .manifesto-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px; border-radius: 50%;
+    border: 1px solid rgba(184,150,12,0.04); pointer-events: none;
+  }
+
+  .manifesto-section::after {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; height: 400px; border-radius: 50%;
+    border: 1px solid rgba(184,150,12,0.06); pointer-events: none;
+  }
+
+  .manifesto-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.35em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    text-align: center; margin-bottom: 4rem; display: block; position: relative;
+  }
+
+  .manifesto-body {
+    max-width: 620px; margin: 0 auto; text-align: center; position: relative;
+  }
+
+  .manifesto-line {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: var(--bone);
+    line-height: 2.4; display: block;
+  }
+
+  .manifesto-line.dim { color: var(--bone-dim); opacity: 0.4; }
+
+  .manifesto-sep {
+    display: block; font-family: var(--font-mono);
+    font-size: 0.8rem; color: var(--bone-dim); opacity: 0.2;
+    margin: 1.5rem 0; letter-spacing: 0.3em;
+  }
+
+  .manifesto-final {
+    margin-top: 4rem; text-align: center; position: relative;
+  }
+
+  .manifesto-final-name {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--bone); display: block; margin-bottom: 0.8rem;
+  }
+
+  .manifesto-final-sub {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.35em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+  }
+
+  /* ─── LINEAGE ─── */
+  .lineage-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .lineage-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; display: block;
+  }
+
+  .lineage-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); margin-bottom: 3rem;
+  }
+
+  .lineage-entries {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .lineage-entry {
+    background: var(--void);
+    display: grid; grid-template-columns: 260px 1fr 1fr;
+    transition: background 0.2s;
+  }
+
+  .lineage-entry:hover { background: rgba(232,224,208,0.02); }
+
+  .lineage-identity {
+    padding: 2.5rem; border-right: 1px solid rgba(232,224,208,0.05);
+  }
+
+  .lineage-name {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.4rem;
+  }
+
+  .lineage-role {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; margin-bottom: 1rem;
+  }
+
+  .lineage-works {
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+
+  .lineage-work {
+    font-family: var(--font-body); font-style: italic; font-size: 0.75rem;
+    color: var(--gold); opacity: 0.7; line-height: 1.4;
+  }
+
+  .lineage-bio {
+    padding: 2.5rem; border-right: 1px solid rgba(232,224,208,0.05);
+  }
+
+  .lineage-bio p {
+    font-family: var(--font-body); font-style: italic; font-size: 0.88rem;
+    color: var(--bone-dim); line-height: 1.8; opacity: 0.8;
+  }
+
+  .lineage-relevance {
+    padding: 2.5rem;
+  }
+
+  .relevance-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.8rem; display: block;
+  }
+
+  .relevance-body {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em;
+    color: var(--bone-dim); text-transform: uppercase; line-height: 2; opacity: 0.5;
+  }
+
+  /* ─── ABOUT NO FOUNDERS ─── */
+  .about-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    text-align: center;
+  }
+
+  .about-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-bottom: 2rem; display: block;
+  }
+
+  .about-text {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem); color: var(--bone-dim);
+    max-width: 640px; margin: 0 auto; line-height: 2; opacity: 0.7;
+  }
+
+  /* ─── FUND / FOOTER ─── */
+  #fund { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
+  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
+  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
+  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+
+  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
+    .opening-section { padding: 3rem 1.5rem; }
+    .doctrines-header { padding: 2rem 1.5rem; }
+    .doctrine-entry { grid-template-columns: 1fr; }
+    .doctrine-num-col { padding: 2rem 1.5rem 0; border-right: none; flex-direction: row; align-items: center; gap: 1rem; }
+    .d-num-large { display: none; }
+    .doctrine-title-col { padding: 1rem 1.5rem; border-right: none; border-bottom: none; }
+    .doctrine-body-col { padding: 0 1.5rem 2rem; }
+    .not-section, .manifesto-section, .lineage-section, .about-section { padding: 3rem 1.5rem; }
+    .not-grid { grid-template-columns: 1fr; }
+    .lineage-entry { grid-template-columns: 1fr; }
+    .lineage-identity, .lineage-bio { border-right: none; border-bottom: 1px solid rgba(232,224,208,0.05); }
+    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html" class="active">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="nav-signal">TRANSMISSION ACTIVE</div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<header class="page-header">
+  <div>
+    <div class="page-header-meta">FILE REF: PHC-BIBLE-001 // CHAPTER THREE // THE NINE DOCTRINES</div>
+    <h1 class="page-title">The Doctrine</h1>
+    <p class="page-subtitle">The Collective does not ask you to believe anything. It asks you to look at the record. To follow the pattern. To reach your own conclusions from documented evidence rather than inherited assumption.</p>
+    <div class="page-transmission">
+      We do not assert. We decode.<br>
+      We do not recruit. We transmit.<br>
+      We do not promise salvation. We offer a map.<br>
+      What you do with the map is yours.
+    </div>
+  </div>
+
+  <div class="header-index">
+    <a href="#doctrine-01" class="index-item"><span class="index-num">01</span><span class="index-name">The Pattern Is The Proof</span></a>
+    <a href="#doctrine-02" class="index-item"><span class="index-num">02</span><span class="index-name">Ordo Ab Chao — Decoded</span></a>
+    <a href="#doctrine-03" class="index-item"><span class="index-num">03</span><span class="index-name">The Symbol Is The Confession</span></a>
+    <a href="#doctrine-04" class="index-item"><span class="index-num">04</span><span class="index-name">Both Sides Are The Same Side</span></a>
+    <a href="#doctrine-05" class="index-item"><span class="index-num">05</span><span class="index-name">The Sky Was The First Scripture</span></a>
+    <a href="#doctrine-06" class="index-item"><span class="index-num">06</span><span class="index-name">Chaos Is The Current Climate</span></a>
+    <a href="#doctrine-07" class="index-item"><span class="index-num">07</span><span class="index-name">Awareness Is The Counter-Operation</span></a>
+    <a href="#doctrine-08" class="index-item"><span class="index-num">08</span><span class="index-name">The Collective Owns This</span></a>
+    <a href="#doctrine-09" class="index-item"><span class="index-num">09</span><span class="index-name">Not Left. Not Right. Awake.</span></a>
+  </div>
+</header>
+
+<!-- ─── OPENING ─── -->
+<section class="opening-section reveal">
+  <span class="opening-label">PHC-BIBLE-001 // Chapter Three // Preamble</span>
+  <p class="opening-text">These are the nine principles from which everything the Collective produces is derived. Every drop, every piece of content, every community decision passes through these. They are not commandments. They are conclusions — arrived at through documented evidence, primary source research, and the kind of pattern recognition that becomes unavoidable once you have seen enough of the record.</p>
+  <div class="opening-transmission">
+    // TRANSMISSION //<br>
+    The following doctrines are derived from primary source material.<br>
+    Every claim is traceable. Every pattern is documented.<br>
+    The precision is itself a statement — that this material<br>
+    withstands scrutiny in a way that most of what surrounds it does not.<br>
+    // END //
+  </div>
+</section>
+
+<!-- ─── NINE DOCTRINES ─── -->
+<section class="doctrines-section">
+  <div class="doctrines-header">
+    <h2 class="doctrines-title">The Nine Doctrines</h2>
+    <span class="doctrines-ref">PHC-BIBLE-001 // Chapter Three</span>
+  </div>
+
+  <div id="doctrine-01" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 01</span>
+      <span class="d-num-large">01</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">The Pattern Is The Proof</h3>
+      <span class="d-source">Source: Cooper // Quigley // The Record</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">We do not rely on a single event, a single document, or a single source. The pattern across time, across institutions, across nations — that is the evidence. One anomaly is an anomaly. A thousand anomalies arranged in the same direction is a system.</p>
+      <div class="d-evidence">Evidence: Declassified COINTELPRO files // MKUltra Senate hearings //<br>Sutton's Wall Street research // Quigley's Tragedy and Hope</div>
+    </div>
+  </div>
+
+  <div id="doctrine-02" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 02</span>
+      <span class="d-num-large">02</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">Ordo Ab Chao — Decoded</h3>
+      <span class="d-source">Source: Historical record // Hegelian method // Documented crises</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">Order out of chaos is not a metaphor. It is a methodology. The documented pattern — crisis, response, consolidation — appears in the historical record with sufficient regularity that it must be treated as operational doctrine. We name it. We show it. We do not fear it.</p>
+      <div class="d-evidence">Evidence: Reichstag fire // Gulf of Tonkin // PATRIOT Act timeline //<br>Federal Reserve creation 1913 // Naomi Klein: The Shock Doctrine</div>
+    </div>
+  </div>
+
+  <div id="doctrine-03" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 03</span>
+      <span class="d-num-large">03</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">The Symbol Is The Confession</h3>
+      <span class="d-source">Source: Maxwell // Cooper // Architectural record</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">Those who use a hidden language leave a record. Every symbol placed in a position of public authority is a signature. The all-seeing eye on the dollar is not decoration. The obelisk in the capital is not architecture. The geometry in the corporate logo is not coincidence. We read the signatures.</p>
+      <div class="d-evidence">Evidence: Great Seal history // Washington DC street layout //<br>Maxwell: Matrix of Power // Masonic symbolism in public architecture</div>
+    </div>
+  </div>
+
+  <div id="doctrine-04" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 04</span>
+      <span class="d-num-large">04</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">Both Sides Are The Same Side</h3>
+      <span class="d-source">Source: Sutton // Quigley // Documented funding records</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">Anthony Sutton proved through primary source documentation that Wall Street financed the Bolshevik Revolution and the Nazi war machine simultaneously. Carroll Quigley, writing from inside the apparatus, described a network whose goal transcends any political party or national interest. Left and right are the outer court of a system that operates in the inner court regardless of which flag is flying.</p>
+      <div class="d-evidence">Evidence: Sutton: Wall Street and the Bolshevik Revolution //<br>Sutton: Wall Street and the Rise of Hitler // Quigley: Tragedy and Hope</div>
+    </div>
+  </div>
+
+  <div id="doctrine-05" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 05</span>
+      <span class="d-num-large">05</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">The Sky Was The First Scripture</h3>
+      <span class="d-source">Source: Maxwell // Astrotheology // Comparative religion</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">Jordan Maxwell spent fifty years documenting that the world's major religious narratives are astrotheological — the sun as the son, the twelve disciples as the twelve constellations, death and resurrection as the winter solstice cycle. The priests who held this knowledge held power over those who didn't. The sky belongs to everyone who looks up.</p>
+      <div class="d-evidence">Evidence: Maxwell: The Dawn of a New Day // Massey: Ancient Egypt //<br>Comparative solar mythology // Solstice alignments in sacred architecture</div>
+    </div>
+  </div>
+
+  <div id="doctrine-06" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 06</span>
+      <span class="d-num-large">06</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">Chaos Is The Current Climate</h3>
+      <span class="d-source">Source: Current record // Observable pattern</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">We are living inside a documented phase of deliberate destabilisation. Financial systems, health infrastructure, information architecture, national sovereignty — all are under simultaneous pressure. This is not mismanagement. Mismanagement does not produce this level of simultaneity. We observe. We document. We do not panic.</p>
+      <div class="d-evidence">Evidence: BIS reports // WHO framework documents // WEF stated objectives //<br>The simultaneity itself is the evidence</div>
+    </div>
+  </div>
+
+  <div id="doctrine-07" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 07</span>
+      <span class="d-num-large">07</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">Awareness Is The Counter-Operation</h3>
+      <span class="d-source">Source: Cooper // The logic of covert operations</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">A system that requires concealment to function is vulnerable to exposure. The single most effective counter to any covert operation is sufficient public awareness of its existence and methodology. We are not a resistance movement. We are a lighting operation.</p>
+      <div class="d-evidence">Evidence: Cooper: Hour of the Time // Church Committee findings //<br>The documented effectiveness of COINTELPRO — which required secrecy to function</div>
+    </div>
+  </div>
+
+  <div id="doctrine-08" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 08</span>
+      <span class="d-num-large">08</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">The Collective Owns This</h3>
+      <span class="d-source">Source: PHC Founding Structure</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">No single individual controls this brand. No single face represents it. The mythology is larger than any founder. The community is the author. Contributions are rewarded. Revenue is shared. The fund is public. This structure is not idealistic — it is strategic. A decentralised organism cannot be beheaded.</p>
+      <div class="d-evidence">Structure: Revenue split public // Fund ledger public //<br>Founding 100 record permanent // No single point of failure</div>
+    </div>
+  </div>
+
+  <div id="doctrine-09" class="doctrine-entry reveal">
+    <div class="doctrine-num-col">
+      <span class="d-num">Doctrine 09</span>
+      <span class="d-num-large">09</span>
+    </div>
+    <div class="doctrine-title-col">
+      <h3 class="d-title">Not Left. Not Right. Awake.</h3>
+      <span class="d-source">Source: The full pattern // Sutton // Quigley // The record</span>
+    </div>
+    <div class="doctrine-body-col">
+      <p class="d-body">This is the only political position available to someone who has seen the full pattern. The spectrum itself is the cage. We do not stand on the spectrum. We stand outside it and describe its dimensions to anyone willing to step back far enough to see the whole thing.</p>
+      <div class="d-evidence">Evidence: Sutton's documented funding of all sides // Quigley's insider admission //<br>The two-party system as documented in Quigley: The Anglo-American Establishment</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── WHAT WE ARE NOT ─── -->
+<section class="not-section">
+  <span class="not-label">// Precise Definitions // What The Collective Is Not</span>
+  <h2 class="not-title">What We Are Not</h2>
+  <div class="not-grid">
+    <div class="not-item reveal">
+      <div class="not-item-label">Not This</div>
+      <h3 class="not-item-title">A Political Brand</h3>
+      <p class="not-item-body">Left and right are two heads of the same eagle, looking in opposite directions so you never see the body they share. We do not serve either head. We document the body. The spectrum itself is the cage.</p>
+    </div>
+    <div class="not-item reveal">
+      <div class="not-item-label">Not This</div>
+      <h3 class="not-item-title">A Hate Movement</h3>
+      <p class="not-item-body">The structures we decode are not ethnic, national, or religious in their nature. Power has no permanent ethnicity. It moves through institutions — financial, governmental, ecclesiastical — and it recruits across every demographic it requires.</p>
+    </div>
+    <div class="not-item reveal">
+      <div class="not-item-label">Not This</div>
+      <h3 class="not-item-title">A Doomsday Cult</h3>
+      <p class="not-item-body">The pattern we document is not inevitable. It is the product of specific decisions made by specific people operating specific systems. Decisions can be unmade. Systems can be understood and therefore navigated. The first step is seeing clearly.</p>
+    </div>
+    <div class="not-item reveal">
+      <div class="not-item-label">Not This</div>
+      <h3 class="not-item-title">Paranoid</h3>
+      <p class="not-item-body">The documented record — declassified files, Senate hearings, academic research, the published work of insiders who broke rank — supports more of what is called conspiracy theory than the mainstream has ever acknowledged. We work from evidence. We cite sources. We let the record speak.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MANIFESTO ─── -->
+<section class="manifesto-section">
+  <span class="manifesto-label">PHC-BIBLE-001 // Chapter Seven // The Manifesto // First Transmission</span>
+  <div class="manifesto-body">
+    <span class="manifesto-line dim">They built a language and called it decoration.</span>
+    <span class="manifesto-line dim">They built a system and called it coincidence.</span>
+    <span class="manifesto-line dim">They built a history and called it settled.</span>
+    <span class="manifesto-sep">—</span>
+    <span class="manifesto-line">We read the language.</span>
+    <span class="manifesto-line">We document the system.</span>
+    <span class="manifesto-line">We open the history.</span>
+    <span class="manifesto-sep">—</span>
+    <span class="manifesto-line">Not left. Not right.</span>
+    <span class="manifesto-line">Not afraid. Not silent.</span>
+    <span class="manifesto-line">Not uninitiated.</span>
+    <span class="manifesto-sep">—</span>
+    <span class="manifesto-line">The horse has always been pale.</span>
+    <span class="manifesto-line" style="color:var(--bone); font-size:1.1em;">Now you can see it.</span>
+  </div>
+  <div class="manifesto-final">
+    <span class="manifesto-final-name">Pale Horse Collective</span>
+    <span class="manifesto-final-sub">The archive is open.</span>
+  </div>
+</section>
+
+<!-- ─── INTELLECTUAL LINEAGE ─── -->
+<section class="lineage-section">
+  <span class="lineage-label">The Intellectual Lineage // Primary Sources // Those Who Documented The Record</span>
+  <h2 class="lineage-title">In The Record</h2>
+
+  <div class="lineage-entries">
+
+    <div class="lineage-entry reveal">
+      <div class="lineage-identity">
+        <div class="lineage-name">William Cooper</div>
+        <div class="lineage-role">Naval Intelligence Officer // Researcher // Broadcaster</div>
+        <div class="lineage-works">
+          <span class="lineage-work">Behold a Pale Horse (1991)</span>
+          <span class="lineage-work">Hour of the Time (radio, 1992–2001)</span>
+          <span class="lineage-work">Mystery Babylon series</span>
+        </div>
+      </div>
+      <div class="lineage-bio">
+        <p>Former US Naval Intelligence briefing team member. Spent his life documenting what he witnessed in classified files and what he could subsequently verify through public record. Called his broadcast Hour of the Time — information without timing is archaeology, but information at the right moment is detonation. Killed November 5, 2001.</p>
+      </div>
+      <div class="lineage-relevance">
+        <span class="relevance-label">Relevance to the doctrine</span>
+        <div class="relevance-body">
+          Primary source: Mystery Babylon series<br>
+          Primary source: Behold a Pale Horse<br>
+          The brand name itself is his<br>
+          The methodology is his<br>
+          Document. Verify. Transmit.
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-entry reveal">
+      <div class="lineage-identity">
+        <div class="lineage-name">Anthony Sutton</div>
+        <div class="lineage-role">Hoover Institution // Research Fellow // Economist</div>
+        <div class="lineage-works">
+          <span class="lineage-work">Wall Street and the Bolshevik Revolution (1974)</span>
+          <span class="lineage-work">Wall Street and the Rise of Hitler (1976)</span>
+          <span class="lineage-work">America's Secret Establishment (1983)</span>
+        </div>
+      </div>
+      <div class="lineage-bio">
+        <p>Research Fellow at the Hoover Institution, Stanford University. Working from primary source documents — company records, Federal Reserve files, State Department archives — Sutton documented that the same network of financial interests funded opposing sides of the major conflicts of the 20th century simultaneously. The evidence is in the footnotes.</p>
+      </div>
+      <div class="lineage-relevance">
+        <span class="relevance-label">Relevance to the doctrine</span>
+        <div class="relevance-body">
+          Doctrine 04: Both sides same side<br>
+          Doctrine 01: The pattern is the proof<br>
+          Primary source methodology<br>
+          Funding records as evidence<br>
+          Skull and Bones documented
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-entry reveal">
+      <div class="lineage-identity">
+        <div class="lineage-name">Carroll Quigley</div>
+        <div class="lineage-role">Georgetown University // Historian // Insider</div>
+        <div class="lineage-works">
+          <span class="lineage-work">Tragedy and Hope (1966)</span>
+          <span class="lineage-work">The Anglo-American Establishment (1981)</span>
+        </div>
+      </div>
+      <div class="lineage-bio">
+        <p>Professor of history at Georgetown University, mentor to Bill Clinton. Writing from access to the inner workings of what he called "the network," Quigley described its goals, its methods, and its reach — and considered its objectives broadly beneficial. The significance for the Collective is not his approval. It is that he confirmed the network's existence from the inside.</p>
+      </div>
+      <div class="lineage-relevance">
+        <span class="relevance-label">Relevance to the doctrine</span>
+        <div class="relevance-body">
+          Insider confirmation of the network<br>
+          Anglo-American establishment documented<br>
+          Doctrine 04: Primary evidence<br>
+          The admission is the evidence<br>
+          He called it good. We read the description.
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-entry reveal">
+      <div class="lineage-identity">
+        <div class="lineage-name">Jordan Maxwell</div>
+        <div class="lineage-role">Researcher // Astrotheology // Comparative Religion</div>
+        <div class="lineage-works">
+          <span class="lineage-work">Matrix of Power (1999)</span>
+          <span class="lineage-work">The Dawn of a New Day</span>
+          <span class="lineage-work">50 years of documented research</span>
+        </div>
+      </div>
+      <div class="lineage-bio">
+        <p>Fifty years researching the astrotheological foundations of religion, law, and corporate symbolism. Documented that most of what is presented as spiritual revelation is solar allegory — the movement of the sun mapped onto narrative. The priests who could read the sky held power over those who could not.</p>
+      </div>
+      <div class="lineage-relevance">
+        <span class="relevance-label">Relevance to the doctrine</span>
+        <div class="relevance-body">
+          Doctrine 05: Sky as first scripture<br>
+          Symbol system: Tier Three<br>
+          Corporate symbolism decoded<br>
+          Legal system as Roman inheritance<br>
+          The celestial clock
+        </div>
+      </div>
+    </div>
+
+    <div class="lineage-entry reveal">
+      <div class="lineage-identity">
+        <div class="lineage-name">Nesta Webster</div>
+        <div class="lineage-role">Historian // Author // Early 20th century</div>
+        <div class="lineage-works">
+          <span class="lineage-work">Secret Societies and Subversive Movements (1924)</span>
+          <span class="lineage-work">World Revolution (1921)</span>
+          <span class="lineage-work">The French Revolution (1919)</span>
+        </div>
+      </div>
+      <div class="lineage-bio">
+        <p>Early 20th century historian who traced secret societies as a continuous thread from the ancient mystery schools through the Illuminati, the French Revolution, and into the 20th century. Her methodology was primary source research. Her conclusion was that the same current runs through different vessels across centuries.</p>
+      </div>
+      <div class="lineage-relevance">
+        <span class="relevance-label">Relevance to the doctrine</span>
+        <div class="relevance-body">
+          Historical continuity documented<br>
+          Mystery school lineage traced<br>
+          French Revolution primary sources<br>
+          The thread across centuries<br>
+          Doctrine 01: Pattern as proof
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ABOUT — NO FOUNDERS ─── -->
+<section class="about-section reveal">
+  <span class="about-label">PHC-BIBLE-001 // The Record // About</span>
+  <p class="about-text">The Collective has no founder whose name you need to know. No individual whose biography would explain this. The archive explains this. The doctrine explains this. The record explains this. We are whoever assembled this. You are whoever found it. That is sufficient.</p>
+</section>
+
+<!-- ─── FUND ─── -->
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> PALE HORSE COLLECTIVE <em>·</em> Est. when you found this</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
