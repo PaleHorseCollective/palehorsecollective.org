@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transmissions — Pale Horse Collective</title>
+<meta name="description" content="File releases. Archive additions. Collective updates. Transmitted directly. No algorithm between us and you. This is the primary signal. Everything else is noise.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease; }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── HERO SIGNAL ─── */
+  .signal-hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 8rem 3rem 5rem;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    text-align: center;
+  }
+
+  /* Animated signal rings */
+  .signal-rings {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(74,255,145,0.06);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring-expand 4s ease-out infinite;
+  }
+
+  .ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+  .ring:nth-child(2) { width: 400px; height: 400px; animation-delay: 0.8s; }
+  .ring:nth-child(3) { width: 600px; height: 600px; animation-delay: 1.6s; }
+  .ring:nth-child(4) { width: 800px; height: 800px; animation-delay: 2.4s; }
+  .ring:nth-child(5) { width: 1000px; height: 1000px; animation-delay: 3.2s; }
+
+  @keyframes ring-expand {
+    0% { opacity: 0.4; }
+    100% { opacity: 0; }
+  }
+
+  /* Grid background */
+  .signal-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+  .hero-signal-indicator {
+    display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.35em;
+    color: var(--green); text-transform: uppercase; margin-bottom: 3rem;
+    opacity: 0; animation: fade-up 0.6s ease 0.3s forwards;
+  }
+
+  .hero-signal-indicator::before,
+  .hero-signal-indicator::after {
+    content: '';
+    display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green); animation: pulse 2s infinite;
+  }
+
+  .hero-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 2rem;
+    opacity: 0; animation: fade-up 0.6s ease 0.5s forwards;
+  }
+
+  .hero-body {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--bone-dim);
+    line-height: 1.9; margin-bottom: 3rem;
+    opacity: 0; animation: fade-up 0.6s ease 0.7s forwards;
+  }
+
+  .hero-body em { color: var(--bone); font-style: italic; }
+
+  /* ─── SIGNUP FORM ─── */
+  .signup-form-wrap {
+    opacity: 0; animation: fade-up 0.6s ease 0.9s forwards;
+    width: 100%; max-width: 500px;
+  }
+
+  .signup-form {
+    display: flex; width: 100%;
+  }
+
+  .signup-input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(232,224,208,0.2); border-right: none;
+    padding: 1rem 1.4rem;
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    color: var(--bone); outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .signup-input::placeholder { color: var(--bone-dim); opacity: 0.35; }
+  .signup-input:focus { border-color: rgba(232,224,208,0.5); }
+
+  .signup-btn {
+    background: transparent;
+    border: 1px solid rgba(232,224,208,0.2);
+    padding: 1rem 2rem;
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--bone); text-transform: uppercase;
+    cursor: crosshair; transition: all 0.2s; white-space: nowrap;
+  }
+
+  .signup-btn:hover {
+    background: rgba(232,224,208,0.06); border-color: var(--bone);
+  }
+
+  .signup-btn.success {
+    color: var(--green); border-color: rgba(74,255,145,0.4);
+  }
+
+  .signup-note {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-top: 1rem; text-align: center;
+  }
+
+  .signup-note.success-note { color: var(--green); opacity: 0.6; }
+
+  /* Scroll hint */
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    opacity: 0; animation: fade-up 0.6s ease 1.4s forwards;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── WHAT YOU RECEIVE ─── */
+  .receive-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start;
+  }
+
+  .receive-left {}
+
+  .receive-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; display: block;
+  }
+
+  .receive-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.1; margin-bottom: 1.5rem;
+  }
+
+  .receive-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); line-height: 1.8;
+  }
+
+  .receive-right {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .receive-item {
+    background: var(--void); padding: 1.8rem 2rem;
+    display: grid; grid-template-columns: 40px 1fr; gap: 1.5rem; align-items: start;
+  }
+
+  .receive-item-num {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+    padding-top: 0.2rem;
+  }
+
+  .receive-item-content {}
+
+  .receive-item-title {
+    font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.4rem;
+  }
+
+  .receive-item-desc {
+    font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
+    color: var(--bone-dim); line-height: 1.65; opacity: 0.8;
+  }
+
+  /* ─── TRANSMISSION ARCHIVE ─── */
+  .archive-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  .archive-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .archive-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .archive-count {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+
+  /* Transmission zero state */
+  .transmission-zero {
+    padding: 5rem 2rem; text-align: center;
+    background: rgba(232,224,208,0.01);
+    border: 1px solid rgba(232,224,208,0.05);
+  }
+
+  .tz-signal {
+    display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--green); text-transform: uppercase; margin-bottom: 2rem; opacity: 0.6;
+  }
+
+  .tz-signal::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+
+  .tz-title {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 1rem; opacity: 0.4;
+  }
+
+  .tz-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.9rem;
+    color: var(--bone-dim); opacity: 0.4; max-width: 400px; margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* Transmission card — used when transmissions exist */
+  .transmission-list {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .transmission-card {
+    background: var(--void); padding: 2rem;
+    display: grid; grid-template-columns: 140px 1fr auto;
+    align-items: center; gap: 2rem;
+    text-decoration: none; color: inherit; transition: background 0.2s;
+  }
+
+  .transmission-card:hover { background: rgba(232,224,208,0.02); }
+
+  .tc-date {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .tc-title {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+  }
+
+  .tc-type {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.2em 0.6em; border: 1px solid currentColor;
+  }
+
+  .tc-type.file-release { color: var(--green); border-color: rgba(74,255,145,0.4); }
+  .tc-type.archive { color: var(--gold); border-color: rgba(184,150,12,0.4); }
+  .tc-type.collective { color: var(--bone-dim); border-color: rgba(160,152,144,0.3); }
+
+  /* ─── CHANNEL DOCTRINE ─── */
+  .channel-section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(232,224,208,0.06);
+  }
+
+  .channel-item {
+    background: var(--void); padding: 2.5rem;
+  }
+
+  .channel-num {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.8rem; display: block;
+  }
+
+  .channel-title {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.8rem;
+  }
+
+  .channel-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.85rem;
+    color: var(--bone-dim); line-height: 1.75; opacity: 0.8;
+  }
+
+  .channel-tag {
+    display: inline-block; margin-top: 1.2rem;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 0.2em 0.6em; border: 1px solid currentColor;
+  }
+
+  .primary-channel { color: var(--green); border-color: rgba(74,255,145,0.3); }
+  .secondary-channel { color: var(--bone-dim); border-color: rgba(160,152,144,0.2); opacity: 0.5; }
+
+  /* ─── SECOND SIGNUP ─── */
+  .second-signup {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    text-align: center;
+  }
+
+  .second-signup-label {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.35em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-bottom: 1.5rem; display: block;
+  }
+
+  .second-signup-title {
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); margin-bottom: 1rem;
+  }
+
+  .second-signup-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); max-width: 420px; margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+
+  .second-signup-form {
+    display: flex; max-width: 460px; margin: 0 auto;
+  }
+
+  /* ─── FUND / FOOTER ─── */
+  #fund { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
+  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
+  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
+  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+
+  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
+  .footer-links a:hover { opacity: 0.7; }
+  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .signal-hero { padding: 7rem 1.5rem 4rem; }
+    .signup-form { flex-direction: column; }
+    .signup-btn { border-left: 1px solid rgba(232,224,208,0.2); border-top: none; }
+    .receive-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+    .archive-section { padding: 3rem 1.5rem; }
+    .channel-section { grid-template-columns: 1fr; padding: 0; }
+    .transmission-card { grid-template-columns: 1fr; gap: 0.8rem; }
+    .second-signup { padding: 4rem 1.5rem; }
+    .second-signup-form { flex-direction: column; }
+    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html" class="active">Transmissions</a></li>
+  </ul>
+  <div class="nav-signal">TRANSMISSION ACTIVE</div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="signal-hero">
+  <div class="signal-rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-signal-indicator">Signal Active</div>
+
+    <h1 class="hero-title">Receive The<br>Transmission</h1>
+
+    <p class="hero-body">
+      File releases. Archive additions. Collective updates.<br>
+      Transmitted directly. <em>No algorithm between us and you.</em><br>
+      This is the primary signal. Everything else is noise.
+    </p>
+
+    <div class="signup-form-wrap">
+      <div class="signup-form">
+        <input
+          type="email"
+          class="signup-input"
+          id="hero-email"
+          placeholder="YOUR EMAIL ADDRESS"
+          autocomplete="off"
+        >
+        <button class="signup-btn" id="hero-btn" onclick="handleSignup('hero-email', 'hero-btn', 'hero-note')">
+          Open The Channel
+        </button>
+      </div>
+      <div class="signup-note" id="hero-note">
+        FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Transmission archive below ↓</div>
+</section>
+
+<!-- ─── WHAT YOU RECEIVE ─── */
+<section class="receive-section">
+  <div class="receive-left reveal">
+    <span class="receive-label">// What Gets Transmitted // Channel Protocol</span>
+    <h2 class="receive-title">The Signal</h2>
+    <p class="receive-body">The transmission list receives everything first. Before social. Before public announcement. Before anyone else. It is the most trusted channel because it is owned — not rented from a platform that can restrict, shadow-ban, or eliminate the signal at will.</p>
+  </div>
+
+  <div class="receive-right reveal">
+    <div class="receive-item">
+      <div class="receive-item-num">01</div>
+      <div class="receive-item-content">
+        <div class="receive-item-title">File Declassifications</div>
+        <p class="receive-item-desc">Every new file release transmitted to the list first, framed as a declassified release. Full decode document linked. Edition status live. You know before anyone who isn't already watching.</p>
+      </div>
+    </div>
+    <div class="receive-item">
+      <div class="receive-item-num">02</div>
+      <div class="receive-item-content">
+        <div class="receive-item-title">Archive Additions</div>
+        <p class="receive-item-desc">When a new symbol is added to the decode library, the transmission goes to the list. The research, the sources, the inversion. The archive grows with every drop cycle and the list receives each addition.</p>
+      </div>
+    </div>
+    <div class="receive-item">
+      <div class="receive-item-num">03</div>
+      <div class="receive-item-content">
+        <div class="receive-item-title">Collective Updates</div>
+        <p class="receive-item-desc">Founding 100 status. Fund disbursements. Community decisions. The operational state of the Collective — transmitted directly. The public ledger is open. The list gets the context behind the numbers.</p>
+      </div>
+    </div>
+    <div class="receive-item">
+      <div class="receive-item-num">04</div>
+      <div class="receive-item-content">
+        <div class="receive-item-title">Research Fragments</div>
+        <p class="receive-item-desc">Decode fragments that don't make it into a full archive entry. Patterns noticed. Connections documented. The work between the drops. This is what makes the list different from a marketing channel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRANSMISSION ARCHIVE ─── -->
+<section class="archive-section">
+  <div class="archive-header">
+    <h2 class="archive-title">Transmission Archive</h2>
+    <span class="archive-count">0 transmissions // Archive begins with first drop</span>
+  </div>
+
+  <!-- Zero state — shown until first transmission is sent -->
+  <div class="transmission-zero reveal">
+    <div class="tz-signal">Awaiting first transmission</div>
+    <h3 class="tz-title">No transmissions yet.</h3>
+    <p class="tz-body">The archive begins when File 001 is declassified. Open the channel now to receive the first transmission when it goes out. The list receives it before anyone else.</p>
+  </div>
+
+  <!-- Transmission cards — uncomment and populate as transmissions are sent
+  <div class="transmission-list">
+    <a href="#" class="transmission-card">
+      <span class="tc-date">2026-03-15 // 07:00</span>
+      <span class="tc-title">File 001 Has Been Declassified — The Capstone</span>
+      <span class="tc-type file-release">File Release</span>
+    </a>
+  </div>
+  -->
+</section>
+
+<!-- ─── CHANNEL DOCTRINE ─── */
+<section class="channel-section">
+  <div class="channel-item reveal">
+    <span class="channel-num">Channel 01 // Primary</span>
+    <h3 class="channel-title">Email Transmission</h3>
+    <p class="channel-body">The most trusted channel. Owned audience. No algorithm determines who sees it. No platform can restrict it. Every person on this list chose to be here and can leave whenever they choose. That is the only relationship worth having.</p>
+    <span class="channel-tag primary-channel">Primary Signal</span>
+  </div>
+  <div class="channel-item reveal">
+    <span class="channel-num">Channel 02 // Surface</span>
+    <h3 class="channel-title">Instagram // TikTok</h3>
+    <p class="channel-body">The Outer Court surface. Symbol reveals. Decode fragments. Tier One content designed to create questions. The algorithm determines reach here — which is why the email channel exists. Social is the hook. The transmission list is the line.</p>
+    <span class="channel-tag secondary-channel">Surface Layer</span>
+  </div>
+  <div class="channel-item reveal">
+    <span class="channel-num">Channel 03 // Community</span>
+    <h3 class="channel-title">Discord</h3>
+    <p class="channel-body">The Collective's home. Inner Court and Initiated access. Gated by first file acquisition. Where the work happens — research contributions, voting on next drops, deep lore discussion. The list is how you hear about it. Discord is where it lives.</p>
+    <span class="channel-tag secondary-channel">Inner Court</span>
+  </div>
+</section>
+
+<!-- ─── SECOND SIGNUP ─── -->
+<section class="second-signup reveal">
+  <span class="second-signup-label">PHC-TRANS-001 // Open The Channel // No Noise</span>
+  <h2 class="second-signup-title">The Archive Is Open</h2>
+  <p class="second-signup-body">The transmission goes out when it goes out. No schedule. No content calendar. When a file is declassified, the list hears first. When the archive grows, the list hears first. When something matters, the list hears first.</p>
+  <div class="second-signup-form">
+    <input
+      type="email"
+      class="signup-input"
+      id="bottom-email"
+      placeholder="YOUR EMAIL ADDRESS"
+      autocomplete="off"
+    >
+    <button class="signup-btn" id="bottom-btn" onclick="handleSignup('bottom-email', 'bottom-btn', 'bottom-note')">
+      Open The Channel
+    </button>
+  </div>
+  <div class="signup-note" id="bottom-note" style="margin-top:1rem">
+    No noise. No schedule. Signal only.
+  </div>
+</section>
+
+<!-- ─── FUND ─── -->
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> PALE HORSE COLLECTIVE <em>·</em> Est. when you found this</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Signup handler
+  function handleSignup(inputId, btnId, noteId) {
+    const input = document.getElementById(inputId);
+    const btn = document.getElementById(btnId);
+    const note = document.getElementById(noteId);
+
+    if (!input.value || !input.value.includes('@')) {
+      note.textContent = 'A valid channel address is required.';
+      note.style.color = 'var(--red)';
+      note.style.opacity = '0.7';
+      setTimeout(() => {
+        note.textContent = inputId === 'hero-email'
+          ? 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM'
+          : 'No noise. No schedule. Signal only.';
+        note.style.color = '';
+        note.style.opacity = '0.3';
+      }, 3000);
+      return;
+    }
+
+    const email = input.value;
+    input.value = '';
+    input.disabled = true;
+    btn.textContent = 'Channel Open';
+    btn.classList.add('success');
+    btn.disabled = true;
+
+    // Submit silently to Google Forms
+    const formData = new FormData();
+    formData.append('entry.1045781291', email);
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    });
+
+    note.textContent = 'Channel open. First transmission incoming when File 001 is declassified.';
+    note.classList.add('success-note');
+
+    setTimeout(() => {
+      input.disabled = false;
+      btn.textContent = 'Open The Channel';
+      btn.classList.remove('success');
+      btn.disabled = false;
+      note.textContent = inputId === 'hero-email'
+        ? 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM'
+        : 'No noise. No schedule. Signal only.';
+      note.classList.remove('success-note');
+      note.style.opacity = '0.3';
+    }, 8000);
+  }
+</script>
+
+</body>
+</html>
