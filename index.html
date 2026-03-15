@@ -1435,7 +1435,7 @@
     e.preventDefault();
     const input = document.getElementById('email-input');
     const note = document.getElementById('signal-note');
-    
+
     if (!input.value || !input.value.includes('@')) {
       note.textContent = 'A valid channel address is required.';
       note.style.color = 'var(--red)';
@@ -1443,7 +1443,18 @@
       return;
     }
 
+    const email = input.value;
     input.value = '';
+
+    // Submit silently to Google Forms
+    const formData = new FormData();
+    formData.append('entry.1045781291', email);
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    });
+
     note.textContent = 'Channel open. First transmission incoming.';
     note.style.color = 'var(--green)';
     note.style.opacity = '0.7';
