@@ -1447,12 +1447,12 @@
     input.value = '';
 
     // Submit silently to Google Forms
-    const formData = new FormData();
-    formData.append('entry.565332746', email);
-    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse', {
+    const googleUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse?entry.565332746=' + encodeURIComponent(email) + '&submit=Submit';
+    fetch(googleUrl, {
       method: 'POST',
       mode: 'no-cors',
-      body: formData
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'entry.565332746=' + encodeURIComponent(email)
     });
 
     note.textContent = 'Channel open. First transmission incoming.';
