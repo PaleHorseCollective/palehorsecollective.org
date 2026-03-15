@@ -657,7 +657,6 @@
       return;
     }
 
-    // Success state
     const email = input.value;
     input.value = '';
     input.disabled = true;
@@ -665,10 +664,18 @@
     btn.classList.add('success');
     btn.disabled = true;
 
+    // Submit silently to Google Forms
+    const formData = new FormData();
+    formData.append('entry.1045781291', email);
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    });
+
     note.textContent = 'Channel open. First transmission incoming when File 001 is declassified.';
     note.classList.add('success-note');
 
-    // Re-enable after a while in case they want to submit again
     setTimeout(() => {
       input.disabled = false;
       btn.textContent = 'Open The Channel';
