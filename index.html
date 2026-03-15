@@ -1338,6 +1338,34 @@
     .nav-mark-sep { display: none; }
   }
 
+
+  .mobile-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    cursor: crosshair;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-bar {
+    width: 22px;
+    height: 1px;
+    background: var(--bone-dim);
+    display: block;
+  }
+
+  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
+  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
+
 </style>
 </head>
 <body>
@@ -1376,6 +1404,10 @@
 
 <!-- ─── MOBILE OVERLAY ─── -->
 <div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close navigation">
+    <span class="close-bar"></span>
+    <span class="close-bar"></span>
+  </button>
   <div class="mobile-nav-ref">PHC // NAV // OUTER COURT ACCESS</div>
   <ul class="mobile-nav-links">
     <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
@@ -2108,6 +2140,16 @@
       document.getElementById('hamburger').classList.remove('open');
       document.body.style.overflow = '';
     });
+  });
+
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
   });
 
 </script>
