@@ -145,7 +145,7 @@
   }
 
   .mockup-img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    width: 100%; height: 100%; object-fit: contain; object-position: center;
   }
 
   /* RIGHT — product info */
@@ -371,16 +371,14 @@
   <!-- LEFT VISUALS -->
   <div class="file-visuals">
     <div class="visual-tabs">
-      <button class="vtab active" onclick="switchTab('graphic')">Graphic</button>
-      <button class="vtab" onclick="switchTab('worn')">Worn</button>
+      <button class="vtab active" onclick="switchTab('worn')">Worn</button>
+      <button class="vtab" onclick="switchTab('graphic')">Graphic</button>
     </div>
-    <div class="visual-panel active" id="panel-graphic">
-      <img src="/001.svg" class="file-graphic" alt="File 001 — The Capstone graphic" style="width:100%;height:100%;object-fit:contain;">
-      
-    </div>
-    <div class="visual-panel" id="panel-worn">
+    <div class="visual-panel active" id="panel-worn">
       <img class="mockup-img" src="/001-worn.webp" alt="File 001 — The Capstone worn">
-      
+    </div>
+    <div class="visual-panel" id="panel-graphic">
+      <img src="/001.svg" class="file-graphic" alt="File 001 — The Capstone graphic" style="width:100%;height:100%;object-fit:contain;">
     </div>
   </div>
 
