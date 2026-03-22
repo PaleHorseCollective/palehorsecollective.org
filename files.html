@@ -712,6 +712,7 @@
   <div class="header-right">
     <div class="header-stat">
       <span class="stat-label">Files Released</span>
+
       <span class="stat-value">002</span>
     </div>
     <div class="header-stat">
@@ -798,29 +799,38 @@
         </div>
       </a>
 
-      <!-- FILE 002 — ACTIVE -->
-      <a href="/002.html" class="file-card tier-1 reveal">
-        <div class="file-visual">
-          <img src="/002.svg" alt="File 002 — The Signal Tower" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;opacity:0.85;">
-          <span class="file-status-badge status-open">Open</span>
+      <!-- FILE 002 — COMING -->
+      <div class="file-card tier-1 reveal">
+        <div class="file-visual" style="opacity:0.4">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Signal tower -->
+            <line x1="100" y1="20" x2="100" y2="140" stroke="#e8e0d0" stroke-width="1.5" opacity="0.6"/>
+            <line x1="80" y1="80" x2="100" y2="60" stroke="#e8e0d0" stroke-width="1" opacity="0.5"/>
+            <line x1="120" y1="80" x2="100" y2="60" stroke="#e8e0d0" stroke-width="1" opacity="0.5"/>
+            <line x1="70" y1="110" x2="100" y2="80" stroke="#e8e0d0" stroke-width="1" opacity="0.4"/>
+            <line x1="130" y1="110" x2="100" y2="80" stroke="#e8e0d0" stroke-width="1" opacity="0.4"/>
+            <!-- Signal rings -->
+            <path d="M 82 35 Q 100 25 118 35" stroke="#8b1a1a" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <path d="M 74 28 Q 100 14 126 28" stroke="#8b1a1a" stroke-width="0.6" fill="none" opacity="0.3"/>
+            <text x="100" y="158" font-family="Oswald" font-size="7" letter-spacing="3" fill="#e8e0d0" text-anchor="middle" opacity="0.4">THE SIGNAL TOWER</text>
+            <text x="100" y="170" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#a09890" text-anchor="middle" opacity="0.25">FILE 002 // OUTER COURT</text>
+          </svg>
+          <span class="file-status-badge status-coming">Incoming</span>
           <span class="file-num-badge">FILE 002</span>
-          <div class="file-edition-bar">
-            <div class="file-edition-fill" style="width: 0%"></div>
-          </div>
         </div>
         <div class="file-body">
-          <div class="file-ref">FILE 002 // OUTER COURT // DECLASSIFIED</div>
-          <h2 class="file-name">The Signal Tower</h2>
-          <span class="file-decode-link">Decode document → SYM-02 in archive</span>
-          <p class="file-desc">Who controls the signal controls the message. The electromagnetic spectrum as broadcast domination — until it isn't. The frequency was always available. It was merely jammed. Broadcast terminated.</p>
-          <div class="file-meta">
+          <div class="file-ref">FILE 002 // OUTER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="opacity:0.5">The Signal Tower</h2>
+          <span class="file-decode-link" style="opacity:0.3">Decode document → SYM-02 in archive</span>
+          <p class="file-desc" style="opacity:0.4">Control of the electromagnetic spectrum. Who controls the signal controls the message. Broadcast as domination — until it isn't. File 002 is in preparation. Transmission date to be announced.</p>
+          <div class="file-meta" style="opacity:0.4">
             <div class="file-meta-item">
               <span class="meta-label">Edition</span>
               <span class="meta-value">500 max</span>
             </div>
             <div class="file-meta-item">
-              <span class="meta-label">Remaining</span>
-              <span class="meta-value remaining">500 available</span>
+              <span class="meta-label">Status</span>
+              <span class="meta-value" style="color:var(--gold)">Pending</span>
             </div>
             <div class="file-meta-item">
               <span class="meta-label">Classification</span>
@@ -831,14 +841,14 @@
               <span class="meta-value">Never</span>
             </div>
           </div>
-          <span class="file-cta">Acquire This File</span>
+          <span class="file-cta coming-soon">Pending Declassification</span>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
 
-  <!-- TIER TWO — COMING -->
+  <!-- TIER TWO -->
   <div class="files-section">
     <div class="section-header">
       <span class="section-tier-badge tier-2-badge">Tier Two</span>
@@ -847,23 +857,144 @@
     </div>
 
     <div class="files-grid">
-      <div class="file-card tier-2 reveal" style="opacity:0.5">
+
+      <!-- SYM-05 — THE COMPASS & SQUARE BROKEN -->
+      <div class="file-card tier-2 reveal" style="opacity:0.45">
         <div class="file-visual">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Ouroboros broken loop -->
-            <path d="M 100 40 A 60 60 0 1 1 99 40" stroke="#b8960c" stroke-width="1.5" fill="none" opacity="0.4" stroke-dasharray="5 3"/>
-            <text x="100" y="108" font-family="Oswald" font-size="7" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.4">INNER COURT</text>
-            <text x="100" y="120" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#a09890" text-anchor="middle" opacity="0.2">TIER TWO // PENDING</text>
+            <!-- Compass — broken apart, left side -->
+            <line x1="70" y1="50" x2="95" y2="120" stroke="#b8960c" stroke-width="1.2" opacity="0.5"/>
+            <line x1="70" y1="50" x2="58" y2="130" stroke="#b8960c" stroke-width="1.2" opacity="0.5"/>
+            <line x1="64" y1="108" x2="89" y2="100" stroke="#b8960c" stroke-width="0.8" opacity="0.35"/>
+            <!-- Square — right side, displaced -->
+            <rect x="112" y="68" width="36" height="36" stroke="#b8960c" stroke-width="1.2" fill="none" opacity="0.5" transform="rotate(12 130 86)"/>
+            <!-- G replaced — open question mark, centre -->
+            <text x="100" y="107" font-family="Oswald" font-size="18" font-weight="700" fill="#b8960c" text-anchor="middle" opacity="0.25">?</text>
+            <!-- Break line -->
+            <line x1="40" y1="148" x2="160" y2="148" stroke="#b8960c" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.2"/>
+            <text x="100" y="162" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.25">SYM-05 // INNER COURT</text>
           </svg>
-          <span class="file-status-badge status-coming">Incoming</span>
+          <span class="file-status-badge status-coming" style="color:var(--gold);border-color:var(--gold)">Pending</span>
+          <span class="file-num-badge" style="opacity:0.25">SYM-05</span>
         </div>
         <div class="file-body">
-          <div class="file-ref">TIER TWO // INNER COURT // PENDING</div>
-          <h2 class="file-name" style="opacity:0.4">Inner Court Files</h2>
-          <p class="file-desc" style="opacity:0.4">Tier Two file releases require Inner Court access. First purchase of any Tier One file unlocks Inner Court membership and Discord access. Tier Two drops are small batch, screen printed, heavyweight. The quality is the message.</p>
-          <span class="file-cta coming-soon">Inner Court Access Required</span>
+          <div class="file-ref" style="opacity:0.3">SYM-05 // INNER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="color:var(--gold);opacity:0.6">The Compass &amp; Square — Broken</h2>
+          <p class="file-desc" style="opacity:0.35">The working tools of the builder. The G at centre — Geometry, God, or the Great Architect. The tools broken apart and redistributed. The compass now in your hands. The question remains: whose architecture?</p>
+          <div class="file-meta" style="opacity:0.3">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">100 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--gold)">Inner Court</span></div>
+            <div class="file-meta-item"><span class="meta-label">Print</span><span class="meta-value">Screen print</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon">Pending Declassification</span>
         </div>
       </div>
+
+      <!-- SYM-06 — THE OUROBOROS BROKEN LOOP -->
+      <div class="file-card tier-2 reveal" style="opacity:0.45">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ouroboros — jaw open, tail escaping -->
+            <path d="M 100 38 A 62 62 0 1 1 72 150" stroke="#b8960c" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <!-- Serpent head at start -->
+            <ellipse cx="100" cy="38" rx="6" ry="4" fill="none" stroke="#b8960c" stroke-width="1" opacity="0.4"/>
+            <!-- Open jaw lines -->
+            <line x1="96" y1="34" x2="90" y2="26" stroke="#b8960c" stroke-width="1" opacity="0.4"/>
+            <line x1="104" y1="34" x2="110" y2="26" stroke="#b8960c" stroke-width="1" opacity="0.4"/>
+            <!-- Escaping tail — breaks away from the loop -->
+            <path d="M 72 150 Q 60 168 48 172" stroke="#b8960c" stroke-width="1.2" fill="none" opacity="0.5" stroke-dasharray="3 2"/>
+            <!-- Gap indicator -->
+            <circle cx="72" cy="150" r="3" fill="none" stroke="#b8960c" stroke-width="0.8" opacity="0.35"/>
+            <text x="100" y="107" font-family="Share Tech Mono" font-size="5" letter-spacing="1.5" fill="#b8960c" text-anchor="middle" opacity="0.2">LOOP BROKEN</text>
+            <text x="100" y="170" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.25">SYM-06 // INNER COURT</text>
+          </svg>
+          <span class="file-status-badge status-coming" style="color:var(--gold);border-color:var(--gold)">Pending</span>
+          <span class="file-num-badge" style="opacity:0.25">SYM-06</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.3">SYM-06 // INNER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="color:var(--gold);opacity:0.6">The Ouroboros — Broken Loop</h2>
+          <p class="file-desc" style="opacity:0.35">The eternal cycle. Debt begetting debt, war begetting war. The serpent's jaw open but not consuming. The tail escapes. The loop is not eternal — it is manufactured. Manufactured things can be stopped.</p>
+          <div class="file-meta" style="opacity:0.3">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">100 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--gold)">Inner Court</span></div>
+            <div class="file-meta-item"><span class="meta-label">Print</span><span class="meta-value">Screen print</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon">Pending Declassification</span>
+        </div>
+      </div>
+
+      <!-- SYM-07 — THE CENTRAL BANK SEAL -->
+      <div class="file-card tier-2 reveal" style="opacity:0.45">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer seal ring -->
+            <circle cx="100" cy="100" r="65" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.35"/>
+            <circle cx="100" cy="100" r="58" stroke="#b8960c" stroke-width="0.5" fill="none" opacity="0.2" stroke-dasharray="3 3"/>
+            <!-- Inner seal -->
+            <circle cx="100" cy="100" r="38" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.35"/>
+            <!-- Contradictions visible — lines crossing through seal -->
+            <line x1="50" y1="60" x2="150" y2="140" stroke="#b8960c" stroke-width="0.8" opacity="0.2"/>
+            <line x1="150" y1="60" x2="50" y2="140" stroke="#b8960c" stroke-width="0.8" opacity="0.2"/>
+            <!-- Seal text placeholder — redacted -->
+            <rect x="72" y="88" width="56" height="6" fill="#b8960c" opacity="0.15" rx="1"/>
+            <rect x="78" y="98" width="44" height="6" fill="#b8960c" opacity="0.1" rx="1"/>
+            <text x="100" y="130" font-family="Share Tech Mono" font-size="4.5" letter-spacing="1.5" fill="#b8960c" text-anchor="middle" opacity="0.2">SUTTON DOCUMENTED</text>
+            <text x="100" y="170" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.25">SYM-07 // INNER COURT</text>
+          </svg>
+          <span class="file-status-badge status-coming" style="color:var(--gold);border-color:var(--gold)">Pending</span>
+          <span class="file-num-badge" style="opacity:0.25">SYM-07</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.3">SYM-07 // INNER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="color:var(--gold);opacity:0.6">The Central Bank Seal</h2>
+          <p class="file-desc" style="opacity:0.35">Official, circular, heavy with implied authority. Sutton documented the same financial architecture funding opposing sides of the Cold War. The seal transcends nation. It precedes nation. The internal contradictions, now visible.</p>
+          <div class="file-meta" style="opacity:0.3">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">100 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--gold)">Inner Court</span></div>
+            <div class="file-meta-item"><span class="meta-label">Print</span><span class="meta-value">Screen print</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon">Pending Declassification</span>
+        </div>
+      </div>
+
+      <!-- SYM-08 — THE DOUBLE-HEADED EAGLE -->
+      <div class="file-card tier-2 reveal" style="opacity:0.45">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <path d="M 100 80 L 100 145" stroke="#b8960c" stroke-width="1.2" opacity="0.4"/>
+            <!-- Wings -->
+            <path d="M 100 95 Q 65 80 40 90 Q 55 100 60 115" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.4"/>
+            <path d="M 100 95 Q 135 80 160 90 Q 145 100 140 115" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.4"/>
+            <!-- Two heads — turned inward, facing each other -->
+            <path d="M 82 68 Q 78 58 84 52 Q 90 48 96 52 Q 100 58 96 65" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.45"/>
+            <path d="M 118 68 Q 122 58 116 52 Q 110 48 104 52 Q 100 58 104 65" stroke="#b8960c" stroke-width="1" fill="none" opacity="0.45"/>
+            <!-- Sword and sceptre — dropped, below the body -->
+            <line x1="78" y1="150" x2="88" y2="168" stroke="#b8960c" stroke-width="0.8" opacity="0.25" stroke-dasharray="2 2"/>
+            <line x1="122" y1="150" x2="112" y2="168" stroke="#b8960c" stroke-width="0.8" opacity="0.25" stroke-dasharray="2 2"/>
+            <text x="100" y="183" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#b8960c" text-anchor="middle" opacity="0.25">SYM-08 // INNER COURT</text>
+          </svg>
+          <span class="file-status-badge status-coming" style="color:var(--gold);border-color:var(--gold)">Pending</span>
+          <span class="file-num-badge" style="opacity:0.25">SYM-08</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.3">SYM-08 // INNER COURT // PENDING DECLASSIFICATION</div>
+          <h2 class="file-name" style="color:var(--gold);opacity:0.6">The Double-Headed Eagle</h2>
+          <p class="file-desc" style="opacity:0.35">East and West. Temporal and spiritual. The 33rd degree holds a sword and sceptre — both directions of power, simultaneously held. The inversion: both heads turned inward. The duality collapsed. Sword and sceptre dropped.</p>
+          <div class="file-meta" style="opacity:0.3">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">100 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--gold)">Inner Court</span></div>
+            <div class="file-meta-item"><span class="meta-label">Print</span><span class="meta-value">Screen print</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon">Pending Declassification</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -876,38 +1007,165 @@
     </div>
 
     <div class="files-grid">
-      <div class="file-card tier-3 reveal" style="opacity:0.4">
+
+      <!-- SYM-09 — THE BLACK SUN -->
+      <div class="file-card tier-3 reveal" style="opacity:0.35">
         <div class="file-visual">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Black sun geometry -->
-            <circle cx="100" cy="100" r="30" stroke="#4aff91" stroke-width="0.8" fill="none" opacity="0.2"/>
-            <circle cx="100" cy="100" r="20" stroke="#4aff91" stroke-width="0.5" fill="none" opacity="0.15"/>
+            <!-- Black sun — 12 spokes, inner and outer rings -->
+            <circle cx="100" cy="100" r="28" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.25"/>
+            <circle cx="100" cy="100" r="18" stroke="#4aff91" stroke-width="0.6" fill="none" opacity="0.2"/>
+            <circle cx="100" cy="100" r="8" fill="#4aff91" opacity="0.08"/>
             <!-- 12 spokes -->
-            <g opacity="0.2" stroke="#4aff91" stroke-width="0.8">
-              <line x1="100" y1="60" x2="100" y2="45"/>
-              <line x1="119.6" y1="65" x2="130.2" y2="53.5"/>
-              <line x1="135" y1="80.4" x2="147.5" y2="73.5"/>
-              <line x1="140" y1="100" x2="155" y2="100"/>
-              <line x1="135" y1="119.6" x2="147.5" y2="126.5"/>
-              <line x1="119.6" y1="135" x2="130.2" y2="146.5"/>
-              <line x1="100" y1="140" x2="100" y2="155"/>
-              <line x1="80.4" y1="135" x2="69.8" y2="146.5"/>
-              <line x1="65" y1="119.6" x2="52.5" y2="126.5"/>
-              <line x1="60" y1="100" x2="45" y2="100"/>
-              <line x1="65" y1="80.4" x2="52.5" y2="73.5"/>
-              <line x1="80.4" y1="65" x2="69.8" y2="53.5"/>
+            <g stroke="#4aff91" stroke-width="0.8" opacity="0.25">
+              <line x1="100" y1="72" x2="100" y2="52"/>
+              <line x1="114" y1="76" x2="123" y2="59"/>
+              <line x1="124" y1="86" x2="141" y2="79"/>
+              <line x1="128" y1="100" x2="148" y2="100"/>
+              <line x1="124" y1="114" x2="141" y2="121"/>
+              <line x1="114" y1="124" x2="123" y2="141"/>
+              <line x1="100" y1="128" x2="100" y2="148"/>
+              <line x1="86" y1="124" x2="77" y2="141"/>
+              <line x1="76" y1="114" x2="59" y2="121"/>
+              <line x1="72" y1="100" x2="52" y2="100"/>
+              <line x1="76" y1="86" x2="59" y2="79"/>
+              <line x1="86" y1="76" x2="77" y2="59"/>
             </g>
-            <text x="100" y="108" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.3">INITIATED ONLY</text>
+            <!-- Redacted name bar -->
+            <rect x="65" y="156" width="70" height="6" fill="#4aff91" opacity="0.1" rx="1"/>
+            <text x="100" y="172" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.2">SYM-09 // INITIATED</text>
           </svg>
-          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.5">Initiated</span>
+          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.4">Initiated</span>
+          <span class="file-num-badge" style="opacity:0.2">SYM-09</span>
         </div>
         <div class="file-body">
-          <div class="file-ref">TIER THREE // INITIATED // EYES ONLY</div>
-          <h2 class="file-name" style="opacity:0.35">Initiated Files</h2>
-          <p class="file-desc" style="opacity:0.35">Tier Three file releases are limited to 33. The number is not arbitrary. Access is by invitation only — extended to deep contributors of the Collective. These files are extremely limited and will not be announced publicly.</p>
-          <span class="file-cta coming-soon">Initiated Access Only</span>
+          <div class="file-ref" style="opacity:0.25">SYM-09 // INITIATED // EYES ONLY</div>
+          <h2 class="file-name" style="color:var(--green);opacity:0.45">The Black Sun</h2>
+          <p class="file-desc" style="opacity:0.25">Pre-Christian solar cults. Hidden solar worship beneath the surface of Western religion. The sun that never set — it merely changed costume. 33 editions. Invitation only. This file will not be announced publicly.</p>
+          <div class="file-meta" style="opacity:0.2">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">33 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--green)">Initiated</span></div>
+            <div class="file-meta-item"><span class="meta-label">Method</span><span class="meta-value">Invitation only</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon" style="color:var(--green);opacity:0.2;border-color:rgba(74,255,145,0.1)">Initiated Access Only</span>
         </div>
       </div>
+
+      <!-- SYM-10 — THE VESICA PISCIS -->
+      <div class="file-card tier-3 reveal" style="opacity:0.35">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Vesica Piscis — two overlapping circles -->
+            <circle cx="88" cy="100" r="42" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.2"/>
+            <circle cx="112" cy="100" r="42" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.2"/>
+            <!-- Vesica intersection fill -->
+            <path d="M 100 60 Q 130 80 130 100 Q 130 120 100 140 Q 70 120 70 100 Q 70 80 100 60 Z" fill="#4aff91" opacity="0.04" stroke="#4aff91" stroke-width="0.6"/>
+            <!-- Ichthys suggestion — horizontal line through vesica -->
+            <line x1="70" y1="100" x2="130" y2="100" stroke="#4aff91" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.2"/>
+            <rect x="65" y="156" width="70" height="6" fill="#4aff91" opacity="0.08" rx="1"/>
+            <text x="100" y="172" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.2">SYM-10 // INITIATED</text>
+          </svg>
+          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.4">Initiated</span>
+          <span class="file-num-badge" style="opacity:0.2">SYM-10</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.25">SYM-10 // INITIATED // EYES ONLY</div>
+          <h2 class="file-name" style="color:var(--green);opacity:0.45">The Vesica Piscis</h2>
+          <p class="file-desc" style="opacity:0.25">Sacred geometry. The origin of the Christian Ichthys. Portal geometry encoded into cathedral architecture for a thousand years. The intersection is the message. 33 editions. Invitation only.</p>
+          <div class="file-meta" style="opacity:0.2">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">33 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--green)">Initiated</span></div>
+            <div class="file-meta-item"><span class="meta-label">Method</span><span class="meta-value">Invitation only</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon" style="color:var(--green);opacity:0.2;border-color:rgba(74,255,145,0.1)">Initiated Access Only</span>
+        </div>
+      </div>
+
+      <!-- SYM-11 — THE CELESTIAL CLOCK -->
+      <div class="file-card tier-3 reveal" style="opacity:0.35">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer clock ring -->
+            <circle cx="100" cy="100" r="62" stroke="#4aff91" stroke-width="0.8" fill="none" opacity="0.2"/>
+            <!-- Hour markers — 12 marks -->
+            <g stroke="#4aff91" opacity="0.25">
+              <line x1="100" y1="40" x2="100" y2="48"/>
+              <line x1="131" y1="47" x2="127" y2="54"/>
+              <line x1="153" y1="69" x2="147" y2="73"/>
+              <line x1="162" y1="100" x2="154" y2="100"/>
+              <line x1="153" y1="131" x2="147" y2="127"/>
+              <line x1="131" y1="153" x2="127" y2="147"/>
+              <line x1="100" y1="162" x2="100" y2="154"/>
+              <line x1="69" y1="153" x2="73" y2="147"/>
+              <line x1="47" y1="131" x2="53" y2="127"/>
+              <line x1="38" y1="100" x2="46" y2="100"/>
+              <line x1="47" y1="69" x2="53" y2="73"/>
+              <line x1="69" y1="47" x2="73" y2="54"/>
+            </g>
+            <!-- Clock hands — arrested, stopped -->
+            <line x1="100" y1="100" x2="100" y2="55" stroke="#4aff91" stroke-width="1" opacity="0.3"/>
+            <line x1="100" y1="100" x2="138" y2="118" stroke="#4aff91" stroke-width="0.8" opacity="0.25"/>
+            <!-- Centre point -->
+            <circle cx="100" cy="100" r="3" fill="#4aff91" opacity="0.15"/>
+            <!-- Zodiac ring suggestion -->
+            <circle cx="100" cy="100" r="50" stroke="#4aff91" stroke-width="0.4" fill="none" opacity="0.1" stroke-dasharray="2 4"/>
+            <rect x="65" y="156" width="70" height="6" fill="#4aff91" opacity="0.08" rx="1"/>
+            <text x="100" y="172" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.2">SYM-11 // INITIATED</text>
+          </svg>
+          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.4">Initiated</span>
+          <span class="file-num-badge" style="opacity:0.2">SYM-11</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.25">SYM-11 // INITIATED // EYES ONLY</div>
+          <h2 class="file-name" style="color:var(--green);opacity:0.45">The Celestial Clock</h2>
+          <p class="file-desc" style="opacity:0.25">Maxwell's astrotheology made precise. The sky as the first scripture. The zodiac as the original calendar of power. The hands arrested at the moment awareness begins. Time as instrument of control. 33 editions. Invitation only.</p>
+          <div class="file-meta" style="opacity:0.2">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">33 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--green)">Initiated</span></div>
+            <div class="file-meta-item"><span class="meta-label">Method</span><span class="meta-value">Invitation only</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon" style="color:var(--green);opacity:0.2;border-color:rgba(74,255,145,0.1)">Initiated Access Only</span>
+        </div>
+      </div>
+
+      <!-- SYM-12 — THE CADUCEUS UNBOUND -->
+      <div class="file-card tier-3 reveal" style="opacity:0.35">
+        <div class="file-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Staff -->
+            <line x1="100" y1="30" x2="100" y2="170" stroke="#4aff91" stroke-width="1.2" opacity="0.3"/>
+            <!-- Two serpents — unbound, diverging from staff -->
+            <path d="M 100 70 Q 80 80 85 95 Q 90 110 100 115 Q 110 120 115 135 Q 120 150 100 158" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.3"/>
+            <path d="M 100 70 Q 120 80 115 95 Q 110 110 100 115 Q 90 120 85 135 Q 80 150 100 158" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.3"/>
+            <!-- Wings — unbound, spread wide -->
+            <path d="M 100 45 Q 78 38 58 48" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.25"/>
+            <path d="M 100 45 Q 122 38 142 48" stroke="#4aff91" stroke-width="1" fill="none" opacity="0.25"/>
+            <!-- Wing tips breaking off -->
+            <line x1="58" y1="48" x2="42" y2="40" stroke="#4aff91" stroke-width="0.8" opacity="0.2" stroke-dasharray="2 2"/>
+            <line x1="142" y1="48" x2="158" y2="40" stroke="#4aff91" stroke-width="0.8" opacity="0.2" stroke-dasharray="2 2"/>
+            <rect x="65" y="156" width="70" height="6" fill="#4aff91" opacity="0.0" rx="1"/>
+            <text x="100" y="185" font-family="Share Tech Mono" font-size="5" letter-spacing="2" fill="#4aff91" text-anchor="middle" opacity="0.2">SYM-12 // INITIATED</text>
+          </svg>
+          <span class="file-status-badge" style="color:var(--green);border-color:var(--green);opacity:0.4">Initiated</span>
+          <span class="file-num-badge" style="opacity:0.2">SYM-12</span>
+        </div>
+        <div class="file-body">
+          <div class="file-ref" style="opacity:0.25">SYM-12 // INITIATED // EYES ONLY</div>
+          <h2 class="file-name" style="color:var(--green);opacity:0.45">The Caduceus — Unbound</h2>
+          <p class="file-desc" style="opacity:0.25">Hermes Trismegistus. Mercury. The messenger of the gods and the patron of commerce, thieves, and travellers between worlds. The serpents unbound from the staff. The wings no longer controlled flight — free flight. 33 editions. Invitation only.</p>
+          <div class="file-meta" style="opacity:0.2">
+            <div class="file-meta-item"><span class="meta-label">Edition</span><span class="meta-value">33 max</span></div>
+            <div class="file-meta-item"><span class="meta-label">Access</span><span class="meta-value" style="color:var(--green)">Initiated</span></div>
+            <div class="file-meta-item"><span class="meta-label">Method</span><span class="meta-value">Invitation only</span></div>
+            <div class="file-meta-item"><span class="meta-label">Reprint</span><span class="meta-value">Never</span></div>
+          </div>
+          <span class="file-cta coming-soon" style="color:var(--green);opacity:0.2;border-color:rgba(74,255,145,0.1)">Initiated Access Only</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
