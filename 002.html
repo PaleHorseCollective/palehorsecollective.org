@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File 002 — The Signal Tower — Pale Horse Collective</title>
+<meta name="description" content="File 002 has been declassified. The Signal Tower. Outer Court. Edition of 500. Never reprinted.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #a09890;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease; }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* DECLASSIFIED HEADER */
+  .declassified-header {
+    padding: 7rem 3rem 2rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(139,26,26,0.05);
+  }
+
+  .dh-stamp {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase;
+    border: 1px solid var(--red); display: inline-block;
+    padding: 0.25em 0.8em; margin-bottom: 1rem; opacity: 0.8;
+  }
+
+  .dh-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1;
+  }
+
+  .dh-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-top: 0.8rem;
+  }
+
+  .dh-right { text-align: right; }
+
+  .edition-live {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700; color: var(--green); line-height: 1;
+  }
+
+  .edition-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--green); text-transform: uppercase; opacity: 0.6; margin-top: 0.4rem;
+  }
+
+  .edition-note {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; margin-top: 0.3rem;
+  }
+
+  /* MAIN LAYOUT */
+  .file-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+
+  /* LEFT — visuals */
+  .file-visuals {
+    border-right: 1px solid rgba(232,224,208,0.06);
+    position: sticky; top: 68px;
+    height: calc(100vh - 68px);
+    display: flex; flex-direction: column;
+  }
+
+  .visual-tabs {
+    display: flex; border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .vtab {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; padding: 1rem 1.5rem;
+    background: none; border: none; cursor: crosshair; border-right: 1px solid rgba(232,224,208,0.06);
+    transition: all 0.2s;
+  }
+
+  .vtab.active { color: var(--bone); background: rgba(232,224,208,0.03); }
+  .vtab:hover { color: var(--bone); }
+
+  .visual-panel {
+    flex: 1; display: none; align-items: center; justify-content: center;
+    padding: 2rem; overflow: hidden; background: #080806;
+  }
+
+  .visual-panel.active { display: flex; }
+
+  .file-graphic {
+    width: auto; height: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(139,26,26,0.1));
+  }
+
+  .mockup-img {
+    width: 100%; height: 100%; object-fit: contain; object-position: center;
+  }
+
+  /* RIGHT — product info */
+  .file-info {
+    padding: 3rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 68px - 80px);
+  }
+
+  .fi-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .fi-section:last-child { border-bottom: none; }
+
+  .fi-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    margin-bottom: 0.8rem; display: block;
+  }
+
+  .fi-title {
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+
+  .fi-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); line-height: 1.8;
+  }
+
+  .fi-meta {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(232,224,208,0.06);
+    margin: 1.5rem 0;
+  }
+
+  .fi-meta-item {
+    background: var(--void); padding: 0.8rem 1rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+
+  .meta-l {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .meta-v {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .meta-v.live { color: var(--green); }
+  .meta-v.never { color: var(--red); opacity: 0.7; }
+
+  /* SIZE SELECTOR */
+  .size-selector { margin: 1.5rem 0 0.5rem; }
+
+  .size-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    display: block; margin-bottom: 0.8rem;
+  }
+
+  .sizes { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .size-btn {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase;
+    background: none; border: 1px solid rgba(232,224,208,0.15);
+    padding: 0.5rem 0.8rem; cursor: crosshair; transition: all 0.15s;
+  }
+
+  .size-btn:hover { border-color: rgba(232,224,208,0.4); color: var(--bone); }
+  .size-btn.selected { border-color: var(--bone); color: var(--bone); background: rgba(232,224,208,0.05); }
+
+  /* ACQUIRE CTA */
+  .acquire-cta {
+    display: block; width: 100%; margin-top: 1.5rem;
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--void); background: var(--bone);
+    padding: 1.1rem 2rem; text-align: center; text-decoration: none;
+    transition: all 0.2s; border: 1px solid transparent;
+  }
+
+  .acquire-cta:hover { background: transparent; color: var(--bone); border-color: var(--bone); }
+
+  .acquire-note {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    text-align: center; margin-top: 0.8rem;
+  }
+
+  /* DECODE SECTION */
+  .decode-section {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    max-width: 900px; margin: 0 auto;
+  }
+
+  .decode-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    display: block; margin-bottom: 1.5rem;
+  }
+
+  .decode-title {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); margin-bottom: 4rem; line-height: 1.1;
+  }
+
+  .decode-entry {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.05);
+    opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .decode-entry.visible { opacity: 1; transform: translateY(0); }
+  .decode-entry:last-child { border-bottom: none; }
+
+  .de-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    padding-top: 0.2rem;
+  }
+
+  .de-content-title {
+    font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.8rem;
+  }
+
+  .de-content-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); line-height: 1.85;
+  }
+
+  .de-content-source {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-top: 1rem;
+  }
+
+  /* FUND */
+  #fund {
+    padding: 4rem 3rem;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 3rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    background: rgba(184,150,12,0.03);
+  }
+
+  .fund-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+  }
+
+  .fund-text {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.9rem; color: var(--bone-dim); line-height: 1.7;
+  }
+
+  .fund-figure {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-align: right; opacity: 0.5;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .footer-mark {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.3; transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.8; }
+
+  .footer-doctrine {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.2; text-align: right;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .file-layout { grid-template-columns: 1fr; }
+    .file-visuals { position: static; height: 60vw; min-height: 320px; }
+    .file-info { max-height: none; }
+    .decode-entry { grid-template-columns: 1fr; gap: 0.8rem; }
+    #fund { grid-template-columns: 1fr; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .declassified-header { flex-direction: column; gap: 1.5rem; }
+    .dh-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-mark">PHC <span>//</span> Pale Horse Collective</a>
+  <ul class="nav-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <span class="nav-signal">Signal Active</span>
+</nav>
+
+<!-- DECLASSIFIED HEADER -->
+<div class="declassified-header">
+  <div class="dh-left">
+    <div class="dh-stamp">Declassified // File 002 // Outer Court</div>
+    <h1 class="dh-title">The Signal Tower</h1>
+    <div class="dh-ref">FILE REF: PHC-002 // SYM-02 // OUTER COURT // BROADCAST TERMINATED</div>
+  </div>
+  <div class="dh-right">
+    <div class="edition-live">500</div>
+    <div class="edition-label">Editions Available</div>
+    <div class="edition-note">Never reprinted when closed</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="file-layout">
+
+  <!-- LEFT VISUALS -->
+  <div class="file-visuals">
+    <div class="visual-tabs">
+      <button class="vtab active" onclick="switchTab('worn')">Worn</button>
+      <button class="vtab" onclick="switchTab('graphic')">Graphic</button>
+    </div>
+    <div class="visual-panel active" id="panel-worn">
+      <img class="mockup-img" src="/002-worn.webp" alt="File 002 — The Signal Tower worn">
+    </div>
+    <div class="visual-panel" id="panel-graphic">
+      <img src="/002.svg" class="file-graphic" alt="File 002 — The Signal Tower graphic" style="width:100%;height:100%;object-fit:contain;">
+    </div>
+  </div>
+
+  <!-- RIGHT INFO -->
+  <div class="file-info">
+
+    <div class="fi-section">
+      <span class="fi-label">File 002 // The Signal Tower // Outer Court</span>
+      <h2 class="fi-title">Acquire This File</h2>
+      <p class="fi-body">The tower that controlled the frequency. The broadcast radius that determined what you were permitted to hear. File 002 decodes the infrastructure of electromagnetic domination — and inverts it. 500 editions. Never reprinted. When this file closes, it is closed permanently.</p>
+
+      <div class="fi-meta">
+        <div class="fi-meta-item">
+          <span class="meta-l">Classification</span>
+          <span class="meta-v">Outer Court</span>
+        </div>
+        <div class="fi-meta-item">
+          <span class="meta-l">Edition</span>
+          <span class="meta-v">500 max</span>
+        </div>
+        <div class="fi-meta-item">
+          <span class="meta-l">Status</span>
+          <span class="meta-v live">Open</span>
+        </div>
+        <div class="fi-meta-item">
+          <span class="meta-l">Reprint</span>
+          <span class="meta-v never">Never</span>
+        </div>
+        <div class="fi-meta-item">
+          <span class="meta-l">Garment</span>
+          <span class="meta-v">Heavyweight black tee</span>
+        </div>
+        <div class="fi-meta-item">
+          <span class="meta-l">Print</span>
+          <span class="meta-v">DTG — chest centre</span>
+        </div>
+      </div>
+
+      <div class="size-selector">
+        <span class="size-label">Select size //</span>
+        <div class="sizes">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn selected" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+          <button class="size-btn" onclick="selectSize(this)">2XL</button>
+        </div>
+      </div>
+
+      <a href="#" class="acquire-cta" id="acquire-btn">Claim Your Edition →</a>
+      <div class="acquire-note">Printful fulfilment // Ships globally // File transferred on order confirmation</div>
+    </div>
+
+    <div class="fi-section">
+      <span class="fi-label">Decode Document // SYM-02</span>
+      <p class="fi-body">Every symbol on this file is documented. The electromagnetic spectrum as instrument of control. The broadcast radius as a locked field. The inversion: those who were only receivers become broadcasters. The full decode is published below — transmitted at the moment of declassification, never separately.</p>
+      <a href="/archive/signal-tower.html" style="display:inline-block; margin-top:1rem; font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; text-decoration:none; opacity:0.7;">Read the full decode → Archive SYM-02</a>
+    </div>
+
+    <div class="fi-section">
+      <span class="fi-label">The Inversion // What This Means</span>
+      <p class="fi-body">The tower is the original instrument of control over what frequencies reach whom and when. The broadcast circle — the radius of permitted signal — is the field of managed reality. The inversion: the frequency was always available. It was merely jammed. The tower is now a transmitter of truth, not noise. The signal goes both ways. The person who wears this has tuned in.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- DECODE DOCUMENT -->
+<section class="decode-section">
+  <span class="decode-label">Decode Document // SYM-02 // Published at Declassification</span>
+  <h2 class="decode-title">The Architecture of Inversion — File 002</h2>
+
+  <div class="decode-entry reveal">
+    <div class="de-label">Origin</div>
+    <div class="de-content">
+      <div class="de-content-title">Communications Infrastructure // Surveillance Architecture</div>
+      <p class="de-content-body">The electromagnetic spectrum was declared public property and then systematically privatised. In the United States, the Federal Communications Commission — established 1934 — was created nominally to regulate broadcast in the public interest. In practice it became the architecture through which control of mass communication was consolidated into the hands of licensed broadcasters. The tower is the physical monument to that consolidation. It marks territory. It declares: this signal originates here, travels in this direction, and reaches who we determine.</p>
+      <div class="de-content-source">Source: Federal Communications Act 1934 // FCC licensing records // Herman & Chomsky — Manufacturing Consent, 1988</div>
+    </div>
+  </div>
+
+  <div class="decode-entry reveal">
+    <div class="de-label">Original Function</div>
+    <div class="de-content">
+      <div class="de-content-title">Broadcast as Domination</div>
+      <p class="de-content-body">William Cooper documented the weaponisation of broadcast media in detail across the Mystery Babylon radio series. The principle is precise: control of the electromagnetic spectrum is control of the consensus reality delivered to the population. The tower transmits one direction. The receiver has no reply channel. The population are passive recipients of a curated signal. COINTELPRO — documented in the 1971 FBI files release — included systematic infiltration of broadcast media to ensure the signal remained managed. The tower was never neutral infrastructure. It was always a one-way instrument.</p>
+      <div class="de-content-source">Source: William Cooper — Mystery Babylon Series, Hour of the Time // COINTELPRO FBI files, declassified 1971 // FCC docket records</div>
+    </div>
+  </div>
+
+  <div class="decode-entry reveal">
+    <div class="de-label">The Inversion</div>
+    <div class="de-content">
+      <div class="de-content-title">The Signal Goes Both Ways</div>
+      <p class="de-content-body">The frequency was always available. The spectrum was never owned — it was enclosed. The broadcast radius drawn around the tower was the managed boundary of permitted reality. The inversion: those who were only receivers become broadcasters. The circle is not a containing field — it is a radius of reach. The tower does not transmit downward. It transmits outward, in every direction, without a licensed gatekeeper at the apex. The broadcast terminated message is not a warning. It is a confirmation. The old signal is gone. A new one is active.</p>
+      <div class="de-content-source">Source: PHC Doctrine 07 — Awareness Is The Counter-Operation // PHC-SYM-001 // PHC-BIBLE-001</div>
+    </div>
+  </div>
+
+  <div class="decode-entry reveal">
+    <div class="de-label">The Application</div>
+    <div class="de-content">
+      <div class="de-content-title">File 002 — The Signal Tower</div>
+      <p class="de-content-body">The tower rendered as a recovered surveillance schematic. The broadcast circle — the radius of the managed signal field — surrounds the structure. Crosshair grid lines extend beyond the circle: the targeting infrastructure of the original system, now visible. The redacted bar at the base carries the only necessary text: BROADCAST TERMINATED. The old signal has ended. The garment itself is the new transmission. The person who wears this is no longer a passive receiver. They are an active node.</p>
+      <div class="de-content-source">Source: PHC-SYM-001 // PHC-BIBLE-001 // The Inversion Principle</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FUND -->
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> FILE 002 <em>·</em> THE SIGNAL TOWER <em>·</em> OUTER COURT</div>
+  <ul class="footer-links">
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.visual-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function selectSize(btn) {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
