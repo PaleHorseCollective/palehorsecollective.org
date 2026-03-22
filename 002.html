@@ -427,6 +427,23 @@
     content: ''; display: inline-block; width: 5px; height: 5px;
     border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
   }
+
+  .mobile-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; cursor: crosshair; padding: 4px;
+    display: flex; flex-direction: column; gap: 0;
+    width: 28px; height: 28px; align-items: center; justify-content: center;
+  }
+  .close-bar { width: 22px; height: 1px; background: var(--bone-dim); display: block; }
+  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
+  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
+
+  .mobile-nav-home {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.4; margin-bottom: 1rem; display: block; position: relative;
+  }
+  .mobile-nav-home:hover { opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -449,6 +466,11 @@
 </nav>
 
 <div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close navigation">
+    <span class="close-bar"></span>
+    <span class="close-bar"></span>
+  </button>
+  <a href="/" class="mobile-nav-home">← PHC // Home</a>
   <div class="mobile-nav-ref">PHC // FILE 002 // THE SIGNAL TOWER</div>
   <ul class="mobile-nav-links">
     <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
