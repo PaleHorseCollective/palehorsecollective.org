@@ -55,6 +55,16 @@
   .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: crosshair; padding: 4px; background: none; border: none; z-index: 200;
+  }
+  .hamburger .bar { width: 24px; height: 1px; background: var(--bone-dim); transition: all 0.3s ease; transform-origin: center; }
+  .hamburger.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--bone); }
+  .hamburger.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--bone); }
+
   /* DECLASSIFIED HEADER */
   .declassified-header {
     padding: 7rem 3rem 2rem;
@@ -326,7 +336,7 @@
     .dh-right { text-align: left; }
     .file-layout { grid-template-columns: 1fr; }
     .file-visuals { position: relative; height: auto; top: 0; }
-    .visual-panel { aspect-ratio: 1/1; }
+    .visual-panel { aspect-ratio: 1/1; padding: 1rem; }
     .file-info { max-height: none; padding: 2rem 1.5rem; }
     .decode-section { padding: 3rem 1.5rem; }
     .decode-entry { grid-template-columns: 1fr; }
@@ -335,17 +345,6 @@
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
   }
-
-  /* HAMBURGER */
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    cursor: crosshair; padding: 4px; background: none; border: none; z-index: 200;
-    margin-left: auto;
-  }
-  .hamburger .bar { width: 24px; height: 1px; background: var(--bone-dim); transition: all 0.3s ease; transform-origin: center; }
-  .hamburger.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--bone); }
-  .hamburger.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--bone); }
 
   /* MOBILE OVERLAY */
   .mobile-overlay {
@@ -390,12 +389,12 @@
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
-  <div class="nav-signal">FILE ACTIVE</div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </button>
+  <div class="nav-signal">FILE ACTIVE</div>
 </nav>
 
 <div class="mobile-overlay" id="mobile-overlay">

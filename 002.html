@@ -345,9 +345,10 @@
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     .nav-signal { display: none; }
+    .hamburger { display: flex; }
     .file-layout { grid-template-columns: 1fr; }
     .file-visuals { position: static; height: auto; }
-    .visual-panel { aspect-ratio: 1/1; }
+    .visual-panel { aspect-ratio: 1/1; padding: 1rem; }
     .file-info { max-height: none; }
     .decode-entry { grid-template-columns: 1fr; gap: 0.8rem; }
     #fund { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -355,14 +356,12 @@
     .footer-links { flex-wrap: wrap; justify-content: center; }
     .declassified-header { flex-direction: column; gap: 1.5rem; }
     .dh-right { text-align: left; }
-    .hamburger { display: flex; }
   }
 
   /* HAMBURGER */
   .hamburger {
     display: none; flex-direction: column; gap: 5px;
     cursor: crosshair; padding: 4px; background: none; border: none; z-index: 200;
-    margin-left: auto;
   }
   .hamburger .bar {
     width: 24px; height: 1px; background: var(--bone-dim);
@@ -441,12 +440,12 @@
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
-  <span class="nav-signal">Signal Active</span>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </button>
+  <span class="nav-signal">Signal Active</span>
 </nav>
 
 <div class="mobile-overlay" id="mobile-overlay">
