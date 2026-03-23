@@ -403,97 +403,121 @@
   }
 
   /* ─── TRANSMISSIONS STRIP ─── */
-  #transmissions-strip {
+  /* ─── FILE GRID (replaces transmissions strip) ─── */
+  #file-grid-section {
     border-top: 1px solid rgba(232,224,208,0.08);
     padding: 3rem;
-    overflow: hidden;
   }
 
-  .strip-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .file-grid-header {
+    display: flex; align-items: baseline; justify-content: space-between;
     margin-bottom: 2rem;
   }
 
-  .strip-label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    color: var(--bone-dim);
-    text-transform: uppercase;
+  .file-grid-label {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase;
   }
 
-  .strip-label span {
-    color: var(--red);
+  .file-grid-label span { color: var(--red); }
+
+  .file-grid-link {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-decoration: none;
+    opacity: 0.4; transition: opacity 0.2s;
   }
 
-  .strip-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5px;
-    background: rgba(232,224,208,0.06);
+  .file-grid-link:hover { opacity: 0.8; }
+
+  .file-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5px; background: rgba(232,224,208,0.06);
   }
 
-  .strip-card {
-    background: var(--void);
-    padding: 2rem;
-    position: relative;
-    cursor: pointer;
+  .fg-card {
+    background: var(--void); text-decoration: none; color: inherit;
+    display: block; position: relative;
     transition: background 0.2s;
-    text-decoration: none;
-    color: inherit;
+  }
+
+  .fg-card:hover { background: rgba(232,224,208,0.02); }
+
+  .fg-visual {
+    aspect-ratio: 1/1; overflow: hidden; position: relative;
+    background: #080806;
+  }
+
+  .fg-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
     display: block;
+    transition: transform 0.4s ease;
   }
 
-  .strip-card:hover {
-    background: rgba(232,224,208,0.02);
+  .fg-card:hover .fg-visual img { transform: scale(1.02); }
+
+  .fg-status {
+    position: absolute; top: 1rem; left: 1rem;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--green); border: 1px solid var(--green);
+    padding: 0.15em 0.5em; text-transform: uppercase;
   }
 
-  .strip-card-stamp {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-    color: var(--green);
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    border: 1px solid var(--green);
-    display: inline-block;
-    padding: 0.15em 0.5em;
-    opacity: 0.7;
+  .fg-num {
+    position: absolute; top: 1rem; right: 1rem;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
   }
 
-  .strip-card-ref {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.15em;
-    color: var(--bone-dim);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    opacity: 0.5;
+  .fg-edition-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: rgba(232,224,208,0.06);
   }
 
-  .strip-card-title {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bone);
-    line-height: 1.2;
+  .fg-body {
+    padding: 1.2rem 1.5rem 1.5rem;
+    border-top: 1px solid rgba(232,224,208,0.06);
   }
 
-  .strip-card-tier {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.45rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    text-transform: uppercase;
-    opacity: 0.6;
+  .fg-ref {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 0.4rem;
   }
+
+  .fg-title {
+    font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.1; margin-bottom: 0.8rem;
+  }
+
+  .fg-meta {
+    display: flex; gap: 1.5rem;
+  }
+
+  .fg-meta-item { display: flex; flex-direction: column; gap: 2px; }
+
+  .fg-meta-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+
+  .fg-meta-value {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em;
+    color: var(--bone); text-transform: uppercase;
+  }
+
+  .fg-meta-value.available { color: var(--green); }
+
+  .fg-cta {
+    display: inline-block; margin-top: 1rem;
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase;
+    border-bottom: 1px solid rgba(232,224,208,0.2); padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .fg-card:hover .fg-cta { color: var(--bone); border-color: rgba(232,224,208,0.5); }
 
   /* ─── INVERSION SECTION ─── */
   #inversion {
@@ -987,7 +1011,7 @@
       grid-template-columns: 1fr;
     }
 
-    .strip-grid {
+    .file-grid {
       grid-template-columns: 1fr;
     }
 
@@ -1017,7 +1041,7 @@
       justify-content: center;
     }
 
-    #transmissions-strip {
+    #file-grid-section {
       padding: 2rem 1.5rem;
     }
 
@@ -1279,7 +1303,7 @@
 
     /* General mono text — bump up on mobile */
     .filter-label,
-    .strip-label,
+    .file-grid-label,
     .fund-label,
     .fund-text,
     .fund-figure,
@@ -1841,24 +1865,69 @@
 </section>
 
 <!-- ─── RECENT TRANSMISSIONS STRIP ─── -->
-<section id="transmissions-strip">
-  <div class="strip-header">
-    <span class="strip-label">Recent <span>//</span> Declassified</span>
-    <span class="strip-label" style="opacity:0.4">Transmission archive →</span>
+<section id="file-grid-section">
+  <div class="file-grid-header">
+    <span class="file-grid-label">Active <span>//</span> Files</span>
+    <a href="/files.html" class="file-grid-link">View all files →</a>
   </div>
-  <div class="strip-grid">
-    <a href="/001.html" class="strip-card">
-      <span class="strip-card-tier">OUTER COURT</span>
-      <span class="strip-card-stamp">Open</span>
-      <div class="strip-card-ref">FILE 001 // OUTER COURT</div>
-      <div class="strip-card-title">The Capstone</div>
+  <div class="file-grid">
+
+    <a href="/001.html" class="fg-card">
+      <div class="fg-visual">
+        <img src="/001-worn.webp" alt="File 001 — The Capstone">
+        <span class="fg-status">Open</span>
+        <span class="fg-num">FILE 001</span>
+        <div class="fg-edition-bar"></div>
+      </div>
+      <div class="fg-body">
+        <div class="fg-ref">FILE 001 // OUTER COURT // DECLASSIFIED</div>
+        <h3 class="fg-title">The Capstone</h3>
+        <div class="fg-meta">
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Edition</span>
+            <span class="fg-meta-value">500 max</span>
+          </div>
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Remaining</span>
+            <span class="fg-meta-value available">500</span>
+          </div>
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Reprint</span>
+            <span class="fg-meta-value">Never</span>
+          </div>
+        </div>
+        <span class="fg-cta">Acquire this file →</span>
+      </div>
     </a>
-    <a href="/002.html" class="strip-card">
-      <span class="strip-card-tier" style="color:var(--green)">FILE ACTIVE</span>
-      <span class="strip-card-stamp" style="border-color:var(--green);color:var(--green)">Current File</span>
-      <div class="strip-card-ref">FILE 002 // OUTER COURT</div>
-      <div class="strip-card-title">The Signal Tower</div>
+
+    <a href="/002.html" class="fg-card">
+      <div class="fg-visual">
+        <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
+        <span class="fg-status">Open</span>
+        <span class="fg-num">FILE 002</span>
+        <div class="fg-edition-bar"></div>
+      </div>
+      <div class="fg-body">
+        <div class="fg-ref">FILE 002 // OUTER COURT // DECLASSIFIED</div>
+        <h3 class="fg-title">The Signal Tower</h3>
+        <div class="fg-meta">
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Edition</span>
+            <span class="fg-meta-value">500 max</span>
+          </div>
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Remaining</span>
+            <span class="fg-meta-value available">500</span>
+          </div>
+          <div class="fg-meta-item">
+            <span class="fg-meta-label">Reprint</span>
+            <span class="fg-meta-value">Never</span>
+          </div>
+        </div>
+        <span class="fg-cta">Acquire this file →</span>
+      </div>
     </a>
+
   </div>
 </section>
 
@@ -2062,7 +2131,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.portal, .doctrine-item, .strip-card, .inv-row').forEach((el, i) => {
+  document.querySelectorAll('.portal, .doctrine-item, .fg-card, .inv-row').forEach((el, i) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(16px)';
     el.style.transition = `opacity 0.5s ease ${i * 0.06}s, transform 0.5s ease ${i * 0.06}s`;
