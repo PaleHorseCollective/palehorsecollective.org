@@ -18,12 +18,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // ─────────────────────────────────────────────────────────────────────────────
 const PRINTFUL_VARIANT_IDS = {
   '001': {
-    'XS':  null, // TODO: replace with Printful sync_variant_id
-    'S':   null,
-    'M':   null,
-    'L':   null,
-    'XL':  null,
-    '2XL': null,
+    'XS':  '69c25c14ef7c52',
+    'S':   '69c25c14ef7cb9',
+    'M':   '69c25c14ef7d04',
+    'L':   '69c25c14ef7d56',
+    'XL':  '69c25c14ef7d96',
+    '2XL': '69c25c14ef7dd2',
   },
   '002': {
     'XS':  null, // TODO: replace with Printful sync_variant_id
