@@ -624,6 +624,60 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<!-- PHC CHECKOUT — FILE 001 -->
+<script>
+(function() {
+  var btn = document.getElementById('acquire-btn');
+  if (!btn) return;
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    var selectedBtn = document.querySelector('.size-btn.selected');
+    if (!selectedBtn) {
+      var label = document.querySelector('.size-label');
+      if (label) { label.style.color = '#8b1a1a'; setTimeout(function(){ label.style.color = ''; }, 2000); }
+      return;
+    }
+
+    var size = selectedBtn.textContent.trim();
+    var originalText = btn.textContent;
+    btn.textContent = 'Accessing Archive...';
+    btn.style.opacity = '0.5';
+    btn.style.pointerEvents = 'none';
+
+    fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fileId: '001', size: size })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL');
+      }
+    })
+    .catch(function() {
+      btn.textContent = originalText;
+      btn.style.opacity = '';
+      btn.style.pointerEvents = '';
+    });
+  });
+
+  // Show confirmed message if returning from Stripe
+  if (window.location.search.includes('order=confirmed')) {
+    var note = document.querySelector('.acquire-note');
+    if (note) {
+      note.textContent = 'File transferred. Fulfilment initiated. Check your email for confirmation.';
+      note.style.opacity = '0.8';
+      note.style.color = 'var(--signal)';
+    }
+    history.replaceState({}, '', window.location.pathname);
+  }
+})();
+</script>
 
 </body>
 </html>
