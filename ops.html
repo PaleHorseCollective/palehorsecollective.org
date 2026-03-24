@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHC // MISSION CONTROL</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0a0a08;
+    --void-2: #111110;
+    --void-3: #1a1a18;
+    --bone: #e8e0d0;
+    --bone-dim: #a09888;
+    --bone-dimmer: #504840;
+    --gold: #b8960c;
+    --gold-dim: #7a6408;
+    --red: #8b1a1a;
+    --green: #4aff91;
+    --green-dim: #1a7a44;
+    --amber: #ff9f1c;
+    --amber-dim: #7a4a08;
+    --border: #2a2a28;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 998;
+    opacity: 0.4;
+  }
+
+  /* SCAN */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    animation: scan 8s linear infinite;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.2;
+  }
+
+  @keyframes scan { 0% { top: 0; } 100% { top: 100vh; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes flicker { 0%,95%,100%{opacity:1} 96%{opacity:0.7} 97%{opacity:1} 98%{opacity:0.5} 99%{opacity:1} }
+
+  /* DASHBOARD */
+  #dash { display: block; }
+
+  /* TOPBAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--void);
+    z-index: 100;
+  }
+
+  .tb-left { display: flex; align-items: center; gap: 24px; }
+  .tb-mark { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 6px; }
+  .tb-mark span { color: var(--gold); }
+  .tb-live { font-size: 9px; letter-spacing: 3px; color: var(--green); display: flex; align-items: center; gap: 6px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+  .tb-right { font-size: 9px; letter-spacing: 2px; color: var(--bone-dimmer); }
+
+  /* HERO */
+  .hero {
+    padding: 48px 32px 36px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .hero-class { font-size: 9px; letter-spacing: 4px; color: var(--bone-dimmer); margin-bottom: 10px; }
+  .hero-title { font-family: 'Oswald', sans-serif; font-size: clamp(30px, 5vw, 56px); letter-spacing: 6px; line-height: 1; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 10px; letter-spacing: 3px; color: var(--bone-dimmer); margin-top: 10px; }
+
+  /* PHASE BAR */
+  .phases {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    animation: fadeUp 0.5s 0.1s ease both;
+    opacity: 0;
+  }
+
+  .phase {
+    padding: 16px 28px;
+    border-right: 1px solid var(--border);
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .phase.now { background: var(--void-3); border-top: 2px solid var(--gold); }
+  .ph-num { font-size: 8px; letter-spacing: 3px; color: var(--bone-dimmer); margin-bottom: 4px; }
+  .ph-name { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 4px; margin-bottom: 4px; }
+  .phase.now .ph-name { color: var(--gold); }
+  .ph-time { font-size: 8px; letter-spacing: 2px; color: var(--bone-dimmer); }
+  .ph-badge { display: inline-block; font-size: 8px; letter-spacing: 2px; padding: 2px 8px; margin-top: 6px; }
+  .ph-badge.active { background: var(--gold-dim); color: var(--gold); }
+  .ph-badge.pending { border: 1px solid var(--border); color: var(--bone-dimmer); }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 32px;
+    animation: fadeUp 0.5s 0.2s ease both;
+    opacity: 0;
+  }
+
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; padding: 16px; } .topbar { padding: 12px 16px; } .hero { padding: 32px 16px 24px; } }
+
+  .card {
+    background: var(--void-2);
+    border: 1px solid var(--border);
+    padding: 24px;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover { border-color: var(--bone-dimmer); }
+  .card.w2 { grid-column: span 2; }
+  .card.w3 { grid-column: span 3; }
+
+  @media (max-width: 960px) { .card.w2, .card.w3 { grid-column: span 2; } }
+  @media (max-width: 600px) { .card.w2, .card.w3 { grid-column: span 1; } }
+
+  .card-ref { font-size: 8px; letter-spacing: 3px; color: var(--bone-dimmer); margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .card-title { font-family: 'Oswald', sans-serif; font-size: 15px; letter-spacing: 4px; margin-bottom: 20px; }
+
+  /* NODES */
+  .nodes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .node {
+    background: var(--void-3);
+    border: 1px solid var(--border);
+    padding: 14px;
+    transition: transform 0.2s;
+  }
+
+  .node:hover { transform: translateY(-1px); }
+  .node-ref { font-size: 8px; letter-spacing: 2px; color: var(--bone-dimmer); margin-bottom: 4px; }
+  .node-name { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 3px; margin-bottom: 6px; }
+  .node.built .node-name { color: var(--green); }
+  .node.progress .node-name { color: var(--amber); }
+  .node.planned .node-name { color: var(--bone-dim); }
+  .node-desc { font-size: 9px; line-height: 1.6; color: var(--bone-dimmer); margin-bottom: 8px; }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 8px; letter-spacing: 2px; padding: 2px 8px; }
+  .badge.built { background: var(--green-dim); color: var(--green); }
+  .badge.progress { background: var(--amber-dim); color: var(--amber); }
+  .badge.planned { border: 1px solid var(--border); color: var(--bone-dimmer); }
+  .badge.urgent { background: var(--red); color: var(--bone); }
+  .bdot { width: 4px; height: 4px; border-radius: 50%; }
+  .built .bdot { background: var(--green); }
+  .progress .bdot { background: var(--amber); animation: pulse 1s infinite; }
+  .planned .bdot { background: var(--bone-dimmer); }
+
+  /* TASKS */
+  .tasks { display: flex; flex-direction: column; gap: 8px; }
+
+  .task {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px;
+    background: var(--void-3);
+    border: 1px solid var(--border);
+    border-left: 2px solid transparent;
+  }
+
+  .task.j { border-left-color: var(--gold); }
+  .task.c { border-left-color: var(--green); }
+  .task.b { border-left-color: var(--red); opacity: 0.7; }
+
+  .task-own { font-size: 8px; letter-spacing: 2px; padding: 2px 6px; flex-shrink: 0; margin-top: 2px; }
+  .task.j .task-own { background: var(--gold-dim); color: var(--gold); }
+  .task.c .task-own { background: var(--green-dim); color: var(--green); }
+  .task.b .task-own { background: var(--red); color: var(--bone); }
+  .task-body { font-size: 9px; line-height: 1.6; color: var(--bone-dim); letter-spacing: 1px; }
+  .task-pri { font-size: 8px; letter-spacing: 2px; color: var(--bone-dimmer); margin-top: 3px; }
+
+  /* SEQUENCE */
+  .seq { display: flex; flex-direction: column; }
+
+  .seq-item {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .seq-item:last-child { border-bottom: none; }
+  .seq-n { font-family: 'Oswald', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--border); flex-shrink: 0; width: 36px; line-height: 1.1; }
+  .seq-item.now .seq-n { color: var(--gold); }
+  .seq-item.done .seq-n { color: var(--green-dim); }
+  .seq-title { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px; margin-bottom: 3px; }
+  .seq-item.now .seq-title { color: var(--gold); }
+  .seq-item.done .seq-title { color: var(--green); }
+  .seq-desc { font-size: 9px; line-height: 1.6; color: var(--bone-dimmer); letter-spacing: 1px; }
+
+  /* FILES TABLE */
+  .files-table { width: 100%; border-collapse: collapse; }
+  .files-table th { font-size: 8px; letter-spacing: 3px; color: var(--bone-dimmer); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .files-table td { font-size: 9px; letter-spacing: 1px; color: var(--bone-dim); padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .files-table tr:last-child td { border-bottom: none; }
+
+  /* STACK */
+  .stack { display: flex; flex-direction: column; gap: 6px; }
+  .stack-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--void-3); border: 1px solid var(--border); }
+  .stack-name { font-size: 9px; letter-spacing: 3px; }
+  .stack-note { font-size: 8px; letter-spacing: 1px; color: var(--bone-dimmer); }
+
+  /* HOW IT WORKS */
+  .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 600px) { .how { grid-template-columns: 1fr; } }
+
+  .how-item { background: var(--void-3); border: 1px solid var(--border); padding: 18px; }
+  .how-label { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--gold); margin-bottom: 10px; }
+  .how-text { font-size: 9px; line-height: 1.8; color: var(--bone-dimmer); letter-spacing: 1px; }
+
+  /* FOOTER */
+  .footer {
+    padding: 20px 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--bone-dimmer);
+    margin-top: 16px;
+  }
+
+  ::-webkit-scrollbar { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- DASHBOARD -->
+<div id="dash">
+
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-mark">PHC <span>//</span> OPS</div>
+      <div class="tb-live"><div class="live-dot"></div>TRANSMISSION ACTIVE</div>
+    </div>
+    <div class="tb-right" id="tb-date">—</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-class">FILE REF: PHC-OPS-001 · VERSION 1.0 · CLEAN BUILD</div>
+    <div class="hero-title">MISSION <span>CONTROL</span></div>
+    <div class="hero-sub">97% AI · 3% HUMAN · JUSTIN POINTS · CLAUDE EXECUTES · THE ARCHIVE GROWS</div>
+  </div>
+
+  <div class="phases">
+    <div class="phase now">
+      <div class="ph-num">PHASE 01</div>
+      <div class="ph-name">FOUNDATION</div>
+      <div class="ph-time">MONTHS 1–2</div>
+      <div class="ph-badge active">ACTIVE</div>
+    </div>
+    <div class="phase">
+      <div class="ph-num">PHASE 02</div>
+      <div class="ph-name">TRANSMISSION</div>
+      <div class="ph-time">MONTHS 3–4</div>
+      <div class="ph-badge pending">PENDING</div>
+    </div>
+    <div class="phase">
+      <div class="ph-num">PHASE 03</div>
+      <div class="ph-name">SIGNAL</div>
+      <div class="ph-time">MONTHS 5–8</div>
+      <div class="ph-badge pending">PENDING</div>
+    </div>
+    <div class="phase">
+      <div class="ph-num">PHASE 04</div>
+      <div class="ph-name">FREQUENCY</div>
+      <div class="ph-time">MONTH 9+</div>
+      <div class="ph-badge pending">PENDING</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- SYSTEM NODES -->
+    <div class="card w3">
+      <div class="card-ref"><span>ALL SYSTEMS · NODE MAP</span><span>PHC-ECO-001</span></div>
+      <div class="card-title">SYSTEM ARCHITECTURE</div>
+      <div class="nodes">
+
+        <div class="node built">
+          <div class="node-ref">NODE-01 · IDENTITY</div>
+          <div class="node-name">BRAND BIBLE</div>
+          <div class="node-desc">Origin, doctrine, voice, mythology. Nine doctrines. Complete founding document.</div>
+          <span class="badge built"><span class="bdot"></span>BUILT</span>
+        </div>
+
+        <div class="node built">
+          <div class="node-ref">NODE-02 · SYMBOLS</div>
+          <div class="node-name">SYMBOL SYSTEM</div>
+          <div class="node-desc">12 symbols across 3 tiers. Full inversion architecture documented.</div>
+          <span class="badge built"><span class="bdot"></span>BUILT</span>
+        </div>
+
+        <div class="node built">
+          <div class="node-ref">NODE-03 · SITE</div>
+          <div class="node-name">WEBSITE</div>
+          <div class="node-desc">Netlify + GitHub + Cloudflare. Files 001 and 002 live. Rebuild complete.</div>
+          <span class="badge built"><span class="bdot"></span>LIVE</span>
+        </div>
+
+        <div class="node progress">
+          <div class="node-ref">NODE-04 · COMMERCE</div>
+          <div class="node-name">TRANSACTION LAYER</div>
+          <div class="node-desc">Stripe + Printful API. Custom checkout built into Netlify site. Next build priority.</div>
+          <span class="badge progress"><span class="bdot"></span>BUILDING</span>
+        </div>
+
+        <div class="node planned">
+          <div class="node-ref">NODE-05 · EMAIL</div>
+          <div class="node-name">TRANSMISSION CHANNEL</div>
+          <div class="node-desc">Brevo. Drop announcements as declassified releases. Justin to action signup.</div>
+          <span class="badge planned"><span class="bdot"></span>PLANNED</span>
+        </div>
+
+        <div class="node planned">
+          <div class="node-ref">NODE-06 · CONTENT</div>
+          <div class="node-name">CONTENT PIPELINE</div>
+          <div class="node-desc">RSS + Claude API. 3–5x weekly. TikTok decode series. Instagram symbol reveals.</div>
+          <span class="badge planned"><span class="bdot"></span>PLANNED</span>
+        </div>
+
+        <div class="node planned">
+          <div class="node-ref">NODE-07 · VISUALS</div>
+          <div class="node-name">DESIGN ENGINE</div>
+          <div class="node-desc">Claude writes prompts. Midjourney/Flux generates. Claude judges. Justin approves.</div>
+          <span class="badge planned"><span class="bdot"></span>PLANNED</span>
+        </div>
+
+        <div class="node planned">
+          <div class="node-ref">NODE-08 · DATA</div>
+          <div class="node-name">INTELLIGENCE FEED</div>
+          <div class="node-desc">Umami analytics + Search Console. Feeds Claude's commercial judgment over time.</div>
+          <span class="badge planned"><span class="bdot"></span>PLANNED</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BUILD SEQUENCE -->
+    <div class="card w2">
+      <div class="card-ref"><span>CORRECT SEQUENCE · REORDERED FOR TRACTION</span></div>
+      <div class="card-title">BUILD SEQUENCE</div>
+      <div class="seq">
+        <div class="seq-item done">
+          <div class="seq-n">01</div>
+          <div>
+            <div class="seq-title">FOUNDATION DOCUMENTS</div>
+            <div class="seq-desc">Brand Bible, Symbol System, Ecosystem Map. The hardest part. Done.</div>
+          </div>
+        </div>
+        <div class="seq-item done">
+          <div class="seq-n">02</div>
+          <div>
+            <div class="seq-title">WEBSITE LIVE</div>
+            <div class="seq-desc">Netlify + GitHub + Cloudflare. Files 001 and 002 pages live.</div>
+          </div>
+        </div>
+        <div class="seq-item done">
+          <div class="seq-n">03</div>
+          <div>
+            <div class="seq-title">WEBSITE REBUILD</div>
+            <div class="seq-desc">Collective and fund references removed. Readability fixed. Clean copy deployed.</div>
+          </div>
+        </div>
+        <div class="seq-item done">
+          <div class="seq-n">04</div>
+          <div>
+            <div class="seq-title">MISSION CONTROL LIVE</div>
+            <div class="seq-desc">This dashboard deployed. Cowork context files loaded. Sessions now stateful.</div>
+          </div>
+        </div>
+        <div class="seq-item now">
+          <div class="seq-n">05</div>
+          <div>
+            <div class="seq-title">TRANSACTION LAYER</div>
+            <div class="seq-desc">Stripe + Printful API. Custom checkout. Orders flow without touching fulfilment.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">06</div>
+          <div>
+            <div class="seq-title">PHYSICAL SAMPLE</div>
+            <div class="seq-desc">Order File 001 sample. Verify quality matches the mythology before any push.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">07</div>
+          <div>
+            <div class="seq-title">EMAIL CAPTURE LIVE</div>
+            <div class="seq-desc">Brevo connected. Google Forms retired. Transmission list begins building.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">08</div>
+          <div>
+            <div class="seq-title">FIND THE EXISTING TRIBE</div>
+            <div class="seq-desc">Appear in r/HighStrangeness, Cooper communities, Maxwell audiences. PHC as discovered object.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">09</div>
+          <div>
+            <div class="seq-title">TIKTOK DECODE SERIES</div>
+            <div class="seq-desc">Eye before mind. Symbol reveal format. Claude scripts. Traffic engine that compounds.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">10</div>
+          <div>
+            <div class="seq-title">CONTENT PIPELINE AUTOMATED</div>
+            <div class="seq-desc">Linux machine running. RSS feeds. Claude API. 3–5x weekly. Archive building permanently.</div>
+          </div>
+        </div>
+        <div class="seq-item">
+          <div class="seq-n">11</div>
+          <div>
+            <div class="seq-title">REVEAL THE AI OPERATION</div>
+            <div class="seq-desc">Strategic timing. Alternative press first. The story that changes everything.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK QUEUE -->
+    <div class="card">
+      <div class="card-ref"><span>CURRENT SESSION · ACTIVE TASKS</span></div>
+      <div class="card-title">TASK QUEUE</div>
+      <div class="tasks">
+        <div class="task j">
+          <div class="task-own">JUSTIN</div>
+          <div>
+            <div class="task-body">Register ABN under business name before revenue flows</div>
+            <div class="task-pri">URGENT</div>
+          </div>
+        </div>
+        <div class="task j">
+          <div class="task-own">JUSTIN</div>
+          <div>
+            <div class="task-body">Set up Brevo using personal address — retire Google Forms</div>
+            <div class="task-pri">EMAIL CAPTURE</div>
+          </div>
+        </div>
+        <div class="task j">
+          <div class="task-own">JUSTIN</div>
+          <div>
+            <div class="task-body">Order Printful sample — File 001 — verify physical quality</div>
+            <div class="task-pri">BEFORE LAUNCH PUSH</div>
+          </div>
+        </div>
+        <div class="task c">
+          <div class="task-own">CLAUDE</div>
+          <div>
+            <div class="task-body">Build Stripe + Printful transaction layer via API</div>
+            <div class="task-pri">NEXT BUILD</div>
+          </div>
+        </div>
+        <div class="task c">
+          <div class="task-own">CLAUDE</div>
+          <div>
+            <div class="task-body">Install Umami analytics on Linux machine</div>
+            <div class="task-pri">DATA COLLECTION</div>
+          </div>
+        </div>
+        <div class="task c">
+          <div class="task-own">CLAUDE</div>
+          <div>
+            <div class="task-body">Install Umami analytics on Linux machine</div>
+            <div class="task-pri">DATA COLLECTION</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILES STATUS -->
+    <div class="card w2">
+      <div class="card-ref"><span>FILE RELEASES · CURRENT STATUS</span></div>
+      <div class="card-title">FILES</div>
+      <table class="files-table">
+        <tr>
+          <th>FILE</th>
+          <th>NAME</th>
+          <th>TIER</th>
+          <th>EDITION</th>
+          <th>SOLD</th>
+          <th>STATUS</th>
+        </tr>
+        <tr>
+          <td>001</td>
+          <td>THE CAPSTONE</td>
+          <td>OUTER COURT</td>
+          <td>500</td>
+          <td>0</td>
+          <td><span class="badge progress"><span class="bdot"></span>LIVE — ORDERS PENDING</span></td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>THE SIGNAL TOWER</td>
+          <td>OUTER COURT</td>
+          <td>500</td>
+          <td>0</td>
+          <td><span class="badge progress"><span class="bdot"></span>LIVE — ORDERS PENDING</span></td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>TBD</td>
+          <td>TBD</td>
+          <td>TBD</td>
+          <td>—</td>
+          <td><span class="badge planned"><span class="bdot"></span>PLANNED</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="card">
+      <div class="card-ref"><span>TECH STACK · ~$10 AUD/MONTH</span></div>
+      <div class="card-title">STACK</div>
+      <div class="stack">
+        <div class="stack-row"><div class="stack-name">NETLIFY</div><span class="badge built"><span class="bdot"></span>LIVE</span></div>
+        <div class="stack-row"><div class="stack-name">GITHUB</div><span class="badge built"><span class="bdot"></span>LIVE</span></div>
+        <div class="stack-row"><div class="stack-name">CLOUDFLARE</div><span class="badge built"><span class="bdot"></span>LIVE</span></div>
+        <div class="stack-row"><div class="stack-name">LINUX SERVER</div><span class="badge built"><span class="bdot"></span>LIVE</span></div>
+        <div class="stack-row"><div class="stack-name">CLAUDE API</div><span class="badge built"><span class="bdot"></span>LIVE</span></div>
+        <div class="stack-row"><div class="stack-name">STRIPE</div><span class="badge progress"><span class="bdot"></span>BUILDING</span></div>
+        <div class="stack-row"><div class="stack-name">PRINTFUL</div><span class="badge progress"><span class="bdot"></span>BUILDING</span></div>
+        <div class="stack-row"><div class="stack-name">BREVO</div><span class="badge planned"><span class="bdot"></span>ACTION REQUIRED</span></div>
+        <div class="stack-row"><div class="stack-name">UMAMI</div><span class="badge planned"><span class="bdot"></span>PLANNED</span></div>
+      </div>
+    </div>
+
+    <!-- HOW THIS WORKS -->
+    <div class="card w3">
+      <div class="card-ref"><span>OPERATING INSTRUCTIONS · READ EACH SESSION</span></div>
+      <div class="card-title">HOW THIS WORKS</div>
+      <div class="how">
+        <div class="how-item">
+          <div class="how-label">START A SESSION</div>
+          <div class="how-text">Open Cowork. Type: "Read the PHC context files and give me a session briefing." Claude reads phc-status.md and phc-rules.md, knows the full state, presents priorities. No re-explaining. No lost context.</div>
+        </div>
+        <div class="how-item">
+          <div class="how-label">DURING A SESSION</div>
+          <div class="how-text">Claude executes tasks from the queue. Justin approves irreversible actions. Justin completes Justin-only tasks. Built files go to /builds or /outputs. Status file updated continuously.</div>
+        </div>
+        <div class="how-item">
+          <div class="how-label">END A SESSION</div>
+          <div class="how-text">Claude updates phc-status.md and this dashboard. Justin commits to GitHub. Netlify deploys in 30 seconds. Next session picks up exactly here. The machine keeps running.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div>PALE HORSE COLLECTIVE · MISSION CONTROL · V1.0</div>
+    <div>NOT LEFT. NOT RIGHT. AWAKE.</div>
+    <div id="ft-date">—</div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', init);
+  function init() {
+    const now = new Date();
+    const d = now.toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
+    document.getElementById('tb-date').textContent = 'SESSION · ' + d;
+    document.getElementById('ft-date').textContent = 'V1.0 · ' + d;
+
+    document.querySelectorAll('.card').forEach((c, i) => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(10px)';
+      c.style.transition = `opacity 0.4s ${i * 0.03}s ease, transform 0.4s ${i * 0.03}s ease`;
+      setTimeout(() => { c.style.opacity = '1'; c.style.transform = 'translateY(0)'; }, 50 + i * 30);
+    });
+  }
+</script>
+</body>
+</html>
