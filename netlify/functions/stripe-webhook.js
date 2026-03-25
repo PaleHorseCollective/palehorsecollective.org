@@ -26,12 +26,12 @@ const PRINTFUL_VARIANT_IDS = {
     '2XL': '69c25c14ef7dd2',
   },
   '002': {
-    'XS':  null, // TODO: replace with Printful sync_variant_id
-    'S':   null,
-    'M':   null,
-    'L':   null,
-    'XL':  null,
-    '2XL': null,
+    'XS':  '69c341c448b844',
+    'S':   '69c341c448b8b1',
+    'M':   '69c341c448b901',
+    'L':   '69c341c448b951',
+    'XL':  '69c341c448b995',
+    '2XL': '69c341c448b9e5',
   },
 };
 
