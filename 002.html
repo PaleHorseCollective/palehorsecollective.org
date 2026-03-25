@@ -480,8 +480,8 @@
     <div class="dh-ref">FILE REF: PHC-002 // SYM-02 // OUTER COURT // BROADCAST TERMINATED</div>
   </div>
   <div class="dh-right">
-    <div class="edition-live">500</div>
-    <div class="edition-label">Editions Available</div>
+    <div class="edition-live" id="edition-count">500</div>
+    <div class="edition-label" id="edition-label">Editions Remaining</div>
     <div class="edition-note">Never reprinted when closed</div>
   </div>
 </div>
@@ -722,6 +722,24 @@
     }
     history.replaceState({}, '', window.location.pathname);
   }
+})();
+</script>
+
+<!-- PHC EDITION COUNTER -->
+<script>
+(function() {
+  fetch('/.netlify/functions/get-edition-count?file=002')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var count = document.getElementById('edition-count');
+      var label = document.getElementById('edition-label');
+      if (count) count.textContent = data.remaining;
+      if (data.remaining === 0 && count) {
+        count.style.color = 'var(--red)';
+        if (label) label.textContent = 'Edition Closed';
+      }
+    })
+    .catch(function() {});
 })();
 </script>
 </body>
