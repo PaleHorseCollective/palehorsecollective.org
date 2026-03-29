@@ -121,13 +121,12 @@ async function createPrintfulOrder(session) {
     confirm: true,
   };
 
-  // Strip any non-Latin-1 characters from the API key before use in headers
+  // Mac copy-paste silently corrupts certain characters in API keys:
+  // × (U+00D7, code 215) → x (120), Cyrillic О (U+041E, code 1054) → Latin O (79)
+  // Replace known substitutions to restore the correct ASCII token.
   const printfulApiKey = (process.env.PRINTFUL_API_KEY || '')
-    .split('')
-    .filter(c => c.charCodeAt(0) <= 127)
-    .join('');
-
-  console.log(`Printful API key sanitised length: ${printfulApiKey.length} (raw: ${(process.env.PRINTFUL_API_KEY || '').length})`);
+    .replace(/\u00D7/g, 'x')
+    .replace(/\u041E/g, 'O');
 
   const response = await fetch('https://api.printful.com/orders', {
     method: 'POST',
