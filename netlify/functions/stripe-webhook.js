@@ -76,11 +76,6 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: JSON.stringify({ received: true, skipped: 'unpaid' }) };
     }
 
-    // DEBUG — log API key char codes to diagnose ByteString error (remove after fix)
-    const apiKey = process.env.PRINTFUL_API_KEY || '';
-    console.log('PRINTFUL_API_KEY length:', apiKey.length);
-    console.log('PRINTFUL_API_KEY char codes (first 25):', [...apiKey.slice(0, 25)].map(c => c.charCodeAt(0)).join(','));
-
     try {
       await createPrintfulOrder(session);
     } catch (err) {
@@ -126,10 +121,18 @@ async function createPrintfulOrder(session) {
     confirm: true,
   };
 
+  // Strip any non-Latin-1 characters from the API key before use in headers
+  const printfulApiKey = (process.env.PRINTFUL_API_KEY || '')
+    .split('')
+    .filter(c => c.charCodeAt(0) <= 127)
+    .join('');
+
+  console.log(`Printful API key sanitised length: ${printfulApiKey.length} (raw: ${(process.env.PRINTFUL_API_KEY || '').length})`);
+
   const response = await fetch('https://api.printful.com/orders', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.PRINTFUL_API_KEY}`,
+      'Authorization': `Bearer ${printfulApiKey}`,
       'Content-Type': 'application/json',
       'X-PF-Store-Id': process.env.PRINTFUL_STORE_ID || '',
     },
