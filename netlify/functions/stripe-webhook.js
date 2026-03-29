@@ -76,6 +76,11 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: JSON.stringify({ received: true, skipped: 'unpaid' }) };
     }
 
+    // DEBUG — log API key char codes to diagnose ByteString error (remove after fix)
+    const apiKey = process.env.PRINTFUL_API_KEY || '';
+    console.log('PRINTFUL_API_KEY length:', apiKey.length);
+    console.log('PRINTFUL_API_KEY char codes (first 25):', [...apiKey.slice(0, 25)].map(c => c.charCodeAt(0)).join(','));
+
     try {
       await createPrintfulOrder(session);
     } catch (err) {
