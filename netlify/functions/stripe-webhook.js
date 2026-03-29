@@ -3,9 +3,10 @@
 // Handles: checkout.session.completed → creates Printful order
 //
 // SETUP REQUIRED:
-//   1. Set STRIPE_WEBHOOK_SECRET in Netlify env vars (from Stripe Dashboard → Webhooks)
-//   2. Set PRINTFUL_API_KEY in Netlify env vars (from Printful → Settings → API)
-//   3. Fill in PRINTFUL_VARIANT_IDS below (from Printful API or dashboard)
+// 1. Set STRIPE_WEBHOOK_SECRET in Netlify env vars (from Stripe Dashboard → Webhooks)
+// 2. Set PRINTFUL_API_KEY in Netlify env vars (from Printful → Settings → API)
+// 3. Set PRINTFUL_STORE_ID in Netlify env vars (from Printful Dashboard URL)
+// 4. Fill in PRINTFUL_VARIANT_IDS below (from Printful API or dashboard)
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -14,23 +15,24 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // Find these via: GET https://api.printful.com/sync/products (with API key)
 // Or: Printful Dashboard → your store → each product → each variant
 //
-// Format: PRINTFUL_VARIANT_IDS['fileId']['SIZE'] = sync_variant_id (number)
+// Format: PRINTFUL_VARIANT_IDS['fileId']['SIZE'] = sync_variant_id (string)
 // ─────────────────────────────────────────────────────────────────────────────
+
 const PRINTFUL_VARIANT_IDS = {
   '001': {
-    'XS':  '69c25c14ef7c52',
-    'S':   '69c25c14ef7cb9',
-    'M':   '69c25c14ef7d04',
-    'L':   '69c25c14ef7d56',
-    'XL':  '69c25c14ef7d96',
+    'XS': '69c25c14ef7c52',
+    'S': '69c25c14ef7cb9',
+    'M': '69c25c14ef7d04',
+    'L': '69c25c14ef7d56',
+    'XL': '69c25c14ef7d96',
     '2XL': '69c25c14ef7dd2',
   },
   '002': {
-    'XS':  '69c341c448b844',
-    'S':   '69c341c448b8b1',
-    'M':   '69c341c448b901',
-    'L':   '69c341c448b951',
-    'XL':  '69c341c448b995',
+    'XS': '69c341c448b844',
+    'S': '69c341c448b8b1',
+    'M': '69c341c448b901',
+    'L': '69c341c448b951',
+    'XL': '69c341c448b995',
     '2XL': '69c341c448b9e5',
   },
 };
@@ -57,7 +59,17 @@ exports.handler = async (event) => {
 
   // Handle checkout completion
   if (stripeEvent.type === 'checkout.session.completed') {
-    const session = stripeEvent.data.object;
+    // Retrieve full session from Stripe API — webhook payload does not always
+    // include shipping_details; a fresh retrieve guarantees it is populated.
+    let session;
+    try {
+      session = await stripe.checkout.sessions.retrieve(
+        stripeEvent.data.object.id
+      );
+    } catch (err) {
+      console.error('Failed to retrieve session from Stripe:', err.message);
+      return { statusCode: 500, body: 'Session retrieval failed' };
+    }
 
     // Only process paid sessions
     if (session.payment_status !== 'paid') {
