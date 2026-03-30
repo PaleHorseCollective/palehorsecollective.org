@@ -6,36 +6,61 @@
 // 1. Set STRIPE_WEBHOOK_SECRET in Netlify env vars (from Stripe Dashboard → Webhooks)
 // 2. Set PRINTFUL_API_KEY in Netlify env vars (from Printful → Settings → API)
 // 3. Set PRINTFUL_STORE_ID in Netlify env vars (from Printful Dashboard URL)
-// 4. Fill in PRINTFUL_VARIANT_IDS below (from Printful API or dashboard)
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PRINTFUL SYNC VARIANT IDs
-// Find these via: GET https://api.printful.com/sync/products (with API key)
-// Or: Printful Dashboard → your store → each product → each variant
-//
-// Format: PRINTFUL_VARIANT_IDS['fileId']['SIZE'] = sync_variant_id (string)
-// ─────────────────────────────────────────────────────────────────────────────
-
-const PRINTFUL_VARIANT_IDS = {
-  '001': {
-    'XS': '69c25c14ef7c52',
-    'S': '69c25c14ef7cb9',
-    'M': '69c25c14ef7d04',
-    'L': '69c25c14ef7d56',
-    'XL': '69c25c14ef7d96',
-    '2XL': '69c25c14ef7dd2',
-  },
-  '002': {
-    'XS': '69c341c448b844',
-    'S': '69c341c448b8b1',
-    'M': '69c341c448b901',
-    'L': '69c341c448b951',
-    'XL': '69c341c448b995',
-    '2XL': '69c341c448b9e5',
-  },
+// PHC product names as they appear in Printful — used to match sync products
+const FILE_NAMES = {
+  '001': 'FILE 001',
+  '002': 'FILE 002',
 };
+
+// Mac copy-paste silently corrupts certain characters in API keys.
+// Apply corrections before every Printful API call.
+function getPrintfulApiKey() {
+  return (process.env.PRINTFUL_API_KEY || '')
+    .replace(/\u00D7/g, 'x')   // × (U+00D7) → x
+    .replace(/\u041E/g, 'O');  // Cyrillic О (U+041E) → Latin O
+}
+
+function printfulHeaders() {
+  return {
+    'Authorization': `Bearer ${getPrintfulApiKey()}`,
+    'Content-Type': 'application/json',
+    'X-PF-Store-Id': process.env.PRINTFUL_STORE_ID || '',
+  };
+}
+
+// Look up the numeric sync_variant_id from Printful by product name and size
+async function getSyncVariantId(fileId, size) {
+  const targetName = FILE_NAMES[fileId];
+  if (!targetName) throw new Error(`Unknown file ID: ${fileId}`);
+
+  const res = await fetch('https://api.printful.com/sync/products', {
+    headers: printfulHeaders(),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(`Printful products fetch failed: ${JSON.stringify(data)}`);
+
+  const product = (data.result || []).find(p =>
+    p.name.toUpperCase().includes(targetName.toUpperCase())
+  );
+  if (!product) throw new Error(`Printful product not found for file ${fileId}`);
+
+  const detailRes = await fetch(`https://api.printful.com/sync/products/${product.id}`, {
+    headers: printfulHeaders(),
+  });
+  const detail = await detailRes.json();
+  if (!detailRes.ok) throw new Error(`Printful product detail failed: ${JSON.stringify(detail)}`);
+
+  const variant = (detail.result?.sync_variants || []).find(v =>
+    v.size === size || (v.name && v.name.toUpperCase().includes(size.toUpperCase()))
+  );
+  if (!variant) throw new Error(`No variant found for file ${fileId} size ${size}`);
+
+  console.log(`Resolved variant — file:${fileId} size:${size} sync_variant_id:${variant.id}`);
+  return variant.id; // numeric integer
+}
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -44,7 +69,6 @@ exports.handler = async (event) => {
 
   const sig = event.headers['stripe-signature'];
 
-  // Verify webhook signature
   let stripeEvent;
   try {
     stripeEvent = stripe.webhooks.constructEvent(
@@ -57,10 +81,8 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
-  // Handle checkout completion
   if (stripeEvent.type === 'checkout.session.completed') {
-    // Retrieve full session from Stripe API — webhook payload does not always
-    // include shipping_details; a fresh retrieve guarantees it is populated.
+    // Retrieve full session — webhook payload may not include shipping_details
     let session;
     try {
       session = await stripe.checkout.sessions.retrieve(
@@ -71,7 +93,6 @@ exports.handler = async (event) => {
       return { statusCode: 500, body: 'Session retrieval failed' };
     }
 
-    // Only process paid sessions
     if (session.payment_status !== 'paid') {
       return { statusCode: 200, body: JSON.stringify({ received: true, skipped: 'unpaid' }) };
     }
@@ -79,7 +100,6 @@ exports.handler = async (event) => {
     try {
       await createPrintfulOrder(session);
     } catch (err) {
-      // Log but don't fail the webhook — Stripe will retry on 5xx
       console.error('Printful order creation failed:', err.message);
       return { statusCode: 500, body: 'Printful order failed' };
     }
@@ -97,10 +117,8 @@ async function createPrintfulOrder(session) {
     throw new Error(`Missing session data: file_id=${file_id} size=${size} shipping=${!!shipping}`);
   }
 
-  const variantId = PRINTFUL_VARIANT_IDS[file_id]?.[size];
-  if (!variantId) {
-    throw new Error(`No Printful variant ID configured for file ${file_id} size ${size}`);
-  }
+  // Dynamically resolve the numeric sync_variant_id from Printful
+  const syncVariantId = await getSyncVariantId(file_id, size);
 
   const orderPayload = {
     recipient: {
@@ -114,27 +132,15 @@ async function createPrintfulOrder(session) {
       email: customerEmail,
     },
     items: [{
-      sync_variant_id: variantId,
+      sync_variant_id: syncVariantId,
       quantity: 1,
     }],
-    // Confirm immediately — Printful will hold for review if there's an issue
     confirm: true,
   };
 
-  // Mac copy-paste silently corrupts certain characters in API keys:
-  // × (U+00D7, code 215) → x (120), Cyrillic О (U+041E, code 1054) → Latin O (79)
-  // Replace known substitutions to restore the correct ASCII token.
-  const printfulApiKey = (process.env.PRINTFUL_API_KEY || '')
-    .replace(/\u00D7/g, 'x')
-    .replace(/\u041E/g, 'O');
-
   const response = await fetch('https://api.printful.com/orders', {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${printfulApiKey}`,
-      'Content-Type': 'application/json',
-      'X-PF-Store-Id': process.env.PRINTFUL_STORE_ID || '',
-    },
+    headers: printfulHeaders(),
     body: JSON.stringify(orderPayload),
   });
 
