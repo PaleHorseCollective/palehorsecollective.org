@@ -760,7 +760,7 @@
     <div class="files-grid">
 
       <!-- FILE 001 — ACTIVE -->
-      <a href="/001.html" class="file-card tier-1 reveal">
+      <a href="/001.html" class="file-card tier-1 reveal" data-file="001">
         <div class="file-visual">
           <img src="/001-worn.webp" alt="File 001 — The Capstone" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
           <span class="file-status-badge status-open">Open</span>
@@ -783,7 +783,7 @@
       </a>
 
       <!-- FILE 002 — ACTIVE -->
-      <a href="/002.html" class="file-card tier-1 reveal">
+      <a href="/002.html" class="file-card tier-1 reveal" data-file="002">
         <div class="file-visual">
           <img src="/002-worn.webp" alt="File 002 — The Signal Tower" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
           <span class="file-status-badge status-open">Open</span>
@@ -1039,6 +1039,21 @@
       document.getElementById('hamburger').classList.remove('open');
       document.body.style.overflow = '';
     }
+  });
+
+  // ─── LIVE EDITION COUNTS ───
+  ['001', '002'].forEach(function(fileId) {
+    var card = document.querySelector('[data-file="' + fileId + '"]');
+    if (!card) return;
+    fetch('/.netlify/functions/get-edition-count?file=' + fileId)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var remainingEl = card.querySelector('.meta-value.remaining');
+        var fillEl = card.querySelector('.file-edition-fill');
+        if (remainingEl) remainingEl.textContent = data.remaining + ' available';
+        if (fillEl) fillEl.style.width = ((data.sold / data.total) * 100) + '%';
+      })
+      .catch(function() {});
   });
 
 </script>
