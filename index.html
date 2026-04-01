@@ -1864,7 +1864,7 @@
   </div>
   <div class="file-grid">
 
-    <a href="/001.html" class="fg-card">
+    <a href="/001.html" class="fg-card" data-file="001">
       <div class="fg-visual">
         <img src="/001-worn.webp" alt="File 001 — The Capstone">
         <span class="fg-status">Open</span>
@@ -1892,7 +1892,7 @@
       </div>
     </a>
 
-    <a href="/002.html" class="fg-card">
+    <a href="/002.html" class="fg-card" data-file="002">
       <div class="fg-visual">
         <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
         <span class="fg-status">Open</span>
@@ -2196,6 +2196,20 @@
       document.getElementById('hamburger').classList.remove('open');
       document.body.style.overflow = '';
     }
+  });
+  // ─── LIVE EDITION COUNTS ───
+  ['001', '002'].forEach(function(fileId) {
+    var card = document.querySelector('[data-file="' + fileId + '"]');
+    if (!card) return;
+    fetch('/.netlify/functions/get-edition-count?file=' + fileId)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var availableEl = card.querySelector('.fg-meta-value.available');
+        var barEl = card.querySelector('.fg-edition-bar');
+        if (availableEl) availableEl.textContent = data.remaining;
+        if (barEl) barEl.style.background = 'linear-gradient(to right, var(--red) ' + ((data.sold / data.total) * 100) + '%, rgba(232,224,208,0.06) 0%)';
+      })
+      .catch(function() {});
   });
 
 </script>
