@@ -41,8 +41,8 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.5rem 3rem;
+    background: var(--void);
     border-bottom: 1px solid rgba(232,224,208,0.06);
-    backdrop-filter: blur(4px);
   }
   .nav-mark { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; }
   .nav-mark span { color: var(--red); }
@@ -317,7 +317,7 @@
 
   .fund-text {
     font-family: var(--font-body); font-style: italic;
-    font-size: 0.9rem; color: var(--bone-dim); line-height: 1.7;
+    font-size: 1rem; color: var(--bone-dim); line-height: 1.7;
   }
 
   .fund-figure {
@@ -443,7 +443,7 @@
   <ul class="nav-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
-    <li><a href="/doctrine.html">Doctrine</a></li>
+        <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
@@ -463,7 +463,7 @@
   <ul class="mobile-nav-links">
     <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
     <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
-    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
+        <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
     <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
   </ul>
   <div class="mobile-nav-footer">
@@ -480,8 +480,8 @@
     <div class="dh-ref">FILE REF: PHC-002 // SYM-02 // OUTER COURT // BROADCAST TERMINATED</div>
   </div>
   <div class="dh-right">
-    <div class="edition-live" id="edition-count">500</div>
-    <div class="edition-label" id="edition-label">Editions Remaining</div>
+    <div class="edition-live">500</div>
+    <div class="edition-label">Editions Available</div>
     <div class="edition-note">Never reprinted when closed</div>
   </div>
 </div>
@@ -611,8 +611,7 @@
 
 </section>
 
-<!-- FUND -->
-
+<!-- FUND --></div>
 
 <!-- FOOTER -->
 <footer>
@@ -620,7 +619,7 @@
   <ul class="footer-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
-    <li><a href="/doctrine.html">Doctrine</a></li>
+        <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
   <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
@@ -671,76 +670,16 @@
     });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-<!-- PHC CHECKOUT — FILE 002 -->
-<script>
-(function() {
-  var btn = document.getElementById('acquire-btn');
-  if (!btn) return;
 
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    var selectedBtn = document.querySelector('.size-btn.selected');
-    if (!selectedBtn) {
-      var label = document.querySelector('.size-label');
-      if (label) { label.style.color = '#8b1a1a'; setTimeout(function(){ label.style.color = ''; }, 2000); }
-      return;
-    }
-
-    var size = selectedBtn.textContent.trim();
-    var originalText = btn.textContent;
-    btn.textContent = 'Accessing Archive...';
-    btn.style.opacity = '0.5';
-    btn.style.pointerEvents = 'none';
-
-    fetch('/.netlify/functions/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fileId: '002', size: size })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL');
-      }
-    })
-    .catch(function() {
-      btn.textContent = originalText;
-      btn.style.opacity = '';
-      btn.style.pointerEvents = '';
-    });
-  });
-
-  if (window.location.search.includes('order=confirmed')) {
-    var note = document.querySelector('.acquire-note');
-    if (note) {
-      note.textContent = 'File transferred. Fulfilment initiated. Check your email for confirmation.';
-      note.style.opacity = '0.8';
-    }
-    history.replaceState({}, '', window.location.pathname);
-  }
-})();
-</script>
-
-<!-- PHC EDITION COUNTER -->
-<script>
-(function() {
+  // ─── LIVE EDITION COUNT ───
   fetch('/.netlify/functions/get-edition-count?file=002')
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      var count = document.getElementById('edition-count');
-      var label = document.getElementById('edition-label');
-      if (count) count.textContent = data.remaining;
-      if (data.remaining === 0 && count) {
-        count.style.color = 'var(--red)';
-        if (label) label.textContent = 'Edition Closed';
-      }
+      const el = document.querySelector('.edition-live');
+      if (el) el.textContent = data.remaining;
     })
     .catch(function() {});
-})();
 </script>
+
 </body>
 </html>
