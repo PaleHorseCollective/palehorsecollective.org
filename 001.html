@@ -257,7 +257,6 @@
     border-bottom: 1px solid rgba(232,224,208,0.08);
     max-width: 900px;
     margin: 0 auto;
-    text-align: center;
   }
 
   .decode-label {
@@ -273,20 +272,21 @@
 
   .decode-entry {
     display: grid; grid-template-columns: 160px 1fr;
-    gap: 0; margin-bottom: 1px; background: rgba(232,224,208,0.06);
+    gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.05);
+    opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease;
   }
+  .decode-entry.visible { opacity: 1; transform: translateY(0); }
+  .decode-entry:last-child { border-bottom: none; }
 
   .de-label {
-    background: var(--void); padding: 1.8rem 1.5rem;
-    border-right: 1px solid rgba(232,224,208,0.06);
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em;
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
     color: var(--gold); text-transform: uppercase; opacity: 0.6;
-    text-align: center;
+    padding-top: 0.2rem;
   }
 
   .de-content {
-    background: var(--void); padding: 1.8rem 2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .de-content-title {
@@ -331,7 +331,7 @@
     .file-info { max-height: none; padding: 2rem 1.5rem; }
     .decode-section { padding: 3rem 1.5rem; }
     .decode-entry { grid-template-columns: 1fr; }
-    .de-label { border-right: none; border-bottom: 1px solid rgba(232,224,208,0.06); padding: 1rem 1.5rem; }
+    .de-label { padding-top: 0; }
     #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
