@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<\!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>File 001 — The Capstone — Pale Horse Collective</title>
-<meta name="description" content="File 001 has been declassified. The Capstone. Outer Court. Edition of 500. Never reprinted.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="File 001 — The Capstone. The unfinished pyramid, inverted, decoded, documented. Limited edition of 500. Never reprinted.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
   :root {
     --void: #0a0a08;
     --bone: #e8e0d0;
-    --bone-dim: #a09890;
+    --bone-dim: #b4aca0;
     --red: #8b1a1a;
     --gold: #b8960c;
     --green: #4aff91;
@@ -55,6 +55,16 @@
   .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
+  /* HAMBURGER — must be declared before media query */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: crosshair; padding: 4px; background: none; border: none; z-index: 200;
+  }
+  .hamburger .bar { width: 24px; height: 1px; background: var(--bone-dim); transition: all 0.3s ease; transform-origin: center; }
+  .hamburger.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--bone); }
+  .hamburger.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--bone); }
+
   /* DECLASSIFIED HEADER */
   .declassified-header {
     padding: 7rem 3rem 2rem;
@@ -62,8 +72,6 @@
     display: flex; align-items: center; justify-content: space-between;
     background: rgba(139,26,26,0.05);
   }
-
-  .dh-left {}
 
   .dh-stamp {
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
@@ -84,9 +92,7 @@
     margin-top: 0.8rem;
   }
 
-  .dh-right {
-    text-align: right;
-  }
+  .dh-right { text-align: right; }
 
   .edition-live {
     font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
@@ -133,19 +139,19 @@
 
   .visual-panel {
     flex: 1; display: none; align-items: center; justify-content: center;
-    padding: 2rem; overflow: hidden; background: #080806;
+    padding: 0; overflow: hidden; background: #080806;
   }
 
   .visual-panel.active { display: flex; }
 
   .file-graphic {
-    width: auto; height: 100%; max-height: 100%;
+    width: auto; height: 100%; max-height: 100%; padding: 2rem;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(139,26,26,0.1));
   }
 
   .mockup-img {
-    width: 100%; height: 100%; object-fit: contain; object-position: center;
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
   }
 
   /* RIGHT — product info */
@@ -166,34 +172,34 @@
   .fi-label {
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
     color: var(--gold); text-transform: uppercase; opacity: 0.6;
-    margin-bottom: 0.8rem; display: block; text-align: center;
+    margin-bottom: 0.8rem; display: block;
   }
 
   .fi-title {
     font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
     letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
-    line-height: 1.1; margin-bottom: 1rem; text-align: center;
+    line-height: 1.1; margin-bottom: 1rem;
   }
 
   .fi-body {
     font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
-    color: var(--bone-dim); line-height: 1.85; text-align: center;
+    color: var(--bone-dim); line-height: 1.8;
   }
 
-  /* Meta grid */
   .fi-meta {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: rgba(232,224,208,0.06); margin: 1.5rem 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(232,224,208,0.06);
+    margin: 1.5rem 0;
   }
 
   .fi-meta-item {
-    background: var(--void); padding: 1rem 1.2rem;
+    background: var(--void); padding: 0.8rem 1rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
   }
 
   .meta-l {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.2em;
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
-    margin-bottom: 0.3rem; display: block;
   }
 
   .meta-v {
@@ -204,70 +210,62 @@
   .meta-v.live { color: var(--green); }
   .meta-v.never { color: var(--red); opacity: 0.7; }
 
-  /* Size selector */
-  .size-selector {
-    margin: 1.5rem 0;
-  }
+  /* SIZE SELECTOR */
+  .size-selector { margin: 1.5rem 0 0.5rem; }
 
   .size-label {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
-    margin-bottom: 0.8rem; display: block; text-align: center;
+    display: block; margin-bottom: 0.8rem;
   }
 
-  .sizes {
-    display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
-  }
+  .sizes { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
   .size-btn {
     font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em;
     color: var(--bone-dim); text-transform: uppercase;
-    border: 1px solid rgba(232,224,208,0.15); padding: 0.5em 0.9em;
-    background: none; cursor: crosshair; transition: all 0.2s;
+    background: none; border: 1px solid rgba(232,224,208,0.15);
+    padding: 0.5rem 0.8rem; cursor: crosshair; transition: all 0.15s;
   }
 
-  .size-btn:hover, .size-btn.selected {
-    color: var(--bone); border-color: rgba(232,224,208,0.5);
-    background: rgba(232,224,208,0.04);
-  }
+  .size-btn:hover { border-color: rgba(232,224,208,0.4); color: var(--bone); }
+  .size-btn.selected { border-color: var(--bone); color: var(--bone); background: rgba(232,224,208,0.05); }
 
-  /* Acquire CTA */
+  /* ACQUIRE CTA */
   .acquire-cta {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; padding: 1.2rem; margin-top: 0.5rem;
-    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--bone);
-    border: 1px solid rgba(232,224,208,0.3); background: transparent;
-    cursor: crosshair; transition: all 0.25s; text-decoration: none;
+    display: block; width: 100%; margin-top: 1.5rem;
+    font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--void); background: var(--bone);
+    padding: 1.1rem 2rem; text-align: center; text-decoration: none;
+    transition: all 0.2s; border: 1px solid transparent;
   }
 
-  .acquire-cta:hover {
-    background: rgba(232,224,208,0.06); border-color: var(--bone);
-  }
+  .acquire-cta:hover { background: transparent; color: var(--bone); border-color: var(--bone); }
 
   .acquire-note {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.15em;
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
     text-align: center; margin-top: 0.8rem;
   }
 
   /* DECODE SECTION */
   .decode-section {
-    padding: 5rem 3rem;
+    padding: 6rem 3rem;
     border-bottom: 1px solid rgba(232,224,208,0.08);
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; margin: 0 auto;
   }
 
   .decode-label {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
-    color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; display: block;
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    display: block; margin-bottom: 1.5rem;
   }
 
   .decode-title {
-    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 3rem);
     font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-    color: var(--bone); margin-bottom: 3rem;
+    color: var(--bone); margin-bottom: 4rem; line-height: 1.1;
   }
 
   .decode-entry {
@@ -276,6 +274,7 @@
     border-bottom: 1px solid rgba(232,224,208,0.05);
     opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease;
   }
+
   .decode-entry.visible { opacity: 1; transform: translateY(0); }
   .decode-entry:last-child { border-bottom: none; }
 
@@ -285,94 +284,213 @@
     padding-top: 0.2rem;
   }
 
-  .de-content {
-    text-align: left;
-  }
-
   .de-content-title {
     font-family: var(--font-display); font-size: 1rem; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
-    margin-bottom: 0.6rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone);
+    margin-bottom: 0.8rem;
   }
 
   .de-content-body {
-    font-family: var(--font-body); font-style: italic; font-size: 0.88rem;
-    color: var(--bone-dim); line-height: 1.8; opacity: 0.85;
+    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+    color: var(--bone-dim); line-height: 1.85;
   }
 
   .de-content-source {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.15em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
-    margin-top: 0.8rem;
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-top: 1rem;
   }
 
-  /* FUND / FOOTER */
-  #fund { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
-  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
-  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
-  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
+  /* FUND */
+  #fund {
+    padding: 4rem 3rem;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 3rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    background: rgba(184,150,12,0.03);
+  }
 
-  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
-  .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
-  .footer-mark em { color: var(--red); font-style: normal; }
+  .fund-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+  }
+
+  .fund-text {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.9rem; color: var(--bone-dim); line-height: 1.7;
+  }
+
+  .fund-figure {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-align: right; opacity: 0.5;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+
+  .footer-mark {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+
   .footer-links { display: flex; gap: 2rem; list-style: none; }
-  .footer-links a { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-decoration: none; text-transform: uppercase; opacity: 0.35; transition: opacity 0.2s; }
-  .footer-links a:hover { opacity: 0.7; }
-  .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
+  .footer-links a {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.3; transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.8; }
 
-  /* MOBILE */
-  @media (max-width: 768px) {
+  .footer-doctrine {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.2; text-align: right;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
-    .declassified-header { flex-direction: column; gap: 1.5rem; padding: 6rem 1.5rem 2rem; }
-    .dh-right { text-align: left; }
+    .nav-signal { display: none; }
+    .hamburger { display: flex; }
     .file-layout { grid-template-columns: 1fr; }
-    .file-visuals { position: relative; height: 80vw; top: 0; }
-    .file-info { max-height: none; padding: 2rem 1.5rem; }
-    .decode-section { padding: 3rem 1.5rem; }
-    .decode-entry { grid-template-columns: 1fr; }
-    .de-label { padding-top: 0; }
-    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .file-visuals { position: static; height: auto; }
+    .visual-panel { aspect-ratio: 1/1; padding: 1rem; }
+    .file-info { max-height: none; }
+    .decode-entry { grid-template-columns: 1fr; gap: 0.8rem; }
+    #fund { grid-template-columns: 1fr; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
+    .declassified-header { flex-direction: column; gap: 1.5rem; }
+    .dh-right { text-align: left; }
   }
 
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  /* MOBILE OVERLAY */
+  .mobile-overlay {
+    display: none; position: fixed; inset: 0; background: var(--void);
+    z-index: 150; flex-direction: column; justify-content: center;
+    align-items: flex-start; padding: 6rem 2.5rem 3rem;
+  }
+  .mobile-overlay.open { display: flex; }
+  .mobile-overlay::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .mobile-nav-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-bottom: 3rem; position: relative;
+  }
+  .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
+  .mobile-nav-links li {
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.25s; }
+  .mobile-nav-links a {
+    font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3rem); font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone-dim);
+    text-decoration: none; padding: 1rem 0; display: flex;
+    align-items: center; justify-content: space-between; transition: color 0.2s;
+  }
+  .mobile-nav-links a:hover { color: var(--bone); }
+  .mobile-nav-links a .mn-num {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--gold); opacity: 0.5; align-self: flex-start; margin-top: 0.4rem;
+  }
+  .mobile-nav-footer {
+    position: relative; margin-top: auto; padding-top: 2rem;
+    border-top: 1px solid rgba(232,224,208,0.06); width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mobile-nav-footer-text {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+  }
+  .mobile-nav-signal {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    color: var(--green); display: flex; align-items: center; gap: 0.4rem;
+  }
+  .mobile-nav-signal::before {
+    content: ''; display: inline-block; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+
+  .mobile-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; cursor: crosshair; padding: 4px;
+    display: flex; flex-direction: column; gap: 0;
+    width: 28px; height: 28px; align-items: center; justify-content: center;
+  }
+  .close-bar { width: 22px; height: 1px; background: var(--bone-dim); display: block; }
+  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
+  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
 </style>
+
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <a href="/" class="nav-mark">PHC <span>//</span> Pale Horse Collective</a>
   <ul class="nav-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
-    <li><a href="/collective.html">Collective</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
-  <div class="nav-signal">FILE ACTIVE</div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  <span class="nav-signal">File Active</span>
 </nav>
 
-<!-- DECLASSIFIED HEADER -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close navigation">
+    <span class="close-bar"></span>
+    <span class="close-bar"></span>
+  </button>
+  <div class="mobile-nav-ref">PHC // FILE 001 // THE CAPSTONE</div>
+  <ul class="mobile-nav-links">
+    <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
+    <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
+    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
+    <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
+  </ul>
+  <div class="mobile-nav-footer">
+    <span class="mobile-nav-footer-text">Not left. Not right. Awake.</span>
+    <span class="mobile-nav-signal">Signal active</span>
+  </div>
+</div>
+
+<\!-- DECLASSIFIED HEADER -->
 <div class="declassified-header">
   <div class="dh-left">
-    <span class="dh-stamp">Declassified</span>
+    <div class="dh-stamp">Declassified // File 001 // Outer Court</div>
     <h1 class="dh-title">The Capstone</h1>
-    <div class="dh-ref">FILE 001 // OUTER COURT // PHC-SYM-01 // EDITION OF 500</div>
+    <div class="dh-ref">FILE REF: PHC-001 // SYM-01 // OUTER COURT // THE EYE THAT WAKES</div>
   </div>
   <div class="dh-right">
-    <div class="edition-live">500</div>
-    <div class="edition-label">Editions Available</div>
+    <div class="edition-live" id="edition-count">500</div>
+    <div class="edition-label" id="edition-label">Editions Remaining</div>
     <div class="edition-note">Never reprinted when closed</div>
   </div>
 </div>
 
-<!-- MAIN LAYOUT -->
+<\!-- MAIN LAYOUT -->
 <div class="file-layout">
 
-  <!-- LEFT VISUALS -->
+  <\!-- LEFT VISUALS -->
   <div class="file-visuals">
     <div class="visual-tabs">
       <button class="vtab active" onclick="switchTab('worn')">Worn</button>
@@ -386,7 +504,7 @@
     </div>
   </div>
 
-  <!-- RIGHT INFO -->
+  <\!-- RIGHT INFO -->
   <div class="file-info">
 
     <div class="fi-section">
@@ -451,7 +569,7 @@
   </div>
 </div>
 
-<!-- DECODE DOCUMENT -->
+<\!-- DECODE DOCUMENT -->
 <section class="decode-section">
   <span class="decode-label">Decode Document // SYM-01 // Published at Declassification</span>
   <h2 class="decode-title">The Architecture of Inversion — File 001</h2>
@@ -494,20 +612,12 @@
 
 </section>
 
-<!-- FUND -->
-<div id="fund">
-  <div class="fund-label">// The Fund // Live</div>
-  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
-  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
-</div>
-
-<!-- FOOTER -->
+<\!-- FOOTER -->
 <footer>
   <div class="footer-mark">PHC <em>·</em> FILE 001 <em>·</em> THE CAPSTONE <em>·</em> OUTER COURT</div>
   <ul class="footer-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
-    <li><a href="/collective.html">Collective</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
@@ -515,6 +625,29 @@
 </footer>
 
 <script>
+  function toggleMenu() {
+    const overlay = document.getElementById('mobile-overlay');
+    const burger = document.getElementById('hamburger');
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
   function switchTab(tab) {
     document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.visual-panel').forEach(p => p.classList.remove('active'));
@@ -536,6 +669,63 @@
     });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<\!-- PHC CHECKOUT — FILE 001 -->
+<script>
+(function() {
+  var btn = document.getElementById('acquire-btn');
+  if (\!btn) return;
+
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    var selectedBtn = document.querySelector('.size-btn.selected');
+    if (\!selectedBtn) {
+      var label = document.querySelector('.size-label');
+      if (label) { label.style.color = '#8b1a1a'; setTimeout(function(){ label.style.color = ''; }, 2000); }
+      return;
+    }
+
+    var size = selectedBtn.textContent.trim();
+    var originalText = btn.textContent;
+    btn.textContent = 'Accessing Archive...';
+    btn.style.opacity = '0.5';
+    btn.style.pointerEvents = 'none';
+
+    fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fileId: '001', size: size })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL');
+      }
+    })
+    .catch(function() {
+      btn.textContent = originalText;
+      btn.style.opacity = '';
+      btn.style.pointerEvents = '';
+    });
+  });
+
+  if (window.location.search.includes('order=confirmed')) {
+    var note = document.querySelector('.acquire-note');
+    if (note) {
+      note.textContent = 'File transferred. Order confirmed. Check your email.';
+      note.style.color = 'var(--green)';
+    }
+    if (btn) {
+      btn.textContent = 'File Transferred';
+      btn.style.opacity = '0.5';
+      btn.style.pointerEvents = 'none';
+    }
+  }
+})();
 </script>
 
 </body>
