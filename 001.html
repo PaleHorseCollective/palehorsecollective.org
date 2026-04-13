@@ -17,7 +17,7 @@
   :root {
     --void: #0a0a08;
     --bone: #e8e0d0;
-    --bone-dim: #b4aca0;
+    --bone-dim: #a09890;
     --red: #8b1a1a;
     --gold: #b8960c;
     --green: #4aff91;
@@ -54,16 +54,6 @@
   .nav-signal { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.5rem; }
   .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-  /* HAMBURGER */
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    cursor: crosshair; padding: 4px; background: none; border: none; z-index: 200;
-  }
-  .hamburger .bar { width: 24px; height: 1px; background: var(--bone-dim); transition: all 0.3s ease; transform-origin: center; }
-  .hamburger.open .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--bone); }
-  .hamburger.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--bone); }
 
   /* DECLASSIFIED HEADER */
   .declassified-header {
@@ -143,19 +133,19 @@
 
   .visual-panel {
     flex: 1; display: none; align-items: center; justify-content: center;
-    padding: 0; overflow: hidden; background: #080806;
+    padding: 2rem; overflow: hidden; background: #080806;
   }
 
   .visual-panel.active { display: flex; }
 
   .file-graphic {
     width: auto; height: 100%; max-height: 100%;
-    object-fit: contain; padding: 2rem;
+    object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(139,26,26,0.1));
   }
 
   .mockup-img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    width: 100%; height: 100%; object-fit: contain; object-position: center;
   }
 
   /* RIGHT — product info */
@@ -176,18 +166,18 @@
   .fi-label {
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
     color: var(--gold); text-transform: uppercase; opacity: 0.6;
-    margin-bottom: 0.8rem; display: block;
+    margin-bottom: 0.8rem; display: block; text-align: center;
   }
 
   .fi-title {
     font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
     letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
-    line-height: 1.1; margin-bottom: 1rem;
+    line-height: 1.1; margin-bottom: 1rem; text-align: center;
   }
 
   .fi-body {
     font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
-    color: var(--bone-dim); line-height: 1.85;
+    color: var(--bone-dim); line-height: 1.85; text-align: center;
   }
 
   /* Meta grid */
@@ -222,11 +212,11 @@
   .size-label {
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
-    margin-bottom: 0.8rem; display: block;
+    margin-bottom: 0.8rem; display: block; text-align: center;
   }
 
   .sizes {
-    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
   }
 
   .size-btn {
@@ -266,6 +256,8 @@
     padding: 5rem 3rem;
     border-bottom: 1px solid rgba(232,224,208,0.08);
     max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .decode-label {
@@ -289,10 +281,12 @@
     border-right: 1px solid rgba(232,224,208,0.06);
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em;
     color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    text-align: center;
   }
 
   .de-content {
     background: var(--void); padding: 1.8rem 2rem;
+    text-align: center;
   }
 
   .de-content-title {
@@ -330,13 +324,10 @@
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
-    .nav-signal { display: none; }
-    .hamburger { display: flex; }
     .declassified-header { flex-direction: column; gap: 1.5rem; padding: 6rem 1.5rem 2rem; }
     .dh-right { text-align: left; }
     .file-layout { grid-template-columns: 1fr; }
-    .file-visuals { position: relative; height: auto; top: 0; }
-    .visual-panel { aspect-ratio: 1/1; padding: 1rem; }
+    .file-visuals { position: relative; height: 80vw; top: 0; }
     .file-info { max-height: none; padding: 2rem 1.5rem; }
     .decode-section { padding: 3rem 1.5rem; }
     .decode-entry { grid-template-columns: 1fr; }
@@ -345,44 +336,6 @@
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
   }
-
-  /* MOBILE OVERLAY */
-  .mobile-overlay {
-    display: none; position: fixed; inset: 0; background: var(--void);
-    z-index: 150; flex-direction: column; justify-content: center;
-    align-items: flex-start; padding: 6rem 2.5rem 3rem;
-  }
-  .mobile-overlay.open { display: flex; }
-  .mobile-overlay::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
-    background-size: 60px 60px; pointer-events: none;
-  }
-  .mobile-nav-ref { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; margin-bottom: 3rem; position: relative; }
-  .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
-  .mobile-nav-links li { border-bottom: 1px solid rgba(232,224,208,0.06); opacity: 0; transform: translateX(-16px); transition: opacity 0.3s ease, transform 0.3s ease; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.25s; }
-  .mobile-nav-links a { font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3rem); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone-dim); text-decoration: none; padding: 1rem 0; display: flex; align-items: center; justify-content: space-between; transition: color 0.2s; }
-  .mobile-nav-links a:hover { color: var(--bone); }
-  .mobile-nav-links a .mn-num { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--gold); opacity: 0.5; align-self: flex-start; margin-top: 0.4rem; }
-  .mobile-nav-footer { position: relative; margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(232,224,208,0.06); width: 100%; display: flex; align-items: center; justify-content: space-between; }
-  .mobile-nav-footer-text { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.25; }
-  .mobile-nav-signal { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--green); display: flex; align-items: center; gap: 0.4rem; }
-  .mobile-nav-signal::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-
-  .mobile-close {
-    position: absolute; top: 1.5rem; right: 1.5rem;
-    background: none; border: none; cursor: crosshair; padding: 4px;
-    display: flex; flex-direction: column; gap: 0;
-    width: 28px; height: 28px; align-items: center; justify-content: center;
-  }
-  .close-bar { width: 22px; height: 1px; background: var(--bone-dim); display: block; }
-  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
-  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
 
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -395,34 +348,12 @@
   <ul class="nav-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
   <div class="nav-signal">FILE ACTIVE</div>
 </nav>
-
-<div class="mobile-overlay" id="mobile-overlay">
-  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close navigation">
-    <span class="close-bar"></span>
-    <span class="close-bar"></span>
-  </button>
-  <div class="mobile-nav-ref">PHC // FILE 001 // THE CAPSTONE</div>
-  <ul class="mobile-nav-links">
-    <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
-    <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
-    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
-    <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
-  </ul>
-  <div class="mobile-nav-footer">
-    <span class="mobile-nav-footer-text">Not left. Not right. Awake.</span>
-    <span class="mobile-nav-signal">Signal active</span>
-  </div>
-</div>
 
 <!-- DECLASSIFIED HEADER -->
 <div class="declassified-header">
@@ -432,8 +363,8 @@
     <div class="dh-ref">FILE 001 // OUTER COURT // PHC-SYM-01 // EDITION OF 500</div>
   </div>
   <div class="dh-right">
-    <div class="edition-live" id="edition-count">500</div>
-    <div class="edition-label" id="edition-label">Editions Remaining</div>
+    <div class="edition-live">500</div>
+    <div class="edition-label">Editions Available</div>
     <div class="edition-note">Never reprinted when closed</div>
   </div>
 </div>
@@ -564,7 +495,11 @@
 </section>
 
 <!-- FUND -->
-
+<div id="fund">
+  <div class="fund-label">// The Fund // Live</div>
+  <div class="fund-text">15% of every acquisition transmitted to independent journalism and freedom of information infrastructure. Public ledger. No exceptions.</div>
+  <div class="fund-figure">TOTAL TRANSMITTED<br><span style="color:var(--bone);opacity:0.8">$0.00</span><br><span style="font-size:0.45rem;opacity:0.35">LEDGER: OPEN</span></div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -572,6 +507,7 @@
   <ul class="footer-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
+    <li><a href="/collective.html">Collective</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
@@ -579,29 +515,6 @@
 </footer>
 
 <script>
-  function toggleMenu() {
-    const overlay = document.getElementById('mobile-overlay');
-    const burger = document.getElementById('hamburger');
-    const isOpen = overlay.classList.contains('open');
-    overlay.classList.toggle('open');
-    burger.classList.toggle('open');
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-  }
-  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('mobile-overlay').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.getElementById('mobile-overlay').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-
   function switchTab(tab) {
     document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.visual-panel').forEach(p => p.classList.remove('active'));
@@ -624,78 +537,6 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-<!-- PHC CHECKOUT — FILE 001 -->
-<script>
-(function() {
-  var btn = document.getElementById('acquire-btn');
-  if (!btn) return;
 
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    var selectedBtn = document.querySelector('.size-btn.selected');
-    if (!selectedBtn) {
-      var label = document.querySelector('.size-label');
-      if (label) { label.style.color = '#8b1a1a'; setTimeout(function(){ label.style.color = ''; }, 2000); }
-      return;
-    }
-
-    var size = selectedBtn.textContent.trim();
-    var originalText = btn.textContent;
-    btn.textContent = 'Accessing Archive...';
-    btn.style.opacity = '0.5';
-    btn.style.pointerEvents = 'none';
-
-    fetch('/.netlify/functions/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fileId: '001', size: size })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error('No checkout URL');
-      }
-    })
-    .catch(function() {
-      btn.textContent = originalText;
-      btn.style.opacity = '';
-      btn.style.pointerEvents = '';
-    });
-  });
-
-  // Show confirmed message if returning from Stripe
-  if (window.location.search.includes('order=confirmed')) {
-    var note = document.querySelector('.acquire-note');
-    if (note) {
-      note.textContent = 'File transferred. Fulfilment initiated. Check your email for confirmation.';
-      note.style.opacity = '0.8';
-      note.style.color = 'var(--signal)';
-    }
-    history.replaceState({}, '', window.location.pathname);
-  }
-})();
-</script>
-
-
-<!-- PHC EDITION COUNTER -->
-<script>
-(function() {
-  fetch('/.netlify/functions/get-edition-count?file=001')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var count = document.getElementById('edition-count');
-      var label = document.getElementById('edition-label');
-      if (count) count.textContent = data.remaining;
-      if (data.remaining === 0 && count) {
-        count.style.color = 'var(--red)';
-        if (label) label.textContent = 'Edition Closed';
-      }
-    })
-    .catch(function() {});
-})();
-</script>
 </body>
 </html>
