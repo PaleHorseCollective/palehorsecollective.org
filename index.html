@@ -312,7 +312,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ─── TWO PORTALS ─── */
+  /* ─── THREE PORTALS ─── */
   #portals {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -371,7 +371,7 @@
   .portal-body {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--bone-dim);
     line-height: 1.7;
     margin-bottom: 2rem;
@@ -1414,7 +1414,7 @@
   <ul class="nav-links">
     <li><a href="/archive">Archive</a></li>
     <li><a href="/files">Files</a></li>
-    <li><a href="/doctrine">Doctrine</a></li>
+        <li><a href="/doctrine">Doctrine</a></li>
     <li><a href="/transmissions">Transmissions</a></li>
   </ul>
   <div class="nav-signal">TRANSMISSION ACTIVE</div>
@@ -1435,7 +1435,7 @@
   <ul class="mobile-nav-links">
     <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
     <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
-    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
+        <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
     <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
   </ul>
   <div class="mobile-nav-footer">
@@ -1838,7 +1838,7 @@
   <div class="hero-scroll-hint">Scroll to access</div>
 </section>
 
-<!-- ─── THREE PORTALS ─── -->
+<!-- ─── PORTALS ─── -->
 <section id="portals">
   <a href="/archive" class="portal">
     <span class="portal-num">NODE-03 // ARCHIVE</span>
@@ -1853,7 +1853,6 @@
     <p class="portal-body">Declassified documents made wearable. Each file is a numbered release. Limited edition. Never reprinted. The archive of what has been released is permanent. The editions are not.</p>
     <span class="portal-link">Access current files</span>
   </a>
-  
 </section>
 
 <!-- ─── RECENT TRANSMISSIONS STRIP ─── -->
@@ -1953,7 +1952,7 @@
     <div class="inv-row">
       <span class="inv-original">Brand</span>
       <span class="inv-arrow">⟶</span>
-      <span class="inv-decoded">The Archive</span>
+      <span class="inv-decoded">The Collective</span>
     </div>
     <div class="inv-row">
       <span class="inv-original">Followers</span>
@@ -2044,7 +2043,7 @@
     </div>
     <div class="doctrine-item">
       <span class="doctrine-num">DOCTRINE 08</span>
-      <div class="doctrine-name">The Archive Persists</div>
+      <div class="doctrine-name">The Collective Owns This</div>
     </div>
     <div class="doctrine-item">
       <span class="doctrine-num">DOCTRINE 09</span>
@@ -2052,11 +2051,7 @@
     </div>
   </div>
 </section>
-
-<!-- ─── FUND ─── -->
-
-
-<!-- ─── SIGNAL SIGNUP ─── -->
+ SIGNUP ─── -->
 <section id="signal">
   <span class="signal-label">Open the channel</span>
   <h2 class="signal-title">Receive The Transmission</h2>
@@ -2078,6 +2073,7 @@
     <li><a href="/files">Files</a></li>
     <li><a href="/doctrine">Doctrine</a></li>
     <li><a href="/transmissions">Transmissions</a></li>
+    <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
   </ul>
   <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
 </footer>
@@ -2099,8 +2095,8 @@
       setTimeout(() => {
         overlay.style.display = 'none';
         nav.classList.add('visible');
-      }, 1100);
-    }, 2000);
+      }, 600);
+    }, 800);
   });
 
   // ─── SCROLL REVEAL ───
@@ -2197,6 +2193,7 @@
       document.body.style.overflow = '';
     }
   });
+
   // ─── LIVE EDITION COUNTS ───
   ['001', '002'].forEach(function(fileId) {
     var card = document.querySelector('[data-file="' + fileId + '"]');
