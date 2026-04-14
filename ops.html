@@ -256,7 +256,7 @@
 
 const CONFIG = {
 
-  version: '5.0',
+  version: '5.1',
   updated: '2026-04-14',
   session: 7,
   operationalState: 'PHASE 02 — TRANSMISSION',
@@ -269,13 +269,11 @@ const CONFIG = {
     date: '2026-04-14',
     number: 7,
     summary: [
-      'Removed Collective tab from files.html nav (desktop, mobile, footer)',
-      'Fixed nav header on 001.html and 002.html — backdrop-filter blur to match site standard',
-      'Fixed corrupted DOCTYPE on 001.html — was rendering as visible text',
-      '001.html and 002.html confirmed as canonical file page templates for all future releases',
-      'phc-status.md merged into single canonical v4.0 — duplicate in Documents folder tombstoned',
-      'phc-about.md, phc-systems.md updated to current state',
-      'phc-mission-control.html rebuilt as data-driven dashboard',
+      'Printful sample ordered — File 001 — awaiting delivery',
+      '2 TikTok reels posted — content pipeline active',
+      'phc-status.md merged into single canonical v4.1',
+      'phc-mission-control.html rebuilt as data-driven dashboard — now the live /ops page',
+      'ops.html added to Web files — deploys to palehorsecollective.org/ops on push',
     ]
   },
 
@@ -297,10 +295,10 @@ const CONFIG = {
   /* TASK QUEUE */
   tasks: {
     justin: [
-      { body: 'Register ABN under business name before revenue flows',        pri: 'URGENT'       },
-      { body: 'Set up PO Box / registered address (email compliance)',         pri: 'COMPLIANCE'   },
-      { body: 'Confirm TikTok / Instagram account status',                    pri: 'SOCIAL'       },
-      { body: 'Order Printful sample — File 001 — verify physical quality',   pri: 'BEFORE PUSH'  },
+      { body: 'Register ABN under business name before revenue flows',                    pri: 'URGENT'      },
+      { body: 'Set up PO Box / registered address (email compliance)',                    pri: 'COMPLIANCE'  },
+      { body: 'Confirm Instagram account status',                                         pri: 'SOCIAL'      },
+      { body: 'Approve print quality when Printful sample arrives — File 001',            pri: 'IN TRANSIT'  },
     ],
     claude: [
       { body: 'First transmission email — draft and send to list',            pri: 'NOW'          },
@@ -318,9 +316,9 @@ const CONFIG = {
     { n: '03', title: 'WEBSITE REBUILD',         desc: 'Removed Collective page and fund references. Fixed readability. Clean copy throughout.',                status: 'done'    },
     { n: '04', title: 'TRANSACTION LAYER',       desc: 'Stripe + Printful API. Custom checkout. All 12 variant IDs wired. Orders flow automatically.',         status: 'done'    },
     { n: '05', title: 'EDITION COUNTERS',        desc: 'Live Stripe query on every page load. No manual updates per order.',                                   status: 'done'    },
-    { n: '06', title: 'PHYSICAL SAMPLE',         desc: 'Order File 001 sample. Verify print quality before any push.',                                         status: 'now'     },
+    { n: '06', title: 'PHYSICAL SAMPLE',         desc: 'Ordered. Awaiting delivery. Justin approves print quality on arrival.',                                status: 'now'     },
     { n: '07', title: 'FIRST TRANSMISSION',      desc: 'Email list send. Inaugural declassification announcement to subscribers.',                             status: 'now'     },
-    { n: '08', title: 'TIKTOK DECODE SERIES',    desc: 'Week 01 delivered. Weeks 02–06 pending. Traffic engine building.',                                     status: 'now'     },
+    { n: '08', title: 'TIKTOK DECODE SERIES',    desc: '2 reels live. Scripted decode series ongoing. Traffic engine building.',                               status: 'now'     },
     { n: '09', title: 'EMAIL SEND LAYER',        desc: 'Listmonk via Elestio + Amazon SES. Replace interim Google Forms setup.',                               status: 'pending' },
     { n: '10', title: 'CONTENT PIPELINE',        desc: 'Linux machine + RSS + Claude API. 3–5x weekly without sessions. Archive building permanently.',        status: 'pending' },
     { n: '11', title: 'REVEAL THE OPERATION',    desc: 'Strategic timing. Alternative press first. The story that changes everything.',                        status: 'pending' },
@@ -348,7 +346,7 @@ const CONFIG = {
     { ref: 'NODE-03 · SITE',      name: 'WEBSITE',              desc: 'Netlify + GitHub + Cloudflare. Files 001 and 002 live. Transaction layer operational.',                     status: 'built'    },
     { ref: 'NODE-04 · COMMERCE',  name: 'TRANSACTION LAYER',    desc: 'Stripe + Printful API live. Custom checkout via Netlify functions. All 12 variant IDs confirmed wired.',   status: 'built'    },
     { ref: 'NODE-05 · EMAIL',     name: 'TRANSMISSION CHANNEL', desc: 'Capture live via Google Forms/Sheets. Send layer (Listmonk/SES) deferred Phase 2.',                        status: 'progress' },
-    { ref: 'NODE-06 · CONTENT',   name: 'CONTENT PIPELINE',     desc: 'TikTok Week 01 Script 01 delivered. Weeks 02–06 pending. Automation not yet built.',                       status: 'progress' },
+    { ref: 'NODE-06 · CONTENT',   name: 'CONTENT PIPELINE',     desc: '2 TikTok reels live. Scripted decode series: Week 01 delivered, Weeks 02–06 pending. Automation not yet built.', status: 'progress' },
     { ref: 'NODE-07 · VISUALS',   name: 'DESIGN ENGINE',        desc: 'Claude writes prompts. Midjourney generates. Claude judges. Justin approves.',                             status: 'planned'  },
     { ref: 'NODE-08 · DATA',      name: 'INTELLIGENCE FEED',    desc: 'Umami + Search Console. Feeds commercial judgment over time.',                                              status: 'planned'  },
   ],
