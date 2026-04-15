@@ -266,12 +266,55 @@
     font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
   }
 
+  /* ─── ACQUISITION STRIP ─── */
+  .acq-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 4rem;
+    display: grid; grid-template-columns: 260px 1fr;
+    gap: 4rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+  .acq-image {
+    aspect-ratio: 1/1; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .acq-image.visible { opacity: 1; transform: translateY(0); }
+  .acq-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acq-info {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+  }
+  .acq-info.visible { opacity: 1; transform: translateY(0); }
+  .acq-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .acq-title {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.05;
+  }
+  .acq-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+  .acq-meta-item {
+    font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.45;
+  }
+  .acq-btn {
+    display: inline-block; align-self: flex-start; margin-top: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--void); background: var(--bone);
+    padding: 1rem 2rem; transition: opacity 0.2s;
+  }
+  .acq-btn:hover { opacity: 0.8; }
+
   /* ─── BACK NAV ─── */
   .doc-nav-strip {
     max-width: 860px; margin: 0 auto;
-    padding: 4rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1.5rem;
+    padding: 3rem 4rem;
+    display: flex; justify-content: flex-start; align-items: center;
     border-bottom: 1px solid rgba(232,224,208,0.06);
   }
   .doc-nav-link {
@@ -280,7 +323,6 @@
     opacity: 0.5; transition: opacity 0.2s;
   }
   .doc-nav-link:hover { opacity: 1; }
-  .doc-nav-link.primary { color: var(--gold); opacity: 0.7; }
   .doc-nav-link.primary:hover { opacity: 1; }
 
   /* ─── FOOTER ─── */
@@ -318,7 +360,9 @@
     .decode-block { padding: 3rem 0; }
     .db-label-row { margin-bottom: 1.2rem; }
     .sources-strip { padding: 3rem 1.5rem; }
-    .doc-nav-strip { padding: 3rem 1.5rem; }
+    .acq-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .acq-image { aspect-ratio: 4/3; }
+    .doc-nav-strip { padding: 2rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
     .footer-doctrine { text-align: center; }
@@ -492,10 +536,26 @@
   </div>
 </section>
 
+<!-- ─── ACQUISITION STRIP ─── -->
+<div class="acq-strip">
+  <div class="acq-image reveal">
+    <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
+  </div>
+  <div class="acq-info reveal">
+    <span class="acq-label">Now Declassified // Outer Court // Edition of 500</span>
+    <div class="acq-title">The Signal Tower</div>
+    <div class="acq-meta">
+      <span class="acq-meta-item">File 002 // Outer Court</span>
+      <span class="acq-meta-item">Edition of 500 // Never reprinted</span>
+      <span class="acq-meta-item">AU$59 // Free shipping worldwide</span>
+    </div>
+    <a href="/002.html" class="acq-btn">Acquire File 002 →</a>
+  </div>
+</div>
+
 <!-- ─── BACK NAVIGATION ─── -->
 <div class="doc-nav-strip">
   <a href="/archive.html" class="doc-nav-link">← Back to the Archive</a>
-  <a href="/002.html" class="doc-nav-link primary">Acquire File 002 — The Signal Tower →</a>
 </div>
 
 <!-- ─── FOOTER ─── -->
