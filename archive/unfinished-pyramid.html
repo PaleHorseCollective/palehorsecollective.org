@@ -113,7 +113,6 @@
   .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.10s; }
   .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
   .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.20s; }
-  .mobile-overlay.open .mobile-nav-links li:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.25s; }
   .mobile-nav-links a {
     display: block; padding: 1.4rem 0;
     font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
@@ -124,10 +123,10 @@
 
   /* ─── DOCUMENT HEADER ─── */
   .doc-header {
-    padding: 10rem 3rem 5rem;
+    padding: 10rem 4rem 5rem;
     border-bottom: 1px solid rgba(232,224,208,0.08);
     position: relative; overflow: hidden;
-    max-width: 900px; margin: 0 auto;
+    max-width: 860px; margin: 0 auto;
   }
   .doc-header::before {
     content: '';
@@ -142,10 +141,7 @@
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
     margin-bottom: 2.5rem; position: relative;
   }
-  .doc-breadcrumb a {
-    color: inherit; text-decoration: none;
-    transition: opacity 0.2s;
-  }
+  .doc-breadcrumb a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
   .doc-breadcrumb a:hover { opacity: 0.8; }
   .doc-ref {
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
@@ -159,8 +155,8 @@
   }
   .doc-subtitle {
     font-family: var(--font-body); font-style: italic;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--bone-dim); line-height: 1.7; max-width: 640px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--bone-dim); line-height: 1.75; max-width: 640px;
     position: relative; margin-bottom: 3rem;
   }
   .doc-meta-row {
@@ -241,14 +237,14 @@
     color: var(--gold); line-height: 2; opacity: 0.6;
   }
 
-  /* ─── SOURCES SIDEBAR ─── */
+  /* ─── SOURCES ─── */
   .sources-strip {
     background: rgba(184,150,12,0.03);
     border-top: 1px solid rgba(232,224,208,0.06);
     border-bottom: 1px solid rgba(232,224,208,0.06);
     padding: 4rem 3rem;
   }
-  .sources-inner { max-width: 900px; margin: 0 auto; }
+  .sources-inner { max-width: 860px; margin: 0 auto; }
   .sources-strip-label {
     font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.3em;
     color: var(--gold); text-transform: uppercase; opacity: 0.6;
@@ -267,14 +263,13 @@
   }
   .source-item-note {
     font-family: var(--font-body); font-style: italic;
-    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6;
-    line-height: 1.6;
+    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
   }
 
   /* ─── BACK NAV ─── */
   .doc-nav-strip {
-    max-width: 900px; margin: 0 auto;
-    padding: 4rem 3rem;
+    max-width: 860px; margin: 0 auto;
+    padding: 4rem 4rem;
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 1.5rem;
     border-bottom: 1px solid rgba(232,224,208,0.06);
@@ -337,11 +332,10 @@
 <div class="mobile-overlay" id="mobile-overlay">
   <div class="mobile-nav-ref">PHC // ARCHIVE // SYM-01 // THE UNFINISHED PYRAMID</div>
   <ul class="mobile-nav-links">
-    <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
-    <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
+    <li><a href="/archive.html">Archive</a></li>
   </ul>
 </div>
 
@@ -349,10 +343,10 @@
 <nav>
   <a href="/" class="nav-mark">PHC <span>·</span> Pale Horse Collective</a>
   <ul class="nav-links">
-    <li><a href="/archive.html" class="active">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html" class="active">Archive</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -367,7 +361,7 @@
   </div>
   <div class="doc-ref">Archive Entry SYM-01 // Declassified with File 001 // The Capstone</div>
   <h1 class="doc-title">The Unfinished Pyramid</h1>
-  <p class="doc-subtitle">The eye above the incomplete pyramid. The floating capstone. Novus Ordo Seclorum. A symbol placed on the currency of the most powerful nation in history, in full view of everyone who ever held a dollar bill. Most looked at it. Few read it.</p>
+  <p class="doc-subtitle">The eye above the incomplete pyramid. The floating capstone. Novus Ordo Seclorum. Placed on the currency of the most powerful nation in history, in full view of everyone who ever held a dollar bill. Most looked at it. Few read it.</p>
   <div class="doc-meta-row">
     <div class="doc-meta-item">
       <span class="doc-meta-label">Archive Reference</span>
@@ -388,7 +382,7 @@
   </div>
 </header>
 
-<!-- ─── DECODE BODY ─── */
+<!-- ─── DECODE BODY ─── -->
 <main class="decode-body">
 
   <!-- BLOCK 01: ORIGIN -->
@@ -400,18 +394,18 @@
     <div class="db-content-col">
       <h2 class="db-title">The Reverse of the Great Seal of the United States // 1782</h2>
       <div class="db-body">
-        <p>The unfinished pyramid first appeared on the reverse of the Great Seal of the United States in 1782. The seal was designed by a committee — Charles Thomson, Secretary of Congress, with contributions from William Barton, a heraldry expert. The obverse shows the eagle. The reverse shows the pyramid.</p>
-        <p>The reverse was considered the spiritual side of the seal. It was not placed on currency until 1935, when Secretary of Agriculture Henry Wallace — a committed Theosophist — brought both sides of the seal to President Franklin D. Roosevelt. Roosevelt, a Freemason of the 32nd degree, immediately recognised the significance. The reverse went on the dollar bill that year.</p>
-        <p>The pyramid has thirteen courses of stone. Thirteen colonies. Thirteen also corresponds, in various Masonic traditions, to the number of degrees separating the outer initiate from the inner sanctum. The capstone floats above, separated from the body of the pyramid by a field of light — the Eye of Providence at its centre. The Latin beneath reads <em>Novus Ordo Seclorum</em>: New Order of the Ages. Above it, <em>Annuit Coeptis</em>: He has favoured our undertakings.</p>
-        <p>The question the historians do not ask is: whose undertakings. And who is <em>He</em>.</p>
+        <p>The unfinished pyramid first appeared on the reverse of the Great Seal of the United States in 1782. The seal was designed by a committee — Charles Thomson, Secretary of Congress, with contributions from William Barton, a heraldry expert. The obverse shows the eagle. The reverse shows the pyramid. The reverse was considered the spiritual side of the seal.</p>
+        <p>It was not placed on currency until 1935, when Secretary of Agriculture Henry Wallace — a committed Theosophist — brought both sides of the seal to President Franklin D. Roosevelt. Roosevelt, a Freemason of the 32nd degree, immediately recognised the significance. The reverse went on the dollar bill that year.</p>
+        <p>The pyramid has thirteen courses of stone. Thirteen colonies. Thirteen also corresponds, in various Masonic traditions, to the number of degrees separating the outer initiate from the inner sanctum. The capstone floats above, separated from the body of the pyramid by a field of light — the Eye of Providence at its centre. The Latin beneath reads Novus Ordo Seclorum: New Order of the Ages. Above it, Annuit Coeptis: He has favoured our undertakings.</p>
+        <p>The question the historians do not ask is: whose undertakings. And who is He.</p>
       </div>
-      <div class="db-source">Primary sources — Charles Thomson, "Remarks and Explanation" on the Great Seal, 1782 // Henry Wallace correspondence, National Archives // Manly P. Hall, "The Secret Destiny of America", 1944 // William Cooper, "Behold a Pale Horse", 1991</div>
+      <div class="db-source">Charles Thomson, "Remarks and Explanation" on the Great Seal, 1782 // Henry Wallace correspondence, National Archives // Manly P. Hall, "The Secret Destiny of America", 1944 // William Cooper, "Behold a Pale Horse", 1991</div>
     </div>
   </div>
 
   <!-- PULL QUOTE -->
   <div class="pull-quote reveal">
-    <p>"The eye above the incomplete pyramid signals an unfinished project — a world still being constructed toward an endpoint the designers understood and the public did not."</p>
+    <p>The eye above the incomplete pyramid signals an unfinished project — a world still being constructed toward an endpoint the designers understood and the public did not.</p>
   </div>
 
   <!-- BLOCK 02: ORIGINAL FUNCTION -->
@@ -424,12 +418,11 @@
       <h2 class="db-title">Programme of a New Secular Order // The Architecture of Unfinished Power</h2>
       <div class="db-body">
         <p>The pyramid as a symbol predates its American application by thousands of years. In its oldest documented use, the pyramid represents the hierarchical organisation of knowledge and power: the base is broad, accessible, uninitiated. As you ascend, the number of people narrows. At the apex — the capstone — sits a very small group who hold the complete view.</p>
-        <p>The key detail in the American symbol is what is missing. The capstone does not sit on the pyramid. It hovers. Detached. Illuminated. The separation between the capstone and the body communicates something specific to anyone trained to read it: the structure is not yet complete. The project is ongoing. The work continues toward a point of consolidation that has not yet arrived.</p>
+        <p>The key detail in the American symbol is what is missing. The capstone does not sit on the pyramid. It hovers. Detached. Illuminated. The separation communicates something specific to anyone trained to read it: the structure is not yet complete. The project is ongoing. The work continues toward a point of consolidation that has not yet arrived.</p>
         <p>Manly P. Hall, Freemason and scholar of esoteric traditions, wrote in 1944 that the reverse of the Great Seal contains "a plan for a philosophic empire." He was not writing metaphorically. He believed the founders were initiates of a tradition extending from the ancient mystery schools — that the United States was designed as the vehicle for a particular completion. A new order, not in the sense of a new beginning, but in the sense of an order finally realised.</p>
-        <p>William Cooper documented in <em>Behold a Pale Horse</em> that the symbol functions as a communication system — from those who understand the plan to those who are being initiated into understanding it. The seal was placed on the currency not as decoration. It was placed where every citizen would handle it daily, most without ever reading it. This is how the language of symbols operates: in plain sight, functioning as transmission, decoded only by those who know what they are looking at.</p>
-        <p>The floating capstone is a promise. A statement of intent. The structure will be completed. The question encoded in the symbol is not <em>whether</em> — it is <em>when</em>.</p>
+        <p>William Cooper documented in Behold a Pale Horse that the symbol functions as a communication system — from those who understand the plan to those being initiated into understanding it. The seal was placed on the currency not as decoration. It was placed where every citizen would handle it daily, most without ever reading it. This is how the language of symbols operates: in plain sight, functioning as transmission, decoded only by those who know what they are looking at.</p>
       </div>
-      <div class="db-source">Manly P. Hall, "The Secret Destiny of America", 1944 // William Cooper, "Behold a Pale Horse", 1991, Chapter 2 // Carroll Quigley, "Tragedy and Hope", 1966, Chapter 3 // Anthony Sutton, "America's Secret Establishment", 1983</div>
+      <div class="db-source">Manly P. Hall, "The Secret Destiny of America", 1944 // William Cooper, "Behold a Pale Horse", 1991, Chapter 2 // Carroll Quigley, "Tragedy and Hope", 1966 // Anthony Sutton, "America's Secret Establishment", 1983</div>
     </div>
   </div>
 
@@ -443,10 +436,9 @@
       <h2 class="db-title">The Eye That Wakes // The Decoder Made Public</h2>
       <div class="db-body">
         <p>The inversion principle does not destroy the original symbol. It does not dismiss it. It takes the symbol apart, documents it, and redistributes what it means to those who were never meant to receive it.</p>
-        <p>The pyramid is unfinished because we are unfinished. The project described by the symbol — the hierarchical consolidation of power at a capstone-level — is only possible while the base remains uninformed. The entire architecture depends on the majority not reading the symbol. The moment the base reads it, the function of the capstone changes.</p>
+        <p>The pyramid is unfinished because we are unfinished. The project described by the symbol — the hierarchical consolidation of power at a capstone level — is only possible while the base remains uninformed. The entire architecture depends on the majority not reading the symbol. The moment the base reads it, the function of the capstone changes.</p>
         <p>The eye in the original symbol watches from above — omniscient, detached, illuminated by privilege of position. In the inversion, the eye does not watch from above. It is the eye of every person who looks at the structure and recognises what they are seeing. The pyramid does not disappear when you see it. But the power dynamic embedded in it shifts the moment the base can read the capstone's language.</p>
-        <p>The inverted pyramid — the triangle pointing downward — is the architectural expression of this shift. What was constructed to concentrate narrows upward is now seen from the perspective of the base looking in. The decoder has been redistributed. The key is now public. This is not destruction. It is the completion of a different kind of project — one the designers of the original symbol did not intend.</p>
-        <p>Jordan Maxwell spent fifty years documenting that the eye symbol across world traditions — the Eye of Horus in Egyptian funerary context, the Eye of Providence in Christian iconography, the eye on the dollar — represents not divine surveillance but solar illumination. The sun as the source of visible reality. The eye that sees. The original symbol placed this seeing-power in the capstone. The inversion places it in whoever wakes to look.</p>
+        <p>Jordan Maxwell spent fifty years documenting that the eye symbol across world traditions represents not divine surveillance but solar illumination — the eye as the source of visible reality. The original symbol placed this seeing-power in the capstone. The inversion places it in whoever wakes to look. The inverted pyramid below is the architectural expression of this shift. The decoder has been redistributed. The key is now public.</p>
       </div>
       <div class="db-source">Jordan Maxwell, "Matrix of Power", 1990 // William Cooper, "Mystery Babylon" radio series, Hour of the Time, 1993 // PHC Doctrine 03: The Symbol Is The Confession // PHC Doctrine 08: The Collective Owns This</div>
     </div>
@@ -464,7 +456,7 @@
         <p>File 001 places the eye between two triangles. The upright pyramid above — the original symbol, the structure being constructed toward hierarchical completion. The inverted pyramid below — the inversion principle applied. Both visible simultaneously. The eye, in the centre, does not choose a side. It sees both.</p>
         <p>This is not decoration. Every element of the design is documented here. The eye between the two triangles communicates a specific position: awareness of the structure, without allegiance to either direction of it. The archivist who wears File 001 is not claiming to have solved anything. They are claiming to have seen something — and to carry the record of it.</p>
         <p>The garment is the surface. The decode is the depth. The two are inseparable — published simultaneously at the moment of declassification, never separately. The clothing without the decode is merchandise. The decode without the clothing is a document that stays on a screen. Together, they make the information wearable.</p>
-        <p>File 001 is limited to 500 editions. It will not be reprinted. When it closes, it closes permanently. 500 archivists will carry this decode in the world. The archive entry — this document — remains open indefinitely. The garment is the transmission. The archive is the record.</p>
+        <p>File 001 is limited to 500 editions. It will not be reprinted. When it closes, it closes permanently. The archive entry — this document — remains open indefinitely. The garment is the transmission. The archive is the record.</p>
       </div>
       <div class="db-source">PHC File 001 // The Capstone // PHC Doctrine 01: The Pattern Is The Proof // PHC Doctrine 03: The Symbol Is The Confession // PHC Doctrine 09: Not Left. Not Right. Awake.</div>
     </div>
@@ -480,7 +472,7 @@
       <div class="source-item reveal">
         <div class="source-item-name">William Cooper</div>
         <div class="source-item-work">Behold a Pale Horse // Mystery Babylon Series</div>
-        <p class="source-item-note">Former naval intelligence officer. Chapter 2 of Behold a Pale Horse documents the symbol system used by secret societies in institutional settings. The Mystery Babylon radio series, broadcast 1993–2001, contains the most detailed publicly available analysis of the Eye of Providence and its operational context.</p>
+        <p class="source-item-note">Chapter 2 of Behold a Pale Horse documents the symbol system used by secret societies in institutional settings. The Mystery Babylon radio series, broadcast 1993–2001, contains the most detailed publicly available analysis of the Eye of Providence and its operational context.</p>
       </div>
       <div class="source-item reveal">
         <div class="source-item-name">Manly P. Hall</div>
@@ -495,12 +487,7 @@
       <div class="source-item reveal">
         <div class="source-item-name">Charles Thomson</div>
         <div class="source-item-work">Remarks and Explanation on the Great Seal, 1782</div>
-        <p class="source-item-note">Secretary of the Continental Congress. Primary author of the formal explanation attached to the Great Seal design. Thomson's own description of the reverse — including the floating capstone and the eye — is a public record held in the National Archives. The document describes the symbol in terms of "the all-seeing eye" and "the Divine favour." It does not explain why these elements were chosen in these forms.</p>
-      </div>
-      <div class="source-item reveal">
-        <div class="source-item-name">Carroll Quigley</div>
-        <div class="source-item-work">Tragedy and Hope // The Anglo-American Establishment</div>
-        <p class="source-item-note">Georgetown historian and insider. His documentation of the network that operates across political parties and national governments provides the structural context in which the seal's promise of a "new order" becomes legible as a real-world programme, not abstract aspiration.</p>
+        <p class="source-item-note">Secretary of the Continental Congress. Primary author of the formal explanation attached to the Great Seal design. Thomson's own description of the reverse — the floating capstone, the eye — is a public record held in the National Archives. It describes the symbol. It does not explain why these elements were chosen in these forms.</p>
       </div>
     </div>
   </div>
@@ -516,17 +503,16 @@
 <footer>
   <div class="footer-mark">PHC <em>·</em> ARCHIVE <em>·</em> SYM-01 <em>·</em> THE UNFINISHED PYRAMID <em>·</em> OUTER COURT</div>
   <ul class="footer-links">
-    <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
     <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
   </ul>
   <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
 </footer>
 
 <script>
-  // ─── SCROLL REVEAL ───
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -537,7 +523,6 @@
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ─── MOBILE MENU ───
   function toggleMenu() {
     const overlay = document.getElementById('mobile-overlay');
     const burger = document.getElementById('hamburger');
