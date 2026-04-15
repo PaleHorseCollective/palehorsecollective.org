@@ -181,62 +181,64 @@
 
   /* ─── DECODE BODY ─── */
   .decode-body {
-    max-width: 900px; margin: 0 auto;
-    padding: 0 3rem;
+    max-width: 860px; margin: 0 auto;
+    padding: 0 4rem;
   }
 
   .decode-block {
-    padding: 5rem 0;
+    padding: 4.5rem 0;
     border-bottom: 1px solid rgba(232,224,208,0.06);
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 4rem;
     opacity: 0; transform: translateY(20px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .decode-block.visible { opacity: 1; transform: translateY(0); }
   .decode-block:last-child { border-bottom: none; }
 
-  .db-label-col {
-    display: flex; flex-direction: column; gap: 0.8rem;
-    padding-top: 0.3rem;
+  .db-label-row {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 1.8rem;
   }
   .db-number {
     font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
     color: var(--bone-dim); opacity: 0.25; text-transform: uppercase;
   }
   .db-label {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em;
+    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.3em;
     color: var(--gold); text-transform: uppercase; opacity: 0.7;
-    line-height: 1.6;
   }
   .db-content-col { display: flex; flex-direction: column; gap: 1.5rem; }
   .db-title {
-    font-family: var(--font-display); font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.6rem);
     font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--bone); line-height: 1.15;
+    color: var(--bone); line-height: 1.2; margin-bottom: 0.5rem;
   }
   .db-body {
     font-family: var(--font-body); font-style: italic;
-    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-    color: var(--bone-dim); line-height: 1.9;
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--bone-dim); line-height: 1.95;
   }
   .db-body p + p { margin-top: 1.2em; }
   .db-source {
     font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
-    margin-top: 0.5rem; line-height: 1.8;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    margin-top: 1rem; line-height: 1.8;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232,224,208,0.05);
   }
 
-  /* ─── REDACTED PULL QUOTE ─── */
+  /* ─── PULL QUOTE ─── */
   .pull-quote {
-    margin: 0; padding: 3rem 0;
-    border-top: 1px solid rgba(184,150,12,0.15);
-    border-bottom: 1px solid rgba(184,150,12,0.15);
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(184,150,12,0.12);
+    border-bottom: 1px solid rgba(184,150,12,0.12);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
+  .pull-quote.visible { opacity: 1; transform: translateY(0); }
   .pull-quote p {
-    font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--gold); line-height: 1.4; opacity: 0.8;
+    font-family: var(--font-mono); font-size: 0.6rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); line-height: 2; opacity: 0.6;
   }
 
   /* ─── SOURCES SIDEBAR ─── */
@@ -318,8 +320,8 @@
     .hamburger { display: flex; }
     .doc-header { padding: 8rem 1.5rem 3rem; }
     .decode-body { padding: 0 1.5rem; }
-    .decode-block { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 0; }
-    .db-label-col { flex-direction: row; align-items: baseline; gap: 1rem; }
+    .decode-block { padding: 3rem 0; }
+    .db-label-row { margin-bottom: 1.2rem; }
     .sources-strip { padding: 3rem 1.5rem; }
     .doc-nav-strip { padding: 3rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
@@ -391,7 +393,7 @@
 
   <!-- BLOCK 01: ORIGIN -->
   <div class="decode-block reveal">
-    <div class="db-label-col">
+    <div class="db-label-row">
       <span class="db-number">01 / 04</span>
       <span class="db-label">Origin</span>
     </div>
@@ -414,7 +416,7 @@
 
   <!-- BLOCK 02: ORIGINAL FUNCTION -->
   <div class="decode-block reveal">
-    <div class="db-label-col">
+    <div class="db-label-row">
       <span class="db-number">02 / 04</span>
       <span class="db-label">Original Function</span>
     </div>
@@ -433,7 +435,7 @@
 
   <!-- BLOCK 03: THE INVERSION -->
   <div class="decode-block reveal">
-    <div class="db-label-col">
+    <div class="db-label-row">
       <span class="db-number">03 / 04</span>
       <span class="db-label">The Inversion</span>
     </div>
@@ -452,7 +454,7 @@
 
   <!-- BLOCK 04: THE APPLICATION -->
   <div class="decode-block reveal">
-    <div class="db-label-col">
+    <div class="db-label-row">
       <span class="db-number">04 / 04</span>
       <span class="db-label">The Application</span>
     </div>
@@ -562,4 +564,3 @@
 
 </body>
 </html>
-
