@@ -125,78 +125,6 @@
 
   .index-item:hover .index-name { opacity: 1; color: var(--bone); }
 
-  /* ─── OPENING ─── */
-  .opening-section {
-    padding: 5rem 3rem;
-    border-bottom: 1px solid rgba(232,224,208,0.08);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .opening-content {
-    max-width: 560px;
-  }
-
-  .opening-label {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
-    margin-bottom: 2rem; display: block;
-  }
-
-  .opening-text {
-    font-family: var(--font-body); font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--bone);
-    line-height: 2; margin-bottom: 2rem;
-  }
-
-  .opening-transmission {
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
-    border-top: 1px solid rgba(232,224,208,0.08); padding-top: 1.5rem;
-    line-height: 2.2;
-  }
-
-  /* ─── OPENING MARGINALIA ─── */
-  .opening-marginalia {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 420px;
-  }
-
-  .marginalia-sigil {
-    width: 100%;
-    max-width: 320px;
-    display: block;
-    opacity: 0.32;
-    filter: grayscale(1) contrast(1.05);
-    mix-blend-mode: screen;
-  }
-
-  .marginalia-stamp {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.28em;
-    color: var(--red); text-transform: uppercase; opacity: 0.55;
-    border: 1px solid rgba(139,26,26,0.35);
-    padding: 0.7rem 0.9rem;
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .marginalia-cross {
-    display: flex; flex-direction: column; gap: 0.7rem;
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.45;
-    line-height: 1.8;
-  }
-
-  .marginalia-cross span::before {
-    content: '▸  ';
-    color: var(--gold);
-    opacity: 0.6;
-  }
-
   /* ─── NINE DOCTRINES ─── */
   .doctrines-section {
     border-bottom: 1px solid rgba(232,224,208,0.08);
@@ -501,10 +429,6 @@
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     .page-header { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
-    .opening-section { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
-    .opening-content { max-width: none; }
-    .opening-marginalia { max-width: none; border-top: 1px solid rgba(232,224,208,0.08); padding-top: 2.5rem; }
-    .marginalia-sigil { max-width: 200px; margin: 0 auto; }
     .doctrines-header { padding: 2rem 1.5rem; }
     .doctrine-entry { grid-template-columns: 1fr; }
     .doctrine-num-col { padding: 2rem 1.5rem 0; border-right: none; flex-direction: row; align-items: center; gap: 1rem; }
@@ -894,35 +818,6 @@
     <a href="#doctrine-09" class="index-item"><span class="index-num">09</span><span class="index-name">Not Left. Not Right. Awake.</span></a>
   </div>
 </header>
-
-<!-- ─── OPENING ─── -->
-<section class="opening-section reveal">
-  <div class="opening-content">
-    <span class="opening-label">PHC-BIBLE-001 // Chapter Three // Preamble</span>
-    <p class="opening-text">These are the nine principles from which everything the Collective produces is derived. Every drop, every piece of content, every community decision passes through these. They are not commandments. They are conclusions — arrived at through documented evidence, primary source research, and the kind of pattern recognition that becomes unavoidable once you have seen enough of the record.</p>
-    <div class="opening-transmission">
-      // TRANSMISSION //<br>
-      The following doctrines are derived from primary source material.<br>
-      Every claim is traceable. Every pattern is documented.<br>
-      The precision is itself a statement — that this material<br>
-      withstands scrutiny in a way that most of what surrounds it does not.<br>
-      // END //
-    </div>
-  </div>
-
-  <aside class="opening-marginalia" aria-hidden="true">
-    <img src="sigil-doctrine.jpg" alt="" class="marginalia-sigil">
-    <div class="marginalia-stamp">Classified // Internal Circulation // PHC-BIBLE-001</div>
-    <div class="marginalia-cross">
-      <span>File Ref: 04.29.26</span>
-      <span>Issuing body: The Collective</span>
-      <span>Doctrine count: 09</span>
-      <span>Citations traceable</span>
-      <span>Lineage: Cooper / Quigley / Sutton / Maxwell</span>
-      <span>Status: Active record</span>
-    </div>
-  </aside>
-</section>
 
 <!-- ─── NINE DOCTRINES ─── -->
 <section class="doctrines-section">
