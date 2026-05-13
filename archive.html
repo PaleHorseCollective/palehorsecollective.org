@@ -204,8 +204,6 @@
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.1;
   }
 
-  #archive-grid:has(.no-results[style*="block"]) .ghost-tile { display: none; }
-
   /* ─── ENTRY CARD ─── */
   .entry-card {
     background: var(--void);
@@ -486,22 +484,6 @@
 <main class="archive-container">
   <div class="archive-grid" id="archive-grid">
     <div class="no-results" id="no-results">No entries match. The archive is still growing.</div>
-    <div class="ghost-tile">
-      <svg class="ghost-horse" viewBox="0 0 541.5 690" xmlns="http://www.w3.org/2000/svg"><path d="M303.29,604.96c3.6.57,5.43-.3,7.48-3.65-.87-.38-3.02-1.5-4.35-.55-.8.57-.57,2.29-1.59,2.22-5.15-.36-4.27-5.01-9.6-2.38.7.34,1.19.61,1.1.8-.24.48-1.04.53-1.64.99,1.18.7,2.44-.12,4.12.04.87,1.9,2.48,2.21,4.49,2.53Z" fill="#e8e0d0"/></svg>
-      <div class="ghost-text">
-        <span class="ghost-label">// Transmission incoming //</span>
-        <p class="ghost-line">The archive grows with each decode. New entries are added with every file release and reel transmission.</p>
-        <span class="ghost-ref">PHC-ARCH-001 // STATUS: GROWING</span>
-      </div>
-    </div>
-    <div class="ghost-tile">
-      <svg class="ghost-horse" viewBox="0 0 541.5 690" xmlns="http://www.w3.org/2000/svg"><path d="M303.29,604.96c3.6.57,5.43-.3,7.48-3.65-.87-.38-3.02-1.5-4.35-.55-.8.57-.57,2.29-1.59,2.22-5.15-.36-4.27-5.01-9.6-2.38.7.34,1.19.61,1.1.8-.24.48-1.04.53-1.64.99,1.18.7,2.44-.12,4.12.04.87,1.9,2.48,2.21,4.49,2.53Z" fill="#e8e0d0"/></svg>
-      <div class="ghost-text">
-        <span class="ghost-label">// The record is not complete //</span>
-        <p class="ghost-line">Nothing in the archive is removed. Every decode published here is permanent. The archive is the proof of work.</p>
-        <span class="ghost-ref">DOCTRINE 03 // THE SYMBOL IS THE CONFESSION</span>
-      </div>
-    </div>
   </div>
 </main>
 
@@ -641,6 +623,34 @@ function renderGrid() {
     const card = buildCard(entry, i);
     grid.appendChild(card);
   });
+
+  // Fill empty columns with ghost tiles
+  grid.querySelectorAll('.ghost-tile').forEach(g => g.remove());
+  const cols = Math.round(grid.offsetWidth / 340) || 3;
+  const remainder = filtered.length % cols;
+  const ghosts = remainder === 0 ? 0 : cols - remainder;
+  const ghostCopy = [
+    { label: '// Transmission incoming //', body: 'The archive grows with each decode. New entries are added with every reel transmission.', ref: 'PHC-ARCH-001 // STATUS: GROWING' },
+    { label: '// The record is not complete //', body: 'Nothing in the archive is removed. Every decode published here is permanent.', ref: 'DOCTRINE 03 // THE SYMBOL IS THE CONFESSION' },
+    { label: '// More decodes incoming //', body: 'Each transmission adds to the record. The archive is open. The signal is active.', ref: 'NOT LEFT. NOT RIGHT. AWAKE.' },
+  ];
+  for (let i = 0; i < ghosts; i++) {
+    const c = ghostCopy[i % ghostCopy.length];
+    const g = document.createElement('div');
+    g.className = 'ghost-tile';
+    g.innerHTML = `
+      <svg class="ghost-horse" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,10 90,90 10,90" fill="none" stroke="#e8e0d0" stroke-width="1"/>
+        <polygon points="50,35 75,80 25,80" fill="none" stroke="#e8e0d0" stroke-width="0.5" opacity="0.5"/>
+      </svg>
+      <div class="ghost-text">
+        <span class="ghost-label">${c.label}</span>
+        <p class="ghost-line">${c.body}</p>
+        <span class="ghost-ref">${c.ref}</span>
+      </div>
+    `;
+    grid.appendChild(g);
+  }
 
   updateCount(filtered.length);
   initScrollReveal();
