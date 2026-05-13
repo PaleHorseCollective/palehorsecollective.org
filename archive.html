@@ -141,7 +141,7 @@
   .filter-btn[data-filter="connection"].active { border-color: var(--gold); color: var(--gold); }
   .filter-btn[data-filter="receipt"].active { border-color: var(--red); color: var(--red); }
   .filter-btn[data-filter="symbol"].active { border-color: var(--bone-dim); color: var(--bone); }
-  .filter-btn.file-btn.active { border-color: var(--red); color: var(--red); }
+  .filter-btn[data-filter="files"].active { border-color: var(--red); color: var(--red); }
 
   /* Entry count */
   .entry-count { font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em; color: var(--bone-dim); opacity: 0.3; margin-left: auto; white-space: nowrap; }
@@ -164,6 +164,47 @@
     color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
     background: var(--void);
   }
+
+  /* Ghost tile — fills odd-count grid */
+  .ghost-tile {
+    background: var(--void);
+    padding: 2rem;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    min-height: 300px;
+  }
+
+  .ghost-horse {
+    width: 140px; height: auto;
+    opacity: 0.04;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ghost-text {
+    position: relative; z-index: 1;
+    text-align: center; display: flex; flex-direction: column; gap: 0.8rem;
+  }
+
+  .ghost-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.2;
+  }
+
+  .ghost-line {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.85rem; color: var(--bone-dim); opacity: 0.15;
+    line-height: 1.6; max-width: 240px;
+  }
+
+  .ghost-ref {
+    font-family: var(--font-mono); font-size: 0.4rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.1;
+  }
+
+  #archive-grid:has(.no-results[style*="block"]) .ghost-tile { display: none; }
 
   /* ─── ENTRY CARD ─── */
   .entry-card {
@@ -437,8 +478,7 @@
   <button class="filter-btn" data-filter="connection" onclick="setFilter('connection', this)">The Connection</button>
   <button class="filter-btn" data-filter="receipt" onclick="setFilter('receipt', this)">The Receipt</button>
   <button class="filter-btn" data-filter="symbol" onclick="setFilter('symbol', this)">The Symbol</button>
-  <span class="controls-divider" id="file-filter-divider" style="display:none"></span>
-  <div id="file-filter-btns" style="display:contents"></div>
+  <button class="filter-btn" data-filter="files" onclick="setFilter('files', this)">Files</button>
   <span class="entry-count" id="entry-count"></span>
 </div>
 
@@ -446,6 +486,22 @@
 <main class="archive-container">
   <div class="archive-grid" id="archive-grid">
     <div class="no-results" id="no-results">No entries match. The archive is still growing.</div>
+    <div class="ghost-tile">
+      <svg class="ghost-horse" viewBox="0 0 541.5 690" xmlns="http://www.w3.org/2000/svg"><path d="M303.29,604.96c3.6.57,5.43-.3,7.48-3.65-.87-.38-3.02-1.5-4.35-.55-.8.57-.57,2.29-1.59,2.22-5.15-.36-4.27-5.01-9.6-2.38.7.34,1.19.61,1.1.8-.24.48-1.04.53-1.64.99,1.18.7,2.44-.12,4.12.04.87,1.9,2.48,2.21,4.49,2.53Z" fill="#e8e0d0"/></svg>
+      <div class="ghost-text">
+        <span class="ghost-label">// Transmission incoming //</span>
+        <p class="ghost-line">The archive grows with each decode. New entries are added with every file release and reel transmission.</p>
+        <span class="ghost-ref">PHC-ARCH-001 // STATUS: GROWING</span>
+      </div>
+    </div>
+    <div class="ghost-tile">
+      <svg class="ghost-horse" viewBox="0 0 541.5 690" xmlns="http://www.w3.org/2000/svg"><path d="M303.29,604.96c3.6.57,5.43-.3,7.48-3.65-.87-.38-3.02-1.5-4.35-.55-.8.57-.57,2.29-1.59,2.22-5.15-.36-4.27-5.01-9.6-2.38.7.34,1.19.61,1.1.8-.24.48-1.04.53-1.64.99,1.18.7,2.44-.12,4.12.04.87,1.9,2.48,2.21,4.49,2.53Z" fill="#e8e0d0"/></svg>
+      <div class="ghost-text">
+        <span class="ghost-label">// The record is not complete //</span>
+        <p class="ghost-line">Nothing in the archive is removed. Every decode published here is permanent. The archive is the proof of work.</p>
+        <span class="ghost-ref">DOCTRINE 03 // THE SYMBOL IS THE CONFESSION</span>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -527,14 +583,7 @@ async function init() {
 
 // ─── FILE FILTERS ───
 function renderFileFilters(entries) {
-  const files = [...new Set(entries.map(e => e.fileRef).filter(Boolean))].sort();
-  const container = document.getElementById('file-filter-btns');
-  const divider = document.getElementById('file-filter-divider');
-  if (files.length === 0) return;
-  divider.style.display = '';
-  container.innerHTML = files.map(f => `
-    <button class="filter-btn file-btn" data-filter="file:${f}" onclick="setFilter('file:${f}', this)">${f}</button>
-  `).join('');
+  // No longer needed — single Files filter button handles this
 }
 
 // ─── ACTIVE FILE STRIP ───
@@ -562,8 +611,8 @@ function renderGrid() {
     let matchesCat;
     if (activeFilter === 'all') {
       matchesCat = true;
-    } else if (activeFilter.startsWith('file:')) {
-      matchesCat = entry.fileRef === activeFilter.replace('file:', '');
+    } else if (activeFilter === 'files') {
+      matchesCat = !!entry.fileRef;
     } else {
       matchesCat = entry.category === activeFilter;
     }
