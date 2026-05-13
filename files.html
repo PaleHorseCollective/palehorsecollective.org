@@ -170,129 +170,155 @@
 
   .file-card {
     background: var(--void); display: block; text-decoration: none; color: inherit;
-    position: relative; overflow: hidden; transition: background 0.2s;
+    position: relative; overflow: hidden; transition: background 0.3s;
+    border-left: 2px solid transparent;
   }
 
-  .file-card:hover { background: rgba(232,224,208,0.02); }
+  .file-card:hover { background: rgba(232,224,208,0.015); border-left-color: var(--red); }
 
-  /* The garment visual area */
+  /* Visual */
   .file-visual {
-    aspect-ratio: 1/1;
+    aspect-ratio: 3/4;
     position: relative;
-    border-bottom: 1px solid rgba(232,224,208,0.06);
-    display: flex; align-items: center; justify-content: center;
     overflow: hidden;
-    background: #080806;
+    background: #060604;
   }
 
-  /* SVG placeholder garment graphics */
-  .file-visual svg {
-    width: 60%; height: 60%;
-    opacity: 0.6;
-    transition: opacity 0.3s, transform 0.3s;
+  .file-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center; display: block;
+    transition: transform 0.6s ease, filter 0.3s ease;
+    filter: grayscale(20%) contrast(1.05);
   }
 
-  .file-card:hover .file-visual svg {
-    opacity: 0.9; transform: scale(1.03);
+  .file-card:hover .file-visual img {
+    transform: scale(1.03);
+    filter: grayscale(0%) contrast(1.08);
+  }
+
+  /* Gradient overlay on image */
+  .file-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(6,6,4,0.4) 75%,
+      rgba(6,6,4,0.85) 100%
+    );
+    pointer-events: none;
   }
 
   .file-status-badge {
-    position: absolute; top: 1rem; left: 1rem;
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
-    text-transform: uppercase; padding: 0.25em 0.6em;
-    border: 1px solid currentColor;
+    position: absolute; top: 1.2rem; left: 1.2rem; z-index: 2;
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.22em;
+    text-transform: uppercase; padding: 0.2em 0.6em;
+    border: 1px solid currentColor; backdrop-filter: blur(4px);
   }
 
-  .status-open { color: var(--green); border-color: var(--green); }
-  .status-coming { color: var(--gold); border-color: var(--gold); }
-  .status-closed { color: var(--red); border-color: var(--red); opacity: 0.6; }
+  .status-open { color: var(--green); }
+  .status-coming { color: var(--gold); }
+  .status-closed { color: var(--red); opacity: 0.7; }
 
   .file-num-badge {
-    position: absolute; top: 1rem; right: 1rem;
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    position: absolute; top: 1.2rem; right: 1.2rem; z-index: 2;
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.18em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
   }
 
+  /* Edition bar — sits at very bottom of image */
   .file-edition-bar {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; background: rgba(232,224,208,0.06);
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    height: 1px; background: rgba(232,224,208,0.08);
   }
 
   .file-edition-fill {
     height: 100%; background: var(--red);
-    transition: width 0.5s ease;
+    transition: width 0.6s ease;
   }
 
-  .file-card.tier-2 .file-edition-fill { background: var(--gold); }
-  .file-card.tier-3 .file-edition-fill { background: var(--green); }
-
   /* Card body */
-  .file-body { padding: 1.8rem; }
+  .file-body {
+    padding: 1.6rem 1.8rem 2rem;
+    border-top: 1px solid rgba(232,224,208,0.05);
+    display: flex; flex-direction: column; gap: 0;
+  }
 
   .file-ref {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; margin-bottom: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.44rem; letter-spacing: 0.22em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
+    margin-bottom: 0.5rem;
   }
 
   .file-name {
-    font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
-    letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
-    line-height: 1.1; margin-bottom: 0.6rem;
-  }
-
-  .file-decode-link {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
-    color: var(--gold); text-transform: uppercase; opacity: 0.6; margin-bottom: 1rem;
-    display: block;
+    font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.05; margin-bottom: 0.8rem;
   }
 
   .file-desc {
     font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
-    color: var(--bone-dim); line-height: 1.6; margin-bottom: 1.5rem;
+    color: var(--bone-dim); line-height: 1.65; opacity: 0.75;
+    margin-bottom: 1.4rem;
   }
 
-  .file-meta {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 0.8rem; margin-bottom: 1.5rem;
-    padding: 1rem;
-    border: 1px solid rgba(232,224,208,0.06);
-    background: rgba(232,224,208,0.02);
+  /* Inline stats — no box, just a ruled row */
+  .file-stats {
+    display: flex; gap: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(232,224,208,0.06);
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    margin-bottom: 1.5rem;
   }
 
-  .file-meta-item {}
+  .file-stat { display: flex; flex-direction: column; gap: 0.3rem; }
 
-  .meta-label {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.18em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
-    margin-bottom: 0.3rem; display: block;
+  .stat-l {
+    font-family: var(--font-mono); font-size: 0.4rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
   }
 
-  .meta-value {
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em;
+  .stat-v {
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em;
     color: var(--bone); text-transform: uppercase;
   }
 
-  .meta-value.remaining { color: var(--green); }
-  .meta-value.sold-out { color: var(--red); opacity: 0.7; }
+  .stat-v.available { color: var(--green); }
+  .stat-v.never { color: var(--red); opacity: 0.7; }
 
+  /* Decode link */
+  .file-decode-link {
+    font-family: var(--font-mono); font-size: 0.44rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 1.2rem; display: block;
+    transition: opacity 0.2s;
+  }
+  .file-card:hover .file-decode-link { opacity: 0.8; }
+
+  /* CTA — text-based, left-aligned, editorial */
   .file-cta {
-    display: flex; align-items: center; justify-content: center;
-    padding: 0.9rem; font-family: var(--font-mono); font-size: 0.6rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    border: 1px solid rgba(232,224,208,0.15); color: var(--bone);
-    transition: all 0.2s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--font-mono); font-size: 0.55rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--bone); opacity: 0.6;
+    transition: opacity 0.2s, gap 0.2s;
+    text-decoration: none;
   }
 
-  .file-cta:hover {
-    background: rgba(232,224,208,0.05); border-color: rgba(232,224,208,0.4);
+  .file-cta::after {
+    content: '→';
+    transition: transform 0.2s;
   }
+
+  .file-card:hover .file-cta {
+    opacity: 1; gap: 0.9rem;
+  }
+
+  .file-card:hover .file-cta::after { transform: translateX(3px); }
 
   .file-cta.coming-soon {
-    color: var(--bone-dim); opacity: 0.4; cursor: not-allowed;
-    border-color: rgba(232,224,208,0.06);
+    color: var(--bone-dim); opacity: 0.2; cursor: not-allowed;
   }
-
-  .file-cta.coming-soon:hover { background: transparent; border-color: rgba(232,224,208,0.06); }
+  .file-cta.coming-soon::after { display: none; }
 
   /* ─── NOTICE ─── */
   .files-notice {
@@ -762,9 +788,9 @@
     <div class="files-grid">
 
       <!-- FILE 001 — ACTIVE -->
-      <a href="/001.html" class="file-card tier-1 reveal">
+      <a href="/001.html" class="file-card reveal">
         <div class="file-visual">
-          <img src="/001-worn.webp" alt="File 001 — The Capstone" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+          <img src="/001-worn.webp" alt="File 001 — The Capstone">
           <span class="file-status-badge status-open">Open</span>
           <span class="file-num-badge">FILE 001</span>
           <div class="file-edition-bar">
@@ -772,33 +798,32 @@
           </div>
         </div>
         <div class="file-body">
-          <div class="file-ref">FILE 001 // OUTER COURT // DECLASSIFIED</div>
+          <div class="file-ref">FILE 001 // DECLASSIFIED</div>
           <h2 class="file-name">The Capstone</h2>
-          <span class="file-decode-link">Decode document → SYM-01 in archive</span>
           <p class="file-desc">The unfinished pyramid — inverted, decoded, documented. The capstone floats because it was never meant to land. The eye is not watching from above. It is the eye of every person who wakes to see the structure for what it is.</p>
-          <div class="file-meta">
-            <div class="file-meta-item">
-              <span class="meta-label">Edition</span>
-              <span class="meta-value">500 max</span>
+          <div class="file-stats">
+            <div class="file-stat">
+              <span class="stat-l">Edition</span>
+              <span class="stat-v">500</span>
             </div>
-            <div class="file-meta-item">
-              <span class="meta-label">Remaining</span>
-              <span class="meta-value remaining">500 available</span>
+            <div class="file-stat">
+              <span class="stat-l">Remaining</span>
+              <span class="stat-v available">500</span>
             </div>
-
-            <div class="file-meta-item">
-              <span class="meta-label">Reprint</span>
-              <span class="meta-value">Never</span>
+            <div class="file-stat">
+              <span class="stat-l">Reprint</span>
+              <span class="stat-v never">Never</span>
             </div>
           </div>
-          <span class="file-cta">Acquire This File</span>
+          <span class="file-decode-link">Decode document — SYM-01 in archive</span>
+          <span class="file-cta">Acquire this file</span>
         </div>
       </a>
 
       <!-- FILE 002 — ACTIVE -->
-      <a href="/002.html" class="file-card tier-1 reveal">
+      <a href="/002.html" class="file-card reveal">
         <div class="file-visual">
-          <img src="/002-worn.webp" alt="File 002 — The Signal Tower" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+          <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
           <span class="file-status-badge status-open">Open</span>
           <span class="file-num-badge">FILE 002</span>
           <div class="file-edition-bar">
@@ -806,26 +831,25 @@
           </div>
         </div>
         <div class="file-body">
-          <div class="file-ref">FILE 002 // OUTER COURT // DECLASSIFIED</div>
+          <div class="file-ref">FILE 002 // DECLASSIFIED</div>
           <h2 class="file-name">The Signal Tower</h2>
-          <span class="file-decode-link">Decode document → SYM-02 in archive</span>
           <p class="file-desc">Control of the electromagnetic spectrum. Who controls the signal controls the message. Broadcast as domination — until it isn't. The tower does not speak for you. Now it does.</p>
-          <div class="file-meta">
-            <div class="file-meta-item">
-              <span class="meta-label">Edition</span>
-              <span class="meta-value">500 max</span>
+          <div class="file-stats">
+            <div class="file-stat">
+              <span class="stat-l">Edition</span>
+              <span class="stat-v">500</span>
             </div>
-            <div class="file-meta-item">
-              <span class="meta-label">Remaining</span>
-              <span class="meta-value remaining">499 available</span>
+            <div class="file-stat">
+              <span class="stat-l">Remaining</span>
+              <span class="stat-v available">499</span>
             </div>
-
-            <div class="file-meta-item">
-              <span class="meta-label">Reprint</span>
-              <span class="meta-value">Never</span>
+            <div class="file-stat">
+              <span class="stat-l">Reprint</span>
+              <span class="stat-v never">Never</span>
             </div>
           </div>
-          <span class="file-cta">Acquire This File</span>
+          <span class="file-decode-link">Decode document — SYM-02 in archive</span>
+          <span class="file-cta">Acquire this file</span>
         </div>
       </a>
 
