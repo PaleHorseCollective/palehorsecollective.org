@@ -141,6 +141,7 @@
   .filter-btn[data-filter="connection"].active { border-color: var(--gold); color: var(--gold); }
   .filter-btn[data-filter="receipt"].active { border-color: var(--red); color: var(--red); }
   .filter-btn[data-filter="symbol"].active { border-color: var(--bone-dim); color: var(--bone); }
+  .filter-btn.file-btn.active { border-color: var(--red); color: var(--red); }
 
   /* Entry count */
   .entry-count { font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em; color: var(--bone-dim); opacity: 0.3; margin-left: auto; white-space: nowrap; }
@@ -150,7 +151,7 @@
 
   .archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1px;
     background: rgba(232,224,208,0.06);
   }
@@ -272,7 +273,7 @@
   }
   .sources-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; display: block; }
   .sources-title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone); margin-bottom: 2.5rem; }
-  .sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: rgba(232,224,208,0.06); }
+  .sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(232,224,208,0.06); }
   .source-card { background: var(--void); padding: 2rem; }
   .source-name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone); margin-bottom: 0.4rem; }
   .source-work { font-family: var(--font-body); font-style: italic; font-size: 0.8rem; color: var(--gold); margin-bottom: 0.8rem; opacity: 0.8; }
@@ -336,6 +337,8 @@
     nav { padding: 1.2rem 1.5rem; }
     .nav-links, .nav-signal { display: none; }
     .hamburger { display: flex; }
+    .nav-mark-full { display: none; }
+    .nav-mark-sep { display: none; }
     #active-file-strip { top: 56px; padding: 0.5rem 1.5rem; gap: 1rem; flex-wrap: wrap; }
     .strip-label { display: none; }
     .page-header { padding: 8rem 1.5rem 3rem; }
@@ -355,32 +358,33 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="/" class="nav-mark">PHC <span>//</span> PALE HORSE COLLECTIVE</a>
+  <a href="/" class="nav-mark">PHC <span class="nav-mark-sep">//</span><span class="nav-mark-full"> PALE HORSE COLLECTIVE</span></a>
   <ul class="nav-links">
-    <li><a href="/archive.html" class="active">Archive</a></li>
-    <li><a href="/files.html">Files</a></li>
-    <li><a href="/collective.html">Collective</a></li>
-    <li><a href="/doctrine.html">Doctrine</a></li>
-    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/files">Files</a></li>
+    <li><a href="/doctrine">Doctrine</a></li>
+    <li><a href="/transmissions">Transmissions</a></li>
+    <li><a href="/archive" class="active">Archive</a></li>
   </ul>
   <div class="nav-signal">TRANSMISSION ACTIVE</div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation">
-    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
   </button>
 </nav>
 
 <!-- ─── MOBILE OVERLAY ─── -->
 <div class="mobile-overlay" id="mobile-overlay">
   <button class="mobile-close" onclick="toggleMenu()" aria-label="Close navigation">
-    <span class="close-bar"></span><span class="close-bar"></span>
+    <span class="close-bar"></span>
+    <span class="close-bar"></span>
   </button>
-  <div class="mobile-nav-ref">PHC // NAV // OUTER COURT ACCESS</div>
+  <div class="mobile-nav-ref">PHC // NAV // SIGNAL ACTIVE</div>
   <ul class="mobile-nav-links">
-    <li><a href="/archive.html"><span>Archive</span><span class="mn-num">01</span></a></li>
-    <li><a href="/files.html"><span>Files</span><span class="mn-num">02</span></a></li>
-    <li><a href="/collective.html"><span>Collective</span><span class="mn-num">03</span></a></li>
-    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">04</span></a></li>
-    <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">05</span></a></li>
+    <li><a href="/files.html"><span>Files</span><span class="mn-num">01</span></a></li>
+    <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">02</span></a></li>
+    <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">03</span></a></li>
+    <li><a href="/archive.html"><span>Archive</span><span class="mn-num">04</span></a></li>
   </ul>
   <div class="mobile-nav-footer">
     <span class="mobile-nav-footer-text">Not left. Not right. Awake.</span>
@@ -433,6 +437,8 @@
   <button class="filter-btn" data-filter="connection" onclick="setFilter('connection', this)">The Connection</button>
   <button class="filter-btn" data-filter="receipt" onclick="setFilter('receipt', this)">The Receipt</button>
   <button class="filter-btn" data-filter="symbol" onclick="setFilter('symbol', this)">The Symbol</button>
+  <span class="controls-divider" id="file-filter-divider" style="display:none"></span>
+  <div id="file-filter-btns" style="display:contents"></div>
   <span class="entry-count" id="entry-count"></span>
 </div>
 
@@ -490,7 +496,6 @@
   <ul class="footer-links">
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="/files.html">Files</a></li>
-    <li><a href="/collective.html">Collective</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
     <li><a href="/transmissions.html">Transmissions</a></li>
   </ul>
@@ -510,6 +515,7 @@ async function init() {
     const data = await res.json();
     allEntries = data.entries;
     renderActiveFileStrip(data.activeFiles, data.meta);
+    renderFileFilters(data.entries);
     renderGrid();
     updateCount();
     updateNote(data.meta);
@@ -517,6 +523,18 @@ async function init() {
   } catch (e) {
     console.error('Archive data failed to load:', e);
   }
+}
+
+// ─── FILE FILTERS ───
+function renderFileFilters(entries) {
+  const files = [...new Set(entries.map(e => e.fileRef).filter(Boolean))].sort();
+  const container = document.getElementById('file-filter-btns');
+  const divider = document.getElementById('file-filter-divider');
+  if (files.length === 0) return;
+  divider.style.display = '';
+  container.innerHTML = files.map(f => `
+    <button class="filter-btn file-btn" data-filter="file:${f}" onclick="setFilter('file:${f}', this)">${f}</button>
+  `).join('');
 }
 
 // ─── ACTIVE FILE STRIP ───
@@ -541,7 +559,14 @@ function renderGrid() {
   const noResults = document.getElementById('no-results');
 
   const filtered = allEntries.filter(entry => {
-    const matchesCat = activeFilter === 'all' || entry.category === activeFilter;
+    let matchesCat;
+    if (activeFilter === 'all') {
+      matchesCat = true;
+    } else if (activeFilter.startsWith('file:')) {
+      matchesCat = entry.fileRef === activeFilter.replace('file:', '');
+    } else {
+      matchesCat = entry.category === activeFilter;
+    }
     const q = searchQuery.toLowerCase();
     const matchesSearch = !q ||
       entry.title.toLowerCase().includes(q) ||
