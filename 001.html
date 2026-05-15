@@ -697,13 +697,13 @@
 <script>
 (function() {
   var btn = document.getElementById('acquire-btn');
-  if (\!btn) return;
+  if (!btn) return;
 
   btn.addEventListener('click', function(e) {
     e.preventDefault();
 
     var selectedBtn = document.querySelector('.size-btn.selected');
-    if (\!selectedBtn) {
+    if (!selectedBtn) {
       var label = document.querySelector('.size-label');
       if (label) { label.style.color = '#8b1a1a'; setTimeout(function(){ label.style.color = ''; }, 2000); }
       return;
