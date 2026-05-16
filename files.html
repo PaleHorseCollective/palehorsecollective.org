@@ -304,6 +304,16 @@
     text-decoration: none;
   }
 
+  .file-cta::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
   .file-cta::after {
     content: '→';
     transition: transform 0.2s;
@@ -318,6 +328,7 @@
   .file-cta.coming-soon {
     color: var(--bone-dim); opacity: 0.2; cursor: not-allowed;
   }
+  .file-cta.coming-soon::before { display: none; }
   .file-cta.coming-soon::after { display: none; }
 
   /* ─── NOTICE ─── */
