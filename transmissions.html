@@ -56,7 +56,7 @@
   .nav-signal::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-  /* ─── HERO SIGNAL ─── */
+  /* ─── HERO ─── */
   .signal-hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
@@ -103,7 +103,12 @@
     background-size: 60px 60px; pointer-events: none;
   }
 
-  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center;
+  }
 
   .hero-signal-indicator {
     display: flex; align-items: center; justify-content: center; gap: 0.8rem;
@@ -139,6 +144,7 @@
   .signup-form-wrap {
     opacity: 0; animation: fade-up 0.6s ease 0.9s forwards;
     width: 100%; max-width: 500px;
+    margin: 0 auto;
   }
 
   .signup-form {
@@ -187,7 +193,7 @@
   .hero-scroll {
     position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
     font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    color: var(--bone-dim); text-transform: uppercase;
     opacity: 0; animation: fade-up 0.6s ease 1.4s forwards;
   }
 
@@ -202,8 +208,6 @@
     border-bottom: 1px solid rgba(232,224,208,0.08);
     display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start;
   }
-
-  .receive-left {}
 
   .receive-label {
     font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.3em;
@@ -236,8 +240,6 @@
     color: var(--gold); text-transform: uppercase; opacity: 0.5;
     padding-top: 0.2rem;
   }
-
-  .receive-item-content {}
 
   .receive-item-title {
     font-family: var(--font-display); font-size: 0.95rem; font-weight: 600;
@@ -302,7 +304,7 @@
     line-height: 1.8;
   }
 
-  /* Transmission card — used when transmissions exist */
+  /* Transmission card */
   .transmission-list {
     display: flex; flex-direction: column; gap: 1px;
     background: rgba(232,224,208,0.06);
@@ -340,7 +342,7 @@
   .channel-section {
     padding: 5rem 3rem;
     border-bottom: 1px solid rgba(232,224,208,0.08);
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
     background: rgba(232,224,208,0.06);
   }
 
@@ -374,42 +376,12 @@
   .primary-channel { color: var(--green); border-color: rgba(74,255,145,0.3); }
   .secondary-channel { color: var(--bone-dim); border-color: rgba(160,152,144,0.2); opacity: 0.5; }
 
-  /* ─── SECOND SIGNUP ─── */
-  .second-signup {
-    padding: 6rem 3rem;
-    border-bottom: 1px solid rgba(232,224,208,0.08);
-    text-align: center;
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding: 3rem;
+    display: flex; align-items: center; justify-content: space-between;
   }
-
-  .second-signup-label {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.35em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.35;
-    margin-bottom: 1.5rem; display: block;
-  }
-
-  .second-signup-title {
-    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-    color: var(--bone); margin-bottom: 1rem;
-  }
-
-  .second-signup-body {
-    font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
-    color: var(--bone-dim); max-width: 420px; margin: 0 auto 2.5rem;
-    line-height: 1.8;
-  }
-
-  .second-signup-form {
-    display: flex; max-width: 460px; margin: 0 auto;
-  }
-
-  /* ─── FUND / FOOTER ─── */
-  #fund { border-top: 1px solid rgba(232,224,208,0.08); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(139,26,26,0.04); }
-  .fund-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; opacity: 0.8; }
-  .fund-text { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--bone-dim); text-align: center; max-width: 500px; }
-  .fund-figure { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--bone-dim); text-align: right; opacity: 0.6; }
-
-  footer { border-top: 1px solid rgba(232,224,208,0.08); padding: 3rem; display: flex; align-items: center; justify-content: space-between; }
   .footer-mark { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.4; }
   .footer-mark em { color: var(--red); font-style: normal; }
   .footer-links { display: flex; gap: 2rem; list-style: none; }
@@ -417,24 +389,7 @@
   .footer-links a:hover { opacity: 0.7; }
   .footer-doctrine { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; color: var(--bone-dim); text-transform: uppercase; opacity: 0.3; text-align: right; }
 
-  /* ─── MOBILE ─── */
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .signal-hero { padding: 7rem 1.5rem 4rem; }
-    .signup-form { flex-direction: column; }
-    .signup-btn { border-left: 1px solid rgba(232,224,208,0.2); border-top: none; }
-    .receive-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
-    .archive-section { padding: 3rem 1.5rem; }
-    .channel-section { grid-template-columns: 1fr; padding: 0; }
-    .transmission-card { grid-template-columns: 1fr; gap: 0.8rem; }
-    .second-signup { padding: 4rem 1.5rem; }
-    .second-signup-form { flex-direction: column; }
-    #fund { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-  }
-
+  /* ─── REVEAL ─── */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -599,26 +554,57 @@
     animation: pulse 2s infinite;
   }
 
-  @media (max-width: 768px) {
-    .hamburger { display: flex; }
-    .nav-signal { display: none; }
+  .mobile-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    cursor: crosshair;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
   }
 
+  .close-bar {
+    width: 22px;
+    height: 1px;
+    background: var(--bone-dim);
+    display: block;
+  }
 
-  /* ─── MOBILE READABILITY FIXES ─── */
+  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
+  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
+
+  /* ─── MOBILE ─── */
   @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-signal { display: none; }
+    .nav-mark-full { display: none; }
+    .nav-mark-sep { display: none; }
+    .hamburger { display: flex; }
 
-    /* Nav mark — truncate on mobile */
-    .nav-mark {
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-    }
+    /* Hero */
+    .signal-hero { padding: 7rem 1.5rem 4rem; }
 
-    .nav-mark::after {
-      content: '';
-    }
+    /* Form — stacked vertically */
+    .signup-form { flex-direction: column; }
+    .signup-input { border-right: 1px solid rgba(232,224,208,0.2); border-bottom: none; }
+    .signup-btn { border-top: none; }
 
-    /* Footer — clean centered stack */
+    /* Sections */
+    .receive-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+    .archive-section { padding: 3rem 1.5rem; }
+    .channel-section { grid-template-columns: 1fr; padding: 0; }
+    .transmission-card { grid-template-columns: 1fr; gap: 0.8rem; }
+
+    /* Footer */
     footer {
       flex-direction: column;
       align-items: center;
@@ -651,97 +637,9 @@
       letter-spacing: 0.2em;
       opacity: 0.4;
       line-height: 2;
-    }
-
-    /* General mono text — bump up on mobile */
-    .filter-label,
-    .strip-label,
-    .fund-label,
-    .fund-text,
-    .fund-figure,
-    .page-header-meta,
-    .hero-file-ref,
-    .hero-tagline,
-    .hero-cta,
-    .portal-num,
-    .portal-link,
-    .entry-ref,
-    .entry-cta,
-    .source-tag,
-    .doctrine-num,
-    .signal-note,
-    .manifesto-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-    }
-
-    /* Body text — more readable */
-    .portal-body,
-    .entry-body,
-    .inversion-body,
-    .statement-body,
-    .tier-description,
-    .founding-body,
-    .fund-subtitle,
-    .receive-body,
-    .notice-body,
-    .not-item-body,
-    .lineage-bio p,
-    .d-body,
-    .about-text,
-    .opening-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
-    }
-
-    /* Fund strip */
-    #fund, #fund-strip {
-      flex-direction: column;
-      gap: 1rem;
       text-align: center;
-      padding: 2rem 1.5rem;
-    }
-
-    .fund-text {
-      font-size: 0.6rem;
-      line-height: 1.8;
     }
   }
-
-
-  @media (max-width: 768px) {
-    .nav-mark-full { display: none; }
-    .nav-mark-sep { display: none; }
-  }
-
-
-  .mobile-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    cursor: crosshair;
-    padding: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    width: 28px;
-    height: 28px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .close-bar {
-    width: 22px;
-    height: 1px;
-    background: var(--bone-dim);
-    display: block;
-  }
-
-  .close-bar:nth-child(1) { transform: rotate(45deg) translateY(0.5px); }
-  .close-bar:nth-child(2) { transform: rotate(-45deg) translateY(-0.5px); }
-
 </style>
 </head>
 <body>
@@ -752,7 +650,7 @@
   <ul class="nav-links">
     <li><a href="/files.html">Files</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
-        <li><a href="/transmissions.html" class="active">Transmissions</a></li>
+    <li><a href="/transmissions.html" class="active">Transmissions</a></li>
     <li><a href="/archive.html">Archive</a></li>
   </ul>
   <div class="nav-signal">TRANSMISSION ACTIVE</div>
@@ -769,11 +667,11 @@
     <span class="close-bar"></span>
     <span class="close-bar"></span>
   </button>
-  <div class="mobile-nav-ref">PHC // NAV // OUTER COURT ACCESS</div>
+  <div class="mobile-nav-ref">PHC // NAV // SIGNAL ACTIVE</div>
   <ul class="mobile-nav-links">
     <li><a href="/files.html"><span>Files</span><span class="mn-num">01</span></a></li>
     <li><a href="/doctrine.html"><span>Doctrine</span><span class="mn-num">02</span></a></li>
-        <li><a href="/transmissions.html"><span>Transmissions</span><span class="mn-num">03</span></a></li>
+    <li><a href="/transmissions.html" class="active"><span>Transmissions</span><span class="mn-num">03</span></a></li>
     <li><a href="/archive.html"><span>Archive</span><span class="mn-num">04</span></a></li>
   </ul>
   <div class="mobile-nav-footer">
@@ -781,7 +679,6 @@
     <span class="mobile-nav-signal">Signal active</span>
   </div>
 </div>
-
 
 <!-- ─── HERO ─── -->
 <section class="signal-hero">
@@ -813,7 +710,7 @@
           placeholder="YOUR EMAIL ADDRESS"
           autocomplete="off"
         >
-        <button class="signup-btn" id="hero-btn" onclick="handleSignup('hero-email', 'hero-btn', 'hero-note')">
+        <button class="signup-btn" id="hero-btn" onclick="handleSignup()">
           Open The Channel
         </button>
       </div>
@@ -826,7 +723,7 @@
   <div class="hero-scroll">Transmission archive below ↓</div>
 </section>
 
-<!-- ─── WHAT YOU RECEIVE ─── */
+<!-- ─── WHAT YOU RECEIVE ─── -->
 <section class="receive-section">
   <div class="receive-left reveal">
     <span class="receive-label">// What Gets Transmitted // Channel Protocol</span>
@@ -883,7 +780,7 @@
   <!-- Transmission cards — uncomment and populate as transmissions are sent
   <div class="transmission-list">
     <a href="#" class="transmission-card">
-      <span class="tc-date">2026-03-15 // 07:00</span>
+      <span class="tc-date">2026-05-19 // 07:00</span>
       <span class="tc-title">File 001 Has Been Declassified — The Capstone</span>
       <span class="tc-type file-release">File Release</span>
     </a>
@@ -891,7 +788,7 @@
   -->
 </section>
 
-<!-- ─── CHANNEL DOCTRINE ─── */
+<!-- ─── CHANNEL DOCTRINE ─── -->
 <section class="channel-section">
   <div class="channel-item reveal">
     <span class="channel-num">Channel 01 // Primary</span>
@@ -906,28 +803,6 @@
     <span class="channel-tag secondary-channel">Surface Layer</span>
   </div>
 </section>
-
-<!-- ─── SECOND SIGNUP ─── -->
-<section class="second-signup reveal">
-  <span class="second-signup-label">PHC-TRANS-001 // Open The Channel // No Noise</span>
-  <h2 class="second-signup-title">The Archive Is Open</h2>
-  <p class="second-signup-body">The transmission goes out when it goes out. No schedule. No content calendar. When a file is declassified, the list hears first. When the archive grows, the list hears first. When something matters, the list hears first.</p>
-  <div class="second-signup-form">
-    <input
-      type="email"
-      class="signup-input"
-      id="bottom-email"
-      placeholder="YOUR EMAIL ADDRESS"
-      autocomplete="off"
-    >
-    <button class="signup-btn" id="bottom-btn" onclick="handleSignup('bottom-email', 'bottom-btn', 'bottom-note')">
-      Open The Channel
-    </button>
-  </div>
-  <div class="signup-note" id="bottom-note" style="margin-top:1rem">
-    No noise. No schedule. Signal only.
-  </div>
-</section></div>
 
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -955,19 +830,17 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // Signup handler
-  function handleSignup(inputId, btnId, noteId) {
-    const input = document.getElementById(inputId);
-    const btn = document.getElementById(btnId);
-    const note = document.getElementById(noteId);
+  function handleSignup() {
+    const input = document.getElementById('hero-email');
+    const btn = document.getElementById('hero-btn');
+    const note = document.getElementById('hero-note');
 
     if (!input.value || !input.value.includes('@')) {
       note.textContent = 'A valid channel address is required.';
       note.style.color = 'var(--red)';
       note.style.opacity = '0.7';
       setTimeout(() => {
-        note.textContent = inputId === 'hero-email'
-          ? 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM'
-          : 'No noise. No schedule. Signal only.';
+        note.textContent = 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM';
         note.style.color = '';
         note.style.opacity = '0.3';
       }, 3000);
@@ -998,16 +871,13 @@
       btn.textContent = 'Open The Channel';
       btn.classList.remove('success');
       btn.disabled = false;
-      note.textContent = inputId === 'hero-email'
-        ? 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM'
-        : 'No noise. No schedule. Signal only.';
+      note.textContent = 'FILE REF: PHC-TRANS-001 // PRIMARY CHANNEL // OWNED AUDIENCE // NO ALGORITHM';
       note.classList.remove('success-note');
       note.style.opacity = '0.3';
     }, 8000);
   }
 
-
-  // ─── MOBILE MENU ───
+  // Mobile menu
   function toggleMenu() {
     const overlay = document.getElementById('mobile-overlay');
     const burger = document.getElementById('hamburger');
@@ -1026,8 +896,7 @@
     });
   });
 
-
-  // Close on escape key
+  // Close on escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.getElementById('mobile-overlay').classList.remove('open');
@@ -1035,7 +904,6 @@
       document.body.style.overflow = '';
     }
   });
-
 </script>
 
 </body>
