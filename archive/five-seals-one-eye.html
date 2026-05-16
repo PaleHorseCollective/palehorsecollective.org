@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Seals. One Eye. — Archive CON-01 — Pale Horse Collective</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Archive CON-01. Five institutions. No documented connection. One symbol. The eye above the triangle appears on the US dollar, Vatican documents, Masonic certificates, East India Company seals, and Yale crests. Across centuries.">
+<meta name="keywords" content="all-seeing eye, Eye of Providence, Eye of Horus, US dollar symbolism, Vatican symbol, Freemasonry, British East India Company, Yale skull and bones, William Cooper, esoteric symbols decoded">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #b4aca0;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+  }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--green); display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-signal::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: crosshair; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1px; background: var(--bone-dim);
+    transition: all 0.25s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ─── MOBILE OVERLAY ─── */
+  .mobile-overlay {
+    display: none; position: fixed; inset: 0; background: var(--void);
+    z-index: 150; flex-direction: column; justify-content: center;
+    align-items: flex-start; padding: 6rem 2.5rem 3rem;
+  }
+  .mobile-overlay.open { display: flex; }
+  .mobile-overlay::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .mobile-nav-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-bottom: 3rem; position: relative;
+  }
+  .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
+  .mobile-nav-links li {
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.10s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.20s; }
+  .mobile-nav-links a {
+    display: block; padding: 1.4rem 0;
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    color: var(--bone); transition: color 0.2s;
+  }
+  .mobile-nav-links a:hover { color: var(--bone-dim); }
+
+  /* ─── DOCUMENT HEADER ─── */
+  .doc-header {
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    max-width: 860px; margin: 0 auto;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .doc-breadcrumb {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 2.5rem; position: relative;
+  }
+  .doc-breadcrumb a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+  .doc-breadcrumb a:hover { opacity: 0.8; }
+  .doc-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--bone-dim); line-height: 1.75; max-width: 640px;
+    position: relative; margin-bottom: 3rem;
+  }
+  .doc-meta-row {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding-top: 2rem; position: relative;
+  }
+  .doc-meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .doc-meta-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .doc-meta-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase;
+  }
+  .doc-meta-value.gold { color: var(--gold); }
+
+  /* ─── DECODE BODY ─── */
+  .decode-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .decode-block {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .decode-block.visible { opacity: 1; transform: translateY(0); }
+  .decode-block:last-child { border-bottom: none; }
+
+  .db-label-row {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+  .db-number {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); opacity: 0.25; text-transform: uppercase;
+  }
+  .db-label {
+    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.7;
+  }
+  .db-content-col { display: flex; flex-direction: column; gap: 1.5rem; }
+  .db-title {
+    font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .db-body {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--bone-dim); line-height: 1.95;
+  }
+  .db-body p + p { margin-top: 1.2em; }
+  .db-source {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    margin-top: 1rem; line-height: 1.8;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232,224,208,0.05);
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(184,150,12,0.12);
+    border-bottom: 1px solid rgba(184,150,12,0.12);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .pull-quote.visible { opacity: 1; transform: translateY(0); }
+  .pull-quote p {
+    font-family: var(--font-mono); font-size: 0.6rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); line-height: 2; opacity: 0.6;
+  }
+
+  /* ─── FIVE INSTITUTIONS TABLE ─── */
+  .institutions-grid {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(232,224,208,0.06);
+    margin: 2rem 0;
+  }
+  .institution-row {
+    background: var(--void); padding: 1.6rem 2rem;
+    display: grid; grid-template-columns: 2rem 1fr 2fr; gap: 1.5rem; align-items: start;
+  }
+  .inst-num {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.4;
+    padding-top: 0.15rem;
+  }
+  .inst-name {
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--bone);
+  }
+  .inst-body {
+    font-family: var(--font-body); font-style: italic; font-size: 0.82rem;
+    color: var(--bone-dim); line-height: 1.65; opacity: 0.8;
+  }
+
+  /* ─── SOURCES ─── */
+  .sources-strip {
+    background: rgba(184,150,12,0.03);
+    border-top: 1px solid rgba(232,224,208,0.06);
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    padding: 4rem 3rem;
+  }
+  .sources-inner { max-width: 860px; margin: 0 auto; }
+  .sources-strip-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    margin-bottom: 2.5rem;
+  }
+  .sources-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+  .source-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .source-item-name {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone); text-transform: uppercase;
+  }
+  .source-item-work {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.4rem;
+  }
+  .source-item-note {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
+  }
+
+  /* ─── ACQUISITION STRIP ─── */
+  .acq-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 4rem;
+    display: grid; grid-template-columns: 260px 1fr;
+    gap: 4rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+  .acq-image {
+    aspect-ratio: 1/1; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .acq-image.visible { opacity: 1; transform: translateY(0); }
+  .acq-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acq-info {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+  }
+  .acq-info.visible { opacity: 1; transform: translateY(0); }
+  .acq-label {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold); opacity: 0.7;
+  }
+  .acq-title {
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone);
+    line-height: 1.1;
+  }
+  .acq-meta { display: flex; flex-direction: column; gap: 0.4rem; }
+  .acq-meta-item {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--bone-dim); opacity: 0.6;
+  }
+  .acq-btn {
+    display: inline-block; align-self: flex-start; margin-top: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--void); background: var(--bone);
+    padding: 1rem 2rem; transition: opacity 0.2s;
+  }
+  .acq-btn:hover { opacity: 0.85; }
+
+  /* ─── BACK NAV ─── */
+  .doc-nav-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 4rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+  .doc-nav-link {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-decoration: none;
+    opacity: 0.5; transition: opacity 0.2s;
+  }
+  .doc-nav-link:hover { opacity: 1; }
+  .doc-nav-link.primary { color: var(--gold); opacity: 0.7; }
+  .doc-nav-link.primary:hover { opacity: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 3rem; gap: 2rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+  .footer-mark {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.4; transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.8; }
+  .footer-doctrine {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    text-align: right; line-height: 1.8;
+  }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-signal { display: none; }
+    .hamburger { display: flex; }
+    .doc-header { padding: 8rem 1.5rem 3rem; }
+    .decode-body { padding: 0 1.5rem; }
+    .decode-block { padding: 3rem 0; }
+    .db-label-row { margin-bottom: 1.2rem; }
+    .institution-row { grid-template-columns: 1.5rem 1fr; }
+    .inst-body { grid-column: 2; }
+    .sources-strip { padding: 3rem 1.5rem; }
+    .acq-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .acq-image { aspect-ratio: 4/3; }
+    .doc-nav-strip { padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .footer-doctrine { text-align: center; }
+    .doc-meta-row { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── MOBILE OVERLAY ─── -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <div class="mobile-nav-ref">PHC // ARCHIVE // CON-01 // FIVE SEALS. ONE EYE.</div>
+  <ul class="mobile-nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+  </ul>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>·</span> Pale Horse Collective</a>
+  <ul class="nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html" class="active">Archive</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-signal">Signal Active</div>
+</nav>
+
+<!-- ─── DOCUMENT HEADER ─── -->
+<header class="doc-header">
+  <div class="doc-breadcrumb">
+    <a href="/archive.html">The Archive</a> &nbsp;/&nbsp; CON-01 &nbsp;/&nbsp; The Connection
+  </div>
+  <div class="doc-ref">Archive Entry CON-01 // The Connection // Pattern Decode</div>
+  <h1 class="doc-title">Five Seals.<br>One Eye.</h1>
+  <p class="doc-subtitle">Five institutions. No documented relationship. No shared century. One symbol: an eye, set above a triangle, appearing independently on the seals of the most powerful organisations in Western history. The symbol predates every one of them by four thousand years.</p>
+  <div class="doc-meta-row">
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Archive Reference</span>
+      <span class="doc-meta-value">PHC-CON-01 // CON-ARCH-001</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Category</span>
+      <span class="doc-meta-value gold">The Connection</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Status</span>
+      <span class="doc-meta-value">Open // Reel 01 Decode</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Primary Sources</span>
+      <span class="doc-meta-value">Cooper · Maxwell · Hall · Great Seal Record</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── DECODE BODY ─── -->
+<main class="decode-body">
+
+  <!-- BLOCK 01: THE SYMBOL -->
+  <div class="decode-block">
+    <div class="db-label-row">
+      <span class="db-number">01 / 04</span>
+      <span class="db-label">The Symbol</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Eye Above The Triangle // What It Is, Before What It Became</h2>
+      <div class="db-body">
+        <p>Before the dollar. Before the Vatican. Before Freemasonry. Before any of the institutions that would later carry it, the eye existed. It appears in its earliest documented form as the Eye of Horus — the Wadjet — in ancient Egypt, approximately 3,000 BCE. Its function was precise: protection of the pharaoh, the connection between divine authority and earthly power, the watching presence of the god rendered as a single, open eye.</p>
+        <p>The eye in Egyptian theology was not merely symbolic. It was operational. The Wadjet eye was believed to carry actual protective force. It was painted on sarcophagi, carved into temple walls, worn as amulet. The form was everywhere because the function was everywhere: to mark something as under divine authority. To say: this is watched over. This is protected by something that sees everything.</p>
+        <p>The eye entered Western esoteric tradition through the Hermetic texts — the Corpus Hermeticum — which carried Egyptian theological concepts into Greek and later Latin thought. From there it moved through Neoplatonism, Alchemy, and Rosicrucianism into the Freemasonic tradition, where it was formally codified as the Eye of Providence: the all-seeing eye of the Grand Architect of the Universe. By the 18th century, the symbol was present in the most elite intellectual and fraternal networks of Western Europe and the American colonies.</p>
+        <p>The question the historical record does not answer is why. Why this symbol, specifically, carried by tradition across three thousand years and multiple civilisations. The answer that requires no conspiracy is the simplest one: that the symbol communicates something particular — the concentration of divine authority in a single watching intelligence — that certain kinds of institutions have always found useful to claim.</p>
+      </div>
+      <div class="db-source">Eye of Horus — Egyptian Museum Cairo // Corpus Hermeticum, trans. G.R.S. Mead, 1906 // Manly P. Hall, "The Secret Teachings of All Ages", 1928 // Jordan Maxwell, "Matrix of Power", 1990 // William Cooper, "Behold a Pale Horse", 1991</div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <p>The symbol predates every institution that carries it by four thousand years. They did not invent it. They inherited it. From something older than all of them.</p>
+  </div>
+
+  <!-- BLOCK 02: THE FIVE -->
+  <div class="decode-block">
+    <div class="db-label-row">
+      <span class="db-number">02 / 04</span>
+      <span class="db-label">The Five Institutions</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">US Dollar. Vatican. Freemasonry. East India Company. Yale. // One Eye. No Explanation.</h2>
+      <div class="db-body">
+        <p>The five institutions that carry the eye are separated by geography, century, stated purpose, and institutional structure. The conventional explanation — that their use of the symbol is coincidental, or merely decorative, or reflects a shared aesthetic tradition without shared meaning — requires believing that five of the most powerful organisations in Western history independently chose the same symbol from a tradition they claim no allegiance to.</p>
+        <p>The record of each institution's relationship to the symbol is documented. It is not speculative. It is in the archives of each institution, in their own heraldic records, their own correspondence, their own founding documents.</p>
+      </div>
+
+      <div class="institutions-grid">
+        <div class="institution-row">
+          <div class="inst-num">01</div>
+          <div class="inst-name">The US Dollar</div>
+          <div class="inst-body">The eye above the unfinished pyramid appears on the reverse of the US dollar from 1935. It was placed there by Secretary of Agriculture Henry Wallace — a documented Theosophist and student of esoteric tradition — with the approval of President Franklin Roosevelt, a 32nd-degree Freemason. The design derives from the reverse of the Great Seal of the United States, first approved in 1782. The Great Seal's designer, Charles Thomson, acknowledged that the reverse carried symbolic content beyond its literal elements.</div>
+        </div>
+        <div class="institution-row">
+          <div class="inst-num">02</div>
+          <div class="inst-name">The Vatican</div>
+          <div class="inst-body">The Eye of Providence appears throughout Vatican iconography. It is present in the Papal Tiara regalia, in the decorative scheme of the Basilica, and in documents of the Roman Catholic Church from the 17th century onward — the period in which the symbol was being formalised across European esoteric institutions simultaneously. The Vatican's adoption of the eye as a symbol of divine omniscience mirrors exactly its function in the Masonic tradition, suggesting both drew from the same earlier source rather than one deriving from the other.</div>
+        </div>
+        <div class="institution-row">
+          <div class="inst-num">03</div>
+          <div class="inst-name">Freemasonry</div>
+          <div class="inst-body">The All-Seeing Eye is among the most central symbols in Freemasonic tradition. It appears on lodge certificates, in lodge rooms, in the degree rituals of both York Rite and Scottish Rite. In Masonic doctrine it represents the Grand Architect of the Universe — the watching intelligence that observes all conduct. The symbol was formally incorporated into Freemasonry in the 18th century, but its antecedents within the craft tradition extend back further, connected explicitly to the Hermetic and Rosicrucian currents from which speculative Freemasonry emerged.</div>
+        </div>
+        <div class="institution-row">
+          <div class="inst-num">04</div>
+          <div class="inst-name">British East India Company</div>
+          <div class="inst-body">The British East India Company — the world's first multinational corporation and at its peak a private army larger than most European nations — incorporated eye symbolism into its institutional emblem and associated iconography. The Company controlled trade routes across Asia for 250 years and functioned as a sovereign power in everything but name. Its founding members included individuals with documented connections to the esoteric currents of English Freemasonry. The eye in the Company's context carried the same meaning as in the Masonic: divine authority for the exercise of absolute power.</div>
+        </div>
+        <div class="institution-row">
+          <div class="inst-num">05</div>
+          <div class="inst-name">Yale University</div>
+          <div class="inst-body">Yale's official seal incorporates the Hebrew phrase Urim V'Thummim — translated as "light and truth" — which in the Old Testament referred to the divination objects carried by the High Priest of Israel, described as instruments for receiving divine illumination. The seal depicts an open book radiating light: the eye of divine wisdom, rendered in a form appropriate to an academic institution. Yale is also the home of Skull and Bones — the secret society whose confirmed membership includes two Presidents Bush, multiple CIA directors, and dozens of senators and Supreme Court justices. The eye above the triangle appears in Skull and Bones iconography directly.</div>
+        </div>
+      </div>
+
+      <div class="db-source">Henry Wallace to FDR, correspondence, 1934, National Archives // Masonic lodge records, United Grand Lodge of England // British East India Company Charter and Records, British Library // Yale University Office of the Secretary, Seal documentation // Anthony Sutton, "America's Secret Establishment", 1983</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 03: THE PATTERN -->
+  <div class="decode-block">
+    <div class="db-label-row">
+      <span class="db-number">03 / 04</span>
+      <span class="db-label">The Pattern</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">Each Uses An Eye Above A Triangle. Independently. Across Centuries. // The Coincidence Standard</h2>
+      <div class="db-body">
+        <p>The conventional dismissal of pattern evidence applies what might be called the coincidence standard: if no direct documentary link between institutions can be produced, the shared symbol is coincidental. This standard has a specific failure mode. It proves nothing about the symbol itself. It only proves that the institutions did not leave a written record of their coordination — which is the expected behaviour of organisations that use symbolic language precisely because it communicates without leaving explicit records.</p>
+        <p>Carroll Quigley, writing in Tragedy and Hope in 1966, documented what he called the "network" — a coordinating structure among elite institutions that operated through shared membership rather than institutional mandate. He was not a critic of the network. He was sympathetic to its goals and described himself as an insider with access to its records. He documented that the network communicated and coordinated through informal channels — clubs, societies, personal relationships — that left a very different paper trail from formal institutions.</p>
+        <p>The PHC standard of evidence is not conspiracy. It is pattern. The question the record asks is not whether these institutions coordinated — that question may be unanswerable from available documents. The question is: what does it mean that five of the most powerful institutions in Western history independently chose to mark themselves with the same symbol from a tradition extending back four thousand years?</p>
+        <p>The most parsimonious answer is not coincidence. The most parsimonious answer is that the symbol carries something these institutions wanted to claim. That they understood what they were claiming. And that they understood the symbol would be recognised by others who had been trained to read it, while remaining merely decorative to those who had not.</p>
+        <p>William Cooper spent the last decade of his life documenting this reading system. His conclusion was not that a single organisation controlled the world through a pyramid with an eye on top. His conclusion was more specific and more verifiable: that a symbolic language exists, has been used continuously since antiquity, and functions in plain sight because its primary defence is not secrecy but the inability of the uninitiated to read what they are seeing.</p>
+      </div>
+      <div class="db-source">Carroll Quigley, "Tragedy and Hope", 1966, Chapter 65 // William Cooper, "Behold a Pale Horse", 1991, Chapters 2–3 // William Cooper, "Mystery Babylon" radio series, 1993–2001 // Jordan Maxwell, "Matrix of Power", 1990 // Manly P. Hall, "The Secret Teachings of All Ages", 1928</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 04: THE INVERSION -->
+  <div class="decode-block">
+    <div class="db-label-row">
+      <span class="db-number">04 / 04</span>
+      <span class="db-label">The Inversion</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">They Inherited It // From Something Older Than All of Them</h2>
+      <div class="db-body">
+        <p>The inversion of this decode is not the destruction of the symbol. It is the redistribution of what the symbol means — from a language readable only by initiates to a language readable by anyone who looks at it with the right frame.</p>
+        <p>The eye above the triangle in its original Egyptian context was not a symbol of secrecy. It was a symbol of protection and divine authority, available to be read by any Egyptian who understood the religious context. The mystery school tradition took that public symbol and narrowed its reading to those within the initiated circle. The institutions that followed — the Vatican, the Masons, the East India Company, the American founding bodies — maintained that narrowing. The symbol remained in plain sight. The key to reading it was kept within the institution.</p>
+        <p>PHC is the key made public. Not as a claim about what these institutions are planning, or whether a single coordinating intelligence controls them all. As a claim about the symbol itself: that it exists, that it appears exactly where the record says it does, that it carries a specific and documented history, and that anyone can now read it.</p>
+        <p>The garment carries the connection. The decode is this document. Together they complete the inversion: the symbol that marked initiates becomes the symbol worn by those who were never initiated, but who have seen the record and chosen to carry it anyway. The eye does not belong to the pyramid. It belongs to whoever is willing to open it.</p>
+      </div>
+      <div class="db-source">PHC Doctrine 01: The Pattern Is The Proof // PHC Doctrine 03: The Symbol Is The Confession // PHC Doctrine 07: Awareness Is The Counter-Operation // PHC Doctrine 09: Not Left. Not Right. Awake.</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── SOURCES ─── -->
+<section class="sources-strip">
+  <div class="sources-inner">
+    <div class="sources-strip-label">In The Record // Primary Sources // Intellectual Lineage — CON-01</div>
+    <div class="sources-list">
+      <div class="source-item reveal">
+        <div class="source-item-name">William Cooper</div>
+        <div class="source-item-work">Behold a Pale Horse // Mystery Babylon Series</div>
+        <p class="source-item-note">Chapters 2 and 3 of Behold a Pale Horse lay out the symbol documentation across institutions. The Mystery Babylon radio series — 42 episodes broadcast 1993–2001 — contains the most detailed publicly available analysis of the eye symbol, its institutional use, and its Hermetic origins. Cooper was not a theorist. He presented documents.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Manly P. Hall</div>
+        <div class="source-item-work">The Secret Teachings of All Ages // The Secret Destiny of America</div>
+        <p class="source-item-note">A 33rd-degree Freemason and scholar of esoteric tradition writing from within it. Hall's encyclopedic 1928 work documents the Eye of Providence across traditions with primary source references. His 1944 work documents the founding fathers as philosophical initiates who understood the symbol system they were encoding into the Great Seal.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Jordan Maxwell</div>
+        <div class="source-item-work">Matrix of Power // Basic Slide Presentation</div>
+        <p class="source-item-note">Fifty years of documented research into astrotheological and esoteric symbolism. Maxwell traced the eye symbol from its Egyptian solar origins through its Hermetic transmission into Western institutional use. His contribution is the continuity — demonstrating that the same symbol carried the same meaning through the same tradition, not through separate reinvention.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Carroll Quigley</div>
+        <div class="source-item-work">Tragedy and Hope, 1966</div>
+        <p class="source-item-note">Georgetown University professor, Bill Clinton's cited mentor, insider to the network he documented. Quigley's 1,300-page work is the primary academic record of coordinated elite institutional action across the 20th century — written by someone who had access to the network's own records and was sympathetic to its aims. Not a critic. A chronicler.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACQUISITION STRIP ─── -->
+<div class="acq-strip">
+  <div class="acq-image reveal">
+    <img src="/001-worn.webp" alt="File 001 — The Capstone — Pale Horse Collective">
+  </div>
+  <div class="acq-info reveal">
+    <span class="acq-label">The Eye. Decoded. Made Wearable.</span>
+    <div class="acq-title">The Capstone<br>File 001</div>
+    <div class="acq-meta">
+      <span class="acq-meta-item">File 001 // Edition of 500</span>
+      <span class="acq-meta-item">Never reprinted</span>
+      <span class="acq-meta-item">AU$59 // Free shipping worldwide</span>
+    </div>
+    <a href="/001.html" class="acq-btn">Acquire File 001 →</a>
+  </div>
+</div>
+
+<!-- ─── BACK NAVIGATION ─── -->
+<div class="doc-nav-strip">
+  <a href="/archive.html" class="doc-nav-link">← Back to the Archive</a>
+  <a href="/archive/unfinished-pyramid.html" class="doc-nav-link primary">Related: SYM-01 // The Unfinished Pyramid →</a>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> ARCHIVE <em>·</em> CON-01 <em>·</em> FIVE SEALS. ONE EYE. <em>·</em> THE CONNECTION</div>
+  <ul class="footer-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal, .decode-block, .pull-quote').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const overlay = document.getElementById('mobile-overlay');
+    const burger = document.getElementById('hamburger');
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
