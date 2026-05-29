@@ -1457,7 +1457,6 @@
         <img src="/001-worn.webp" alt="File 001 — The Capstone">
         <span class="fg-status">Open</span>
         <span class="fg-num">FILE 001</span>
-        <div class="fg-edition-bar"></div>
       </div>
       <div class="fg-body">
         <div class="fg-ref">FILE 001 // DECLASSIFIED</div>
@@ -1466,10 +1465,6 @@
           <div class="fg-meta-item">
             <span class="fg-meta-label">Edition</span>
             <span class="fg-meta-value">500 max</span>
-          </div>
-          <div class="fg-meta-item">
-            <span class="fg-meta-label">Remaining</span>
-            <span class="fg-meta-value available">500</span>
           </div>
           <div class="fg-meta-item">
             <span class="fg-meta-label">Reprint</span>
@@ -1485,7 +1480,6 @@
         <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
         <span class="fg-status">Open</span>
         <span class="fg-num">FILE 002</span>
-        <div class="fg-edition-bar"></div>
       </div>
       <div class="fg-body">
         <div class="fg-ref">FILE 002 // DECLASSIFIED</div>
@@ -1494,10 +1488,6 @@
           <div class="fg-meta-item">
             <span class="fg-meta-label">Edition</span>
             <span class="fg-meta-value">500 max</span>
-          </div>
-          <div class="fg-meta-item">
-            <span class="fg-meta-label">Remaining</span>
-            <span class="fg-meta-value available">500</span>
           </div>
           <div class="fg-meta-item">
             <span class="fg-meta-label">Reprint</span>
@@ -1784,20 +1774,6 @@
     }
   });
 
-  // ─── LIVE EDITION COUNTS ───
-  ['001', '002'].forEach(function(fileId) {
-    var card = document.querySelector('[data-file="' + fileId + '"]');
-    if (!card) return;
-    fetch('/.netlify/functions/get-edition-count?file=' + fileId)
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        var availableEl = card.querySelector('.fg-meta-value.available');
-        var barEl = card.querySelector('.fg-edition-bar');
-        if (availableEl) availableEl.textContent = data.remaining;
-        if (barEl) barEl.style.background = 'linear-gradient(to right, var(--red) ' + ((data.sold / data.total) * 100) + '%, rgba(232,224,208,0.06) 0%)';
-      })
-      .catch(function() {});
-  });
 
 </script>
 

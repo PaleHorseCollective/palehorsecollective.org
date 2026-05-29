@@ -499,11 +499,6 @@
     <h1 class="dh-title">The Signal Tower</h1>
     <div class="dh-ref">FILE REF: PHC-002 // SYM-02 // OUTER COURT // BROADCAST TERMINATED</div>
   </div>
-  <div class="dh-right">
-    <div class="edition-live">500</div>
-    <div class="edition-label">Editions Available</div>
-    <div class="edition-note">Never reprinted when closed</div>
-  </div>
 </div>
 
 <!-- MAIN LAYOUT -->
@@ -693,14 +688,6 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ─── LIVE EDITION COUNT ───
-  fetch('/.netlify/functions/get-edition-count?file=002')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      const el = document.querySelector('.edition-live');
-      if (el) el.textContent = data.remaining;
-    })
-    .catch(function() {});
 </script>
 
 <!-- PHC CHECKOUT — FILE 002 -->
