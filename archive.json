@@ -65,7 +65,8 @@
       "inversion": "The symbol was never hidden. It was placed in plain sight. For those who were meant to see it.",
       "tags": ["Maxwell", "Bohemian Grove", "Yale"],
       "decodeUrl": null,
-      "live": true,
+      "live": false,
+      "scheduled": true,
       "fileRef": null,
       "reelRef": "REEL 02"
     },
@@ -79,7 +80,8 @@
       "inversion": "The tower is not architecture. It is a declaration. We are here. We reach higher than you.",
       "tags": ["Cooper", "Maxwell", "Freemasonry"],
       "decodeUrl": null,
-      "live": true,
+      "live": false,
+      "scheduled": true,
       "fileRef": null,
       "reelRef": "REEL 03"
     },

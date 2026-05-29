@@ -690,7 +690,9 @@ function buildCard(entry, index) {
       </div>
       ${isLive
         ? `<span class="entry-cta">Read decode →</span>`
-        : `<span class="entry-pending">Decode incoming</span>`
+        : entry.scheduled
+          ? `<span class="entry-pending">Scheduled</span>`
+          : `<span class="entry-pending">Decode incoming</span>`
       }
     </div>
   `;
