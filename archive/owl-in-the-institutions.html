@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Owl in the Institutions — Archive CON-02 — Pale Horse Collective</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Archive CON-02. The Owl in the Institutions decoded. The symbol of Athena — goddess of wisdom and strategic warfare — appears at Bohemian Grove, on the Yale seal, on the US dollar, and at the Athens drachma. Five institutions. One symbol. No coincidence.">
+<meta name="keywords" content="bohemian grove owl, yale seal owl, athena owl symbol, illuminati owl, dollar bill owl, secret society symbols, owl symbolism institutions, jordan maxwell, occult symbols decoded">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #b4aca0;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+  }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--green); display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-signal::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: crosshair; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1px; background: var(--bone-dim);
+    transition: all 0.25s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ─── MOBILE OVERLAY ─── */
+  .mobile-overlay {
+    display: none; position: fixed; inset: 0; background: var(--void);
+    z-index: 150; flex-direction: column; justify-content: center;
+    align-items: flex-start; padding: 6rem 2.5rem 3rem;
+  }
+  .mobile-overlay.open { display: flex; }
+  .mobile-overlay::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .mobile-nav-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-bottom: 3rem; position: relative;
+  }
+  .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
+  .mobile-nav-links li {
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.10s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.20s; }
+  .mobile-nav-links a {
+    display: block; padding: 1.4rem 0;
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    color: var(--bone); transition: color 0.2s;
+  }
+  .mobile-nav-links a:hover { color: var(--bone-dim); }
+
+  /* ─── DOCUMENT HEADER ─── */
+  .doc-header {
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    max-width: 860px; margin: 0 auto;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .doc-breadcrumb {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 2.5rem; position: relative;
+  }
+  .doc-breadcrumb a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+  .doc-breadcrumb a:hover { opacity: 0.8; }
+  .doc-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--bone-dim); line-height: 1.75; max-width: 640px;
+    position: relative; margin-bottom: 3rem;
+  }
+  .doc-meta-row {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding-top: 2rem; position: relative;
+  }
+  .doc-meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .doc-meta-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .doc-meta-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase;
+  }
+  .doc-meta-value.gold { color: var(--gold); }
+
+  /* ─── DECODE BODY ─── */
+  .decode-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .decode-block {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .decode-block.visible { opacity: 1; transform: translateY(0); }
+  .decode-block:last-child { border-bottom: none; }
+
+  .db-label-row {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+  .db-number {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); opacity: 0.25; text-transform: uppercase;
+  }
+  .db-label {
+    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.7;
+  }
+  .db-content-col { display: flex; flex-direction: column; gap: 1.5rem; }
+  .db-title {
+    font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .db-body {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--bone-dim); line-height: 1.95;
+  }
+  .db-body p + p { margin-top: 1.2em; }
+  .db-source {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    margin-top: 1rem; line-height: 1.8;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232,224,208,0.05);
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(184,150,12,0.12);
+    border-bottom: 1px solid rgba(184,150,12,0.12);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .pull-quote.visible { opacity: 1; transform: translateY(0); }
+  .pull-quote p {
+    font-family: var(--font-mono); font-size: 0.6rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); line-height: 2; opacity: 0.6;
+  }
+
+  /* ─── SOURCES ─── */
+  .sources-strip {
+    background: rgba(184,150,12,0.03);
+    border-top: 1px solid rgba(232,224,208,0.06);
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    padding: 4rem 3rem;
+  }
+  .sources-inner { max-width: 860px; margin: 0 auto; }
+  .sources-strip-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    margin-bottom: 2.5rem;
+  }
+  .sources-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+  .source-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .source-item-name {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone); text-transform: uppercase;
+  }
+  .source-item-work {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.4rem;
+  }
+  .source-item-note {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
+  }
+
+  /* ─── ACQUISITION STRIP ─── */
+  .acq-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 4rem;
+    display: grid; grid-template-columns: 260px 1fr;
+    gap: 4rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+  .acq-image {
+    aspect-ratio: 1/1; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .acq-image.visible { opacity: 1; transform: translateY(0); }
+  .acq-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acq-info {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+  }
+  .acq-info.visible { opacity: 1; transform: translateY(0); }
+  .acq-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .acq-title {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.05;
+  }
+  .acq-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+  .acq-meta-item {
+    font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.45;
+  }
+  .acq-btn {
+    display: inline-block; align-self: flex-start; margin-top: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--void); background: var(--bone);
+    padding: 1rem 2rem; transition: opacity 0.2s;
+  }
+  .acq-btn:hover { opacity: 0.8; }
+
+  /* ─── BACK NAV ─── */
+  .doc-nav-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 4rem;
+    display: flex; justify-content: flex-start; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+  .doc-nav-link {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-decoration: none;
+    opacity: 0.5; transition: opacity 0.2s;
+  }
+  .doc-nav-link:hover { opacity: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 3rem; gap: 2rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+  .footer-mark {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.4; transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.8; }
+  .footer-doctrine {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    text-align: right; line-height: 1.8;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-signal { display: none; }
+    .hamburger { display: flex; }
+    .doc-header { padding: 8rem 1.5rem 3rem; }
+    .decode-body { padding: 0 1.5rem; }
+    .decode-block { padding: 3rem 0; }
+    .db-label-row { margin-bottom: 1.2rem; }
+    .sources-strip { padding: 3rem 1.5rem; }
+    .acq-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .acq-image { aspect-ratio: 4/3; }
+    .doc-nav-strip { padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .footer-doctrine { text-align: center; }
+    .doc-meta-row { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── MOBILE OVERLAY ─── -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <div class="mobile-nav-ref">PHC // ARCHIVE // CON-02 // THE OWL IN THE INSTITUTIONS</div>
+  <ul class="mobile-nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+  </ul>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>·</span> Pale Horse Collective</a>
+  <ul class="nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html" class="active">Archive</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-signal" aria-label="Transmission live">Live</div>
+</nav>
+
+<!-- ─── DOCUMENT HEADER ─── -->
+<header class="doc-header">
+  <div class="doc-breadcrumb">
+    <a href="/archive.html">The Archive</a> &nbsp;/&nbsp; CON-02 &nbsp;/&nbsp; Outer Court &nbsp;/&nbsp; Connection
+  </div>
+  <div class="doc-ref">Archive Entry CON-02 // The Owl in the Institutions // Connection Document</div>
+  <h1 class="doc-title">The Owl in the Institutions</h1>
+  <p class="doc-subtitle">The symbol of Athena — goddess of wisdom and strategic warfare — appears where power concentrates. Bohemian Grove. The Yale seal. The Athenian drachma. The US dollar. Five institutions across three millennia. One symbol. No explanation offered.</p>
+  <div class="doc-meta-row">
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Archive Reference</span>
+      <span class="doc-meta-value">PHC-CON-02 // CON-ARCH-002</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Classification</span>
+      <span class="doc-meta-value gold">Outer Court // Open</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Category</span>
+      <span class="doc-meta-value">Connection // Pattern Documentation</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Primary Sources</span>
+      <span class="doc-meta-value">Maxwell · Pausanias · Bohemian Club Records · US Dollar</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── DECODE BODY ─── -->
+<main class="decode-body">
+
+  <!-- BLOCK 01: ORIGIN -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">01 / 04</span>
+      <span class="db-label">Origin</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Owl of Athena // Athens // 600 BCE</h2>
+      <div class="db-body">
+        <p>The owl is not a symbol of mystery. It is a symbol of a very specific god — Athena, goddess of wisdom, craft, and strategic warfare. Not defensive war. Strategic war. The calculated use of force to achieve outcomes invisible to those who experience the force. The Athenian silver drachma first bore the owl around 510 BCE. It became the most widely circulated coin of the ancient world — not through military conquest alone, but through the deliberate construction of trade networks that made Athenian currency the default instrument of commerce across the Mediterranean.</p>
+        <p>The owl on the drachma communicated Athenian authority. Not loudly. Precisely. The coin arrived before the army did. The economy preceded the empire. The symbol was the advance signal — a declaration of intellectual dominance transmitted through the mechanisms of trade rather than the spectacle of force. This is the original meaning of the owl: not wisdom as contemplation. Wisdom as strategic advantage. The ability to see in the dark while others are blind.</p>
+        <p>Pausanias, the second-century Greek geographer, documented that the Acropolis owl was considered sacred — a divine messenger present before Athena herself manifested. The bird that sees at night, that turns its head to observe what is behind it, that hunts in silence. Not a symbol of mystery for its own sake. A symbol of the capacity to perceive what others cannot, and to act on that perception without announcing the action.</p>
+      </div>
+      <div class="db-source">Pausanias — Description of Greece, c. 150 CE // Athenian Drachma — numismatic records, c. 510 BCE // Jordan Maxwell — Matrix of Power, 1990</div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote reveal">
+    <p>The symbol was never hidden. It was placed in plain sight. For those who were meant to see it.</p>
+  </div>
+
+  <!-- BLOCK 02: ORIGINAL FUNCTION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">02 / 04</span>
+      <span class="db-label">Original Function</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Institutions That Chose the Owl // Bohemian Grove, Yale, the Dollar</h2>
+      <div class="db-body">
+        <p>Bohemian Grove is a 2,700-acre private campground in California owned by the Bohemian Club of San Francisco — a private membership organisation founded in 1872. The Grove hosts an annual gathering every July attended by current and former US presidents, CEOs of major corporations, military commanders, heads of intelligence agencies, and senior government officials. The central monument at Bohemian Grove is a 40-foot stone owl. The opening ceremony of every gathering — conducted since 1929 — is called the Cremation of Care. A mock human effigy is burned before the owl. The club's motto: Weaving Spiders Come Not Here. Translated from a line in A Midsummer Night's Dream: no business is to be conducted here. The gathering is off the record. The owl watches.</p>
+        <p>Yale University was founded in 1701. Its seal bears a Hebrew inscription — Urim V'Thummim, meaning Light and Truth — and incorporates an open book. But the institution most associated with Yale's enduring power in American life is Skull and Bones, founded 1832. Confirmed members include two presidents, multiple CIA directors, senators, and Supreme Court justices. The Skull and Bones tomb on Yale's campus incorporates an owl above its entrance. The owl of Minerva — the Roman name for Athena — is the Hegelian symbol of philosophy that only understands events after they have occurred. Hegel: the owl of Minerva spreads its wings only with the falling of the dusk. The institution that shaped American intelligence and foreign policy for the twentieth century placed its animal above the door.</p>
+        <p>The US dollar micro-print: in the upper right section of the face of the one-dollar bill, where the number 1 appears in its ornate border, a small owl is rendered in the engraving. It is not officially documented. The Bureau of Engraving has not confirmed it. It is visible under magnification. The artist who placed it has never been publicly identified. The currency of the most powerful nation in history carries a symbol that connects Athens, Bohemian Grove, Yale, and every structure of knowledge-based power that preceded them.</p>
+      </div>
+      <div class="db-source">Bohemian Club records // Domhoff — The Bohemian Grove and Other Retreats, 1974 // Yale University founding documents // Anthony Sutton — America's Secret Establishment, 1986 // G.W.F. Hegel — Elements of the Philosophy of Right, 1820</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 03: THE INVERSION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">03 / 04</span>
+      <span class="db-label">The Inversion</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">What the Owl Communicates // Seeing in the Dark</h2>
+      <div class="db-body">
+        <p>The owl is not a symbol of secrecy. Secrecy implies something hidden. The owl is a symbol of selective visibility — the capacity to see what others cannot while remaining unseen oneself. The institutions that adopted it were not hiding a symbol. They were using a symbol to communicate with those who already understood the language. Everyone else looked at the stone owl above the Bohemian Grove stage and saw a decoration. Those who chose it saw a declaration.</p>
+        <p>This is the mechanics of esoteric communication. The word esoteric means: intended for or understood by only a small group with special knowledge. It is not mysticism. It is a communication strategy. Messages embedded in plain sight — in currency, in institutional seals, in architectural ornament — that communicate one thing to the uninitiated and another to those who carry the decoder. The owl on the dollar is not a conspiracy. It is a signature. Signatures are left intentionally.</p>
+        <p>The inversion here is not architectural. It is informational. The connection between these institutions — Athens, Bohemian Grove, Yale, the dollar — is not a mystery. It is documented. Pausanias documented the Athenian owl. Domhoff documented Bohemian Grove. Sutton documented Skull and Bones. The Bureau of Engraving produced the dollar. The symbol is in each of them. The connection is not hidden. It has simply not been assembled in one place and stated plainly. This document does that.</p>
+      </div>
+      <div class="db-source">PHC Doctrine 03 — The Symbol Is The Confession // PHC Doctrine 01 — The Pattern Is The Proof // PHC-CON-002</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 04: THE APPLICATION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">04 / 04</span>
+      <span class="db-label">The Application</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Pattern // Three Millennia // One Continuous Signal</h2>
+      <div class="db-body">
+        <p>The owl appears where a particular kind of power concentrates: not military power, not economic power in isolation, but the power that precedes both — the power of information asymmetry. The capacity to know what others do not, to see in the dark while others are blind, to make decisions based on a fuller picture of reality than is available to those affected by the decisions.</p>
+        <p>Athena was the patron of Athens not because Athens was the most powerful military state in Greece — Sparta held that distinction — but because Athens was the most strategically sophisticated. The owl on the drachma was a statement of a different kind of strength. Yale produced not the most soldiers but the most intelligence directors, the most secretaries of state, the most architects of foreign policy. Bohemian Grove hosts not the most visible politicians but the most consequential ones — those who meet before the decisions are announced, not after. The owl marks the location of the pre-decision.</p>
+        <p>The PHC archive documents patterns. This is a pattern. Across 2,500 years, across continents, across institutions that appear to have no connection, one symbol recurs at the intersection of knowledge, power, and strategic action. The symbol does not explain the network. It identifies its participants. To see the owl is to see who placed it there — and to begin asking why they wanted those who could read the language to know they were present.</p>
+      </div>
+      <div class="db-source">PHC-CON-002 // PHC-BIBLE-001 // The Inversion Principle // PHC Doctrine 07: Awareness Is The Counter-Operation</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── SOURCES ─── -->
+<section class="sources-strip">
+  <div class="sources-inner">
+    <div class="sources-strip-label">In The Record // Primary Sources // Intellectual Lineage — CON-02</div>
+    <div class="sources-list">
+      <div class="source-item reveal">
+        <div class="source-item-name">Jordan Maxwell</div>
+        <div class="source-item-work">Matrix of Power, 1990 // Basic Slide Presentation</div>
+        <p class="source-item-note">Maxwell's documentation of owl symbolism across institutions remains the most systematic public assembly of the pattern. His identification of the Bohemian Grove owl, the Yale connection, and the dollar micro-print created the framework for subsequent researchers. Primary source for the institutional owl connection.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">G. William Domhoff</div>
+        <div class="source-item-work">The Bohemian Grove and Other Retreats, 1974</div>
+        <p class="source-item-note">Academic documentation of the Bohemian Grove gathering and its membership. Domhoff's sociological analysis established the overlap between Bohemian Club membership and positions of institutional power in American political and economic life. Primary source for the Grove's documented composition and ritual structure.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Anthony Sutton</div>
+        <div class="source-item-work">America's Secret Establishment, 1986</div>
+        <p class="source-item-note">Sutton's investigation of Skull and Bones at Yale — conducted using documented membership lists — traces the institution's graduates into the CIA, the State Department, the Federal Reserve, and the Supreme Court. The owl above the Bones tomb connects directly to the Athenian tradition Maxwell documented and Sutton's subsequent analysis makes structurally legible.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Pausanias</div>
+        <div class="source-item-work">Description of Greece, c. 150 CE</div>
+        <p class="source-item-note">Primary source documentation of the Athenian owl's sacred status and its association with Athena as the presiding deity of Athens. Pausanias records the owl as a divine messenger — present before Athena's manifestation, remaining after her departure. The original textual record of what the symbol was designed to communicate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACQUISITION STRIP ─── -->
+<div class="acq-strip">
+  <div class="acq-image reveal">
+    <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
+  </div>
+  <div class="acq-info reveal">
+    <span class="acq-label">Now Declassified // Outer Court // Edition of 500</span>
+    <div class="acq-title">The Signal Tower<br>File 002</div>
+    <div class="acq-meta">
+      <span class="acq-meta-item">File 002 // Outer Court</span>
+      <span class="acq-meta-item">Edition of 500 // Never reprinted</span>
+      <span class="acq-meta-item">AU$59 // Free shipping worldwide</span>
+    </div>
+    <a href="/002.html" class="acq-btn">Acquire File 002 →</a>
+  </div>
+</div>
+
+<!-- ─── BACK NAVIGATION ─── -->
+<div class="doc-nav-strip">
+  <a href="/archive.html" class="doc-nav-link">← Back to the Archive</a>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> ARCHIVE <em>·</em> CON-02 <em>·</em> THE OWL IN THE INSTITUTIONS <em>·</em> OUTER COURT</div>
+  <ul class="footer-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const overlay = document.getElementById('mobile-overlay');
+    const burger = document.getElementById('hamburger');
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>

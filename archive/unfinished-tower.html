@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Unfinished Tower — Archive CON-03 — Pale Horse Collective</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Archive CON-03. The Unfinished Tower decoded. The Tower of Babel. Solomon's Temple. The Washington Monument. The unfinished pyramid. They keep building the same tower. It is never finished. The pattern is not architectural — it is doctrinal.">
+<meta name="keywords" content="tower of babel freemasonry, solomon's temple symbolism, washington monument obelisk, unfinished pyramid meaning, masonic architecture, william cooper, occult symbolism decoded, pale horse collective">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #0a0a08;
+    --bone: #e8e0d0;
+    --bone-dim: #b4aca0;
+    --red: #8b1a1a;
+    --gold: #b8960c;
+    --green: #4aff91;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'IM Fell English', serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  html { background: var(--void); color: var(--bone); font-family: var(--font-body); scroll-behavior: smooth; }
+  body { min-height: 100vh; overflow-x: hidden; cursor: crosshair; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 1; opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    backdrop-filter: blur(4px);
+  }
+  .nav-mark {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+  }
+  .nav-mark span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a.active { color: var(--bone); }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--bone); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--bone); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-signal {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--green); display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-signal::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: crosshair; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1px; background: var(--bone-dim);
+    transition: all 0.25s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ─── MOBILE OVERLAY ─── */
+  .mobile-overlay {
+    display: none; position: fixed; inset: 0; background: var(--void);
+    z-index: 150; flex-direction: column; justify-content: center;
+    align-items: flex-start; padding: 6rem 2.5rem 3rem;
+  }
+  .mobile-overlay.open { display: flex; }
+  .mobile-overlay::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .mobile-nav-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    margin-bottom: 3rem; position: relative;
+  }
+  .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
+  .mobile-nav-links li {
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.05s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.10s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+  .mobile-overlay.open .mobile-nav-links li:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.20s; }
+  .mobile-nav-links a {
+    display: block; padding: 1.4rem 0;
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    color: var(--bone); transition: color 0.2s;
+  }
+  .mobile-nav-links a:hover { color: var(--bone-dim); }
+
+  /* ─── DOCUMENT HEADER ─── */
+  .doc-header {
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+    position: relative; overflow: hidden;
+    max-width: 860px; margin: 0 auto;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,224,208,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,224,208,0.012) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .doc-breadcrumb {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    margin-bottom: 2.5rem; position: relative;
+  }
+  .doc-breadcrumb a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+  .doc-breadcrumb a:hover { opacity: 0.8; }
+  .doc-ref {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
+    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--bone); line-height: 1; margin-bottom: 1.5rem; position: relative;
+  }
+  .doc-subtitle {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--bone-dim); line-height: 1.75; max-width: 640px;
+    position: relative; margin-bottom: 3rem;
+  }
+  .doc-meta-row {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.08);
+    padding-top: 2rem; position: relative;
+  }
+  .doc-meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .doc-meta-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .doc-meta-value {
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase;
+  }
+  .doc-meta-value.gold { color: var(--gold); }
+
+  /* ─── DECODE BODY ─── */
+  .decode-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .decode-block {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .decode-block.visible { opacity: 1; transform: translateY(0); }
+  .decode-block:last-child { border-bottom: none; }
+
+  .db-label-row {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+  .db-number {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
+    color: var(--bone-dim); opacity: 0.25; text-transform: uppercase;
+  }
+  .db-label {
+    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.7;
+  }
+  .db-content-col { display: flex; flex-direction: column; gap: 1.5rem; }
+  .db-title {
+    font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.2; margin-bottom: 0.5rem;
+  }
+  .db-body {
+    font-family: var(--font-body); font-style: italic;
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: var(--bone-dim); line-height: 1.95;
+  }
+  .db-body p + p { margin-top: 1.2em; }
+  .db-source {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    margin-top: 1rem; line-height: 1.8;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(232,224,208,0.05);
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(184,150,12,0.12);
+    border-bottom: 1px solid rgba(184,150,12,0.12);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .pull-quote.visible { opacity: 1; transform: translateY(0); }
+  .pull-quote p {
+    font-family: var(--font-mono); font-size: 0.6rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); line-height: 2; opacity: 0.6;
+  }
+
+  /* ─── SOURCES ─── */
+  .sources-strip {
+    background: rgba(184,150,12,0.03);
+    border-top: 1px solid rgba(232,224,208,0.06);
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+    padding: 4rem 3rem;
+  }
+  .sources-inner { max-width: 860px; margin: 0 auto; }
+  .sources-strip-label {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    margin-bottom: 2.5rem;
+  }
+  .sources-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+  .source-item { display: flex; flex-direction: column; gap: 0.4rem; }
+  .source-item-name {
+    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--bone); text-transform: uppercase;
+  }
+  .source-item-work {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 0.4rem;
+  }
+  .source-item-note {
+    font-family: var(--font-body); font-style: italic;
+    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
+  }
+
+  /* ─── ACQUISITION STRIP ─── */
+  .acq-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 4rem;
+    display: grid; grid-template-columns: 260px 1fr;
+    gap: 4rem; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.08);
+  }
+  .acq-image {
+    aspect-ratio: 1/1; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .acq-image.visible { opacity: 1; transform: translateY(0); }
+  .acq-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acq-info {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+  }
+  .acq-info.visible { opacity: 1; transform: translateY(0); }
+  .acq-label {
+    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.3em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+  }
+  .acq-title {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--bone); line-height: 1.05;
+  }
+  .acq-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+  .acq-meta-item {
+    font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.45;
+  }
+  .acq-btn {
+    display: inline-block; align-self: flex-start; margin-top: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--void); background: var(--bone);
+    padding: 1rem 2rem; transition: opacity 0.2s;
+  }
+  .acq-btn:hover { opacity: 0.8; }
+
+  /* ─── BACK NAV ─── */
+  .doc-nav-strip {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 4rem;
+    display: flex; justify-content: flex-start; align-items: center;
+    border-bottom: 1px solid rgba(232,224,208,0.06);
+  }
+  .doc-nav-link {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; text-decoration: none;
+    opacity: 0.5; transition: opacity 0.2s;
+  }
+  .doc-nav-link:hover { opacity: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 3rem; gap: 2rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(232,224,208,0.06);
+  }
+  .footer-mark {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+  }
+  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
+    opacity: 0.4; transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.8; }
+  .footer-doctrine {
+    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    text-align: right; line-height: 1.8;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-signal { display: none; }
+    .hamburger { display: flex; }
+    .doc-header { padding: 8rem 1.5rem 3rem; }
+    .decode-body { padding: 0 1.5rem; }
+    .decode-block { padding: 3rem 0; }
+    .db-label-row { margin-bottom: 1.2rem; }
+    .sources-strip { padding: 3rem 1.5rem; }
+    .acq-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .acq-image { aspect-ratio: 4/3; }
+    .doc-nav-strip { padding: 2rem 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .footer-doctrine { text-align: center; }
+    .doc-meta-row { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── MOBILE OVERLAY ─── -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <div class="mobile-nav-ref">PHC // ARCHIVE // CON-03 // THE UNFINISHED TOWER</div>
+  <ul class="mobile-nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+  </ul>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="/" class="nav-mark">PHC <span>·</span> Pale Horse Collective</a>
+  <ul class="nav-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html" class="active">Archive</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-signal" aria-label="Transmission live">Live</div>
+</nav>
+
+<!-- ─── DOCUMENT HEADER ─── -->
+<header class="doc-header">
+  <div class="doc-breadcrumb">
+    <a href="/archive.html">The Archive</a> &nbsp;/&nbsp; CON-03 &nbsp;/&nbsp; Outer Court &nbsp;/&nbsp; Connection
+  </div>
+  <div class="doc-ref">Archive Entry CON-03 // The Unfinished Tower // Connection Document</div>
+  <h1 class="doc-title">The Unfinished Tower</h1>
+  <p class="doc-subtitle">They keep building the same tower. It is never finished. The Tower of Babel. Solomon's Temple. The unfinished pyramid. The Washington Monument. The pattern is not architectural — it is doctrinal. The unfinished structure signals a work still in progress toward an endpoint its builders understand and its observers do not.</p>
+  <div class="doc-meta-row">
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Archive Reference</span>
+      <span class="doc-meta-value">PHC-CON-03 // CON-ARCH-003</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Classification</span>
+      <span class="doc-meta-value gold">Outer Court // Open</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Category</span>
+      <span class="doc-meta-value">Connection // Pattern Documentation</span>
+    </div>
+    <div class="doc-meta-item">
+      <span class="doc-meta-label">Primary Sources</span>
+      <span class="doc-meta-value">Cooper · Maxwell · Genesis 11 · Masonic Records</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── DECODE BODY ─── -->
+<main class="decode-body">
+
+  <!-- BLOCK 01: ORIGIN -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">01 / 04</span>
+      <span class="db-label">Origin</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Tower of Babel // Genesis 11 // The First Documented Project</h2>
+      <div class="db-body">
+        <p>Genesis 11:1–9. The whole earth had one language and the same words. They said to one another: come, let us build a city and a tower with its top in the heavens. Let us make a name for ourselves. The purpose of the tower is stated without ambiguity — not shelter, not defence, not worship. A name. A vertical claim on the attention of the divine. A monument to unified human reach toward the celestial authority that governed from above.</p>
+        <p>The narrative records the response: the construction was interrupted not by collapse but by deliberate disruption of the communication system that made coordinated building possible. The project was not destroyed. It was halted. The tower was left unfinished. This is not a failure narrative. It is the record of a project that was interrupted mid-construction — with the clear implication that the project remains, in principle, resumable. The intent was not abandoned. The language was confused. The builders scattered. The blueprint survived.</p>
+        <p>The Masonic interpretation of the Tower of Babel is foundational to the tradition. Operative masonry — the actual craft of stone-cutting and building — was theorised by Speculative Freemasonry to trace its intellectual lineage through Solomon's Temple back to the builders of Babel. The interrupted tower is not a warning in Masonic cosmology. It is a precedent. An earlier attempt at the same project that was set back but not concluded. The lodges that carry the tradition understand themselves as inheritors of the interrupted work.</p>
+      </div>
+      <div class="db-source">Genesis 11:1–9 // Albert Mackey — Encyclopedia of Freemasonry, 1873 // William Cooper — Behold a Pale Horse, 1991 // Jordan Maxwell — Matrix of Power, 1990</div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote reveal">
+    <p>The tower is not architecture. It is a declaration. We are here. We reach higher than you.</p>
+  </div>
+
+  <!-- BLOCK 02: ORIGINAL FUNCTION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">02 / 04</span>
+      <span class="db-label">Original Function</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">Solomon's Temple // The Masonic Blueprint // The Structure That Must Be Completed</h2>
+      <div class="db-body">
+        <p>Freemasonry understands itself as a continuation of the builders of Solomon's Temple. The ritual degrees of the craft — particularly the third degree, the Master Mason — are structured around the myth of Hiram Abiff, the chief architect of Solomon's Temple, who is murdered before he can complete the structure and transmit its most sacred secrets. The entire theology of Masonic initiation is a search for what was lost when Hiram died: the Master's Word, the completion of the temple, the recovery of the ancient knowledge that was buried with its architect.</p>
+        <p>The temple was completed in its physical form. Its esoteric completion — the restoration of the lost knowledge of its architect — is the ongoing project of the tradition. This is not metaphor. It is the literal structure of Masonic ritual, documented in the lodge ritual texts, in Mackey's Encyclopedia, in Pike's Morals and Dogma. The 33rd degree of Scottish Rite Freemasonry — the highest degree, conferred on a small number of Master Masons — is titled Sovereign Grand Inspector General. Its symbolism concerns the completed temple. The 33-degree structure exists because the journey toward completion has 33 stages. The destination is the finished tower.</p>
+        <p>Albert Pike, Sovereign Grand Commander of the Scottish Rite Southern Jurisdiction from 1859 to 1891, wrote in Morals and Dogma: Masonry is a search after Light. That search leads us directly back, as you see, to the Kabalah. Freemasonry is explicitly a tradition seeking to recover what was lost — the unfinished knowledge that the tower's interruption, and Hiram's murder, left incomplete. The project is the project. The tower is always unfinished because its completion is the purpose of the ongoing tradition, not an event that has already occurred.</p>
+      </div>
+      <div class="db-source">Albert Pike — Morals and Dogma, 1871 // Albert Mackey — Encyclopedia of Freemasonry, 1873 // Masonic ritual — third degree // Scottish Rite Southern Jurisdiction records</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 03: THE INVERSION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">03 / 04</span>
+      <span class="db-label">The Inversion</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">The Pattern Across History // The Same Tower // Different Names</h2>
+      <div class="db-body">
+        <p>The Washington Monument is the world's tallest stone obelisk — 169 metres, completed in 1884. Construction began in 1848 and was halted for 23 years due to funding shortfalls and the interruption of the Civil War. The visible seam in the stonework, approximately one-third of the way up the structure, marks the interruption. When construction resumed in 1876, the new stone was quarried from a different source. The colour difference is visible from the ground. An unfinished tower in the capital of the United States, bearing the mark of its interruption in permanent stone.</p>
+        <p>The unfinished pyramid on the US dollar — documented in the PHC archive SYM-01 — is the same pattern in miniature. The capstone floats above the structure, separated, suspended. Not missing — present, but not yet landed. The Novus Ordo Seclorum inscription: New Order of the Ages. The order is not complete. The new age is not yet established. The tower is still building. The capstone has not yet descended.</p>
+        <p>The European Parliament building in Strasbourg — designed by the architect firm Studio Europe and opened in 1999 — was deliberately modelled on Bruegel's painting of the Tower of Babel. The architects confirmed this in interviews. A promotional poster produced for the institution showed the tower under construction with the caption: Europe: Many Tongues, One Voice — the direct inversion of the Genesis narrative in which the confusion of tongues ended the tower's construction. The institution produced a building that is explicitly the resumption of the interrupted project. It is not a coincidence. It is a design brief.</p>
+      </div>
+      <div class="db-source">Washington Monument construction records — National Park Service // PHC-SYM-01 // Studio Europe — European Parliament architectural brief, 1991 // Pieter Bruegel — The Tower of Babel, c. 1563</div>
+    </div>
+  </div>
+
+  <!-- BLOCK 04: THE APPLICATION -->
+  <div class="decode-block reveal">
+    <div class="db-label-row">
+      <span class="db-number">04 / 04</span>
+      <span class="db-label">The Application</span>
+    </div>
+    <div class="db-content-col">
+      <h2 class="db-title">What the Unfinished Tower Communicates // The Ongoing Declaration</h2>
+      <div class="db-body">
+        <p>The unfinished tower is a communication device. Its message is not failure. Its message is: we are still building. The work continues. The project that was interrupted at Babel — the project that lost its chief architect at Solomon's Temple — is ongoing. The floating capstone, the disconnected monument, the parliament building modelled on the interrupted tower — all of them communicate the same thing to those who understand the language: the order is not yet complete, but the builders are still present, and the endpoint is still the same.</p>
+        <p>This is why the capstone on the US dollar floats. A completed pyramid would communicate that the project was done. A floating capstone communicates that the project is active. The eye above it — the Eye of Providence, documented in PHC-SYM-01 — watches the construction proceed. The Novus Ordo Seclorum below marks the epoch in which the construction is taking place. The pyramid is on the currency because the currency is the mechanism through which the construction is funded. The dollar is the building material of the tower.</p>
+        <p>The inversion that PHC applies to this pattern is not to celebrate or condemn the project. It is to see it. The unfinished tower is only invisible to those who have not been told what they are looking at. Once the pattern is assembled — Babel, Solomon's Temple, the dollar, the Washington Monument, the European Parliament — the communication is legible. The builders left their signature on every structure they erected. The signature is the tower. The tower is always unfinished. The project is always ongoing. The archive documents what the builders left visible and states what it means.</p>
+      </div>
+      <div class="db-source">PHC-SYM-01 // PHC-BIBLE-001 // PHC Doctrine 01: The Pattern Is The Proof // PHC Doctrine 03: The Symbol Is The Confession</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── SOURCES ─── -->
+<section class="sources-strip">
+  <div class="sources-inner">
+    <div class="sources-strip-label">In The Record // Primary Sources // Intellectual Lineage — CON-03</div>
+    <div class="sources-list">
+      <div class="source-item reveal">
+        <div class="source-item-name">William Cooper</div>
+        <div class="source-item-work">Behold a Pale Horse, 1991 // Mystery Babylon Series</div>
+        <p class="source-item-note">Cooper's Mystery Babylon series provides the most thorough audio documentation of the Masonic tower tradition and its relationship to the New World Order project. His identification of the dollar symbolism, the Masonic temple construction mythology, and the unfinished pyramid as an active declaration rather than a historical artifact forms the primary analytical framework for this entry.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Albert Pike</div>
+        <div class="source-item-work">Morals and Dogma, 1871</div>
+        <p class="source-item-note">The primary internal source on the theological structure of Freemasonry, written by the Sovereign Grand Commander of the Scottish Rite Southern Jurisdiction. Pike's documentation of Masonry as a search for lost knowledge — the recovery of what was interrupted — is the insider's account of why the tower is always unfinished in the tradition's own cosmology. Available in full text.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Albert Mackey</div>
+        <div class="source-item-work">Encyclopedia of Freemasonry, 1873</div>
+        <p class="source-item-note">The definitive reference text on Masonic symbolism, history, and ritual. Mackey's entries on the Tower of Babel, Solomon's Temple, and Hiram Abiff provide the documented foundation for the claim that operative building tradition traces directly to the interrupted tower narrative. Primary source for the institutional self-understanding of the tradition.</p>
+      </div>
+      <div class="source-item reveal">
+        <div class="source-item-name">Jordan Maxwell</div>
+        <div class="source-item-work">Matrix of Power, 1990 // Basic Slide Presentation</div>
+        <p class="source-item-note">Maxwell's documentation of the dollar symbolism and the Masonic architecture connection provides the visual pattern analysis underpinning this entry. His identification of the unfinished pyramid as a live declaration rather than historical decoration, and his cross-referencing of Masonic temple symbolism with US institutional architecture, established the connection this document develops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ACQUISITION STRIP ─── -->
+<div class="acq-strip">
+  <div class="acq-image reveal">
+    <img src="/001-worn.webp" alt="File 001 — The Capstone">
+  </div>
+  <div class="acq-info reveal">
+    <span class="acq-label">Now Declassified // Outer Court // Edition of 500</span>
+    <div class="acq-title">The Capstone<br>File 001</div>
+    <div class="acq-meta">
+      <span class="acq-meta-item">File 001 // Outer Court</span>
+      <span class="acq-meta-item">Edition of 500 // Never reprinted</span>
+      <span class="acq-meta-item">AU$59 // Free shipping worldwide</span>
+    </div>
+    <a href="/001.html" class="acq-btn">Acquire File 001 →</a>
+  </div>
+</div>
+
+<!-- ─── BACK NAVIGATION ─── -->
+<div class="doc-nav-strip">
+  <a href="/archive.html" class="doc-nav-link">← Back to the Archive</a>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-mark">PHC <em>·</em> ARCHIVE <em>·</em> CON-03 <em>·</em> THE UNFINISHED TOWER <em>·</em> OUTER COURT</div>
+  <ul class="footer-links">
+    <li><a href="/files.html">Files</a></li>
+    <li><a href="/doctrine.html">Doctrine</a></li>
+    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
+  </ul>
+  <div class="footer-doctrine">Not left. Not right.<br>Awake.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const overlay = document.getElementById('mobile-overlay');
+    const burger = document.getElementById('hamburger');
+    const isOpen = overlay.classList.contains('open');
+    overlay.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('mobile-overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
