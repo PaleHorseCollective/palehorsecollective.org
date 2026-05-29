@@ -256,24 +256,25 @@
 
 const CONFIG = {
 
-  version: '5.1',
-  updated: '2026-04-14',
-  session: 7,
+  version: '5.2',
+  updated: '2026-05-29',
+  session: 12,
   operationalState: 'PHASE 02 — TRANSMISSION',
 
   /* NEXT PRIORITY — the single most important thing right now */
-  nextPriority: 'First transmission email — draft and send to Google Sheets list',
+  nextPriority: 'Push 9 pending files to GitHub (Sessions 11 + 12) — then first transmission email',
 
   /* LAST SESSION — what happened, for both Justin and Claude to see on open */
   lastSession: {
-    date: '2026-04-14',
-    number: 7,
+    date: '2026-05-29',
+    number: 12,
     summary: [
-      'Printful sample ordered — File 001 — awaiting delivery',
-      '2 TikTok reels posted — content pipeline active',
-      'phc-status.md merged into single canonical v4.1',
-      'phc-mission-control.html rebuilt as data-driven dashboard — now the live /ops page',
-      'ops.html added to Web files — deploys to palehorsecollective.org/ops on push',
+      'Removed all edition counter UI from index.html, files.html, 001.html, 002.html — no remaining counts visible anywhere',
+      'archive.json — CON-02 + CON-03 marked scheduled with decodeUrls',
+      'archive/owl-in-the-institutions.html — NEW: full decode for CON-02 (Bohemian Grove, Skull & Bones, Athenian drachma owl)',
+      'archive/unfinished-tower.html — NEW: full decode for CON-03 (Tower of Babel, Solomon\'s Temple, Washington Monument, EU Parliament)',
+      'archive.html — fixed isLive logic so scheduled entries with decodeUrl are clickable — "Scheduled" label added',
+      '9 files pending push to GitHub (include transmissions.html from Session 11)',
     ]
   },
 
@@ -295,10 +296,10 @@ const CONFIG = {
   /* TASK QUEUE */
   tasks: {
     justin: [
+      { body: 'Push 9 files to GitHub — index, files, 001, 002, transmissions, archive.json, archive.html, owl-in-the-institutions.html, unfinished-tower.html', pri: 'NOW' },
       { body: 'Register ABN under business name before revenue flows',                    pri: 'URGENT'      },
       { body: 'Set up PO Box / registered address (email compliance)',                    pri: 'COMPLIANCE'  },
       { body: 'Confirm Instagram account status',                                         pri: 'SOCIAL'      },
-      { body: 'Approve print quality when Printful sample arrives — File 001',            pri: 'IN TRANSIT'  },
     ],
     claude: [
       { body: 'First transmission email — draft and send to list',            pri: 'NOW'          },
@@ -315,7 +316,7 @@ const CONFIG = {
     { n: '02', title: 'WEBSITE LIVE',            desc: 'Netlify + GitHub + Cloudflare. Files 001 and 002 pages live.',                                         status: 'done'    },
     { n: '03', title: 'WEBSITE REBUILD',         desc: 'Removed Collective page and fund references. Fixed readability. Clean copy throughout.',                status: 'done'    },
     { n: '04', title: 'TRANSACTION LAYER',       desc: 'Stripe + Printful API. Custom checkout. All 12 variant IDs wired. Orders flow automatically.',         status: 'done'    },
-    { n: '05', title: 'EDITION COUNTERS',        desc: 'Live Stripe query on every page load. No manual updates per order.',                                   status: 'done'    },
+    { n: '05', title: 'EDITION COUNTERS',        desc: 'Built live — then removed from all frontend pages. Netlify function still live. Counter UI stripped Session 12.',  status: 'done'    },
     { n: '06', title: 'PHYSICAL SAMPLE',         desc: 'Ordered. Awaiting delivery. Justin approves print quality on arrival.',                                status: 'now'     },
     { n: '07', title: 'FIRST TRANSMISSION',      desc: 'Email list send. Inaugural declassification announcement to subscribers.',                             status: 'now'     },
     { n: '08', title: 'TIKTOK DECODE SERIES',    desc: '2 reels live. Scripted decode series ongoing. Traffic engine building.',                               status: 'now'     },

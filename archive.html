@@ -657,7 +657,7 @@ function renderGrid() {
 
 // ─── BUILD CARD ───
 function buildCard(entry, index) {
-  const isLive = entry.live && entry.decodeUrl;
+  const isLive = (entry.live || entry.scheduled) && entry.decodeUrl;
   const el = isLive
     ? document.createElement('a')
     : document.createElement('div');
