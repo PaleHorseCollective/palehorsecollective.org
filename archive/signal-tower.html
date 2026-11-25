@@ -46,13 +46,13 @@
     backdrop-filter: blur(4px);
   }
   .nav-mark {
-    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
   }
-  .nav-mark span { color: var(--red); }
+  .nav-mark span { color: #e0675c; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
     transition: color 0.2s; position: relative;
   }
@@ -64,7 +64,7 @@
   .nav-links a:hover { color: var(--bone); }
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
   .nav-signal {
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--green); display: flex; align-items: center; gap: 0.5rem;
   }
   .nav-signal::before {
@@ -99,8 +99,8 @@
     background-size: 60px 60px; pointer-events: none;
   }
   .mobile-nav-ref {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
     margin-bottom: 3rem; position: relative;
   }
   .mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0; width: 100%; position: relative; }
@@ -137,15 +137,15 @@
     background-size: 60px 60px; pointer-events: none;
   }
   .doc-breadcrumb {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
     margin-bottom: 2.5rem; position: relative;
   }
   .doc-breadcrumb a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
   .doc-breadcrumb a:hover { opacity: 0.8; }
   .doc-ref {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.3em;
-    color: var(--red); text-transform: uppercase; opacity: 0.7;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: #e0675c; text-transform: uppercase; opacity: 0.7;
     margin-bottom: 1.5rem; position: relative;
   }
   .doc-title {
@@ -166,11 +166,11 @@
   }
   .doc-meta-item { display: flex; flex-direction: column; gap: 0.4rem; }
   .doc-meta-label {
-    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
   }
   .doc-meta-value {
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone-dim); text-transform: uppercase;
   }
   .doc-meta-value.gold { color: var(--gold); }
@@ -195,11 +195,11 @@
     margin-bottom: 1.8rem;
   }
   .db-number {
-    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.25em;
-    color: var(--bone-dim); opacity: 0.25; text-transform: uppercase;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); opacity: 1; text-transform: uppercase;
   }
   .db-label {
-    font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.3em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--gold); text-transform: uppercase; opacity: 0.7;
   }
   .db-content-col { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -215,8 +215,8 @@
   }
   .db-body p + p { margin-top: 1.2em; }
   .db-source {
-    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
     margin-top: 1rem; line-height: 1.8;
     padding-top: 1rem;
     border-top: 1px solid rgba(232,224,208,0.05);
@@ -232,9 +232,9 @@
   }
   .pull-quote.visible { opacity: 1; transform: translateY(0); }
   .pull-quote p {
-    font-family: var(--font-mono); font-size: 0.6rem;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); line-height: 2; opacity: 0.6;
+    font-family: var(--font-mono); font-size: 0.8125rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); line-height: 2; opacity: 1;
   }
 
   /* ─── SOURCES ─── */
@@ -246,24 +246,24 @@
   }
   .sources-inner { max-width: 860px; margin: 0 auto; }
   .sources-strip-label {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.3em;
-    color: var(--gold); text-transform: uppercase; opacity: 0.6;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--gold); text-transform: uppercase; opacity: 1;
     margin-bottom: 2.5rem;
   }
   .sources-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
   .source-item { display: flex; flex-direction: column; gap: 0.4rem; }
   .source-item-name {
-    font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone); text-transform: uppercase;
   }
   .source-item-work {
-    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.15em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.5;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
     margin-bottom: 0.4rem;
   }
   .source-item-note {
     font-family: var(--font-body); font-style: italic;
-    font-size: 0.82rem; color: var(--bone-dim); opacity: 0.6; line-height: 1.6;
+    font-size: 0.82rem; color: var(--bone-dim); opacity: 1; line-height: 1.6;
   }
 
   /* ─── ACQUISITION STRIP ─── */
@@ -288,8 +288,8 @@
   }
   .acq-info.visible { opacity: 1; transform: translateY(0); }
   .acq-label {
-    font-family: var(--font-mono); font-size: 0.42rem; letter-spacing: 0.3em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.4;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
   }
   .acq-title {
     font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem);
@@ -298,12 +298,12 @@
   }
   .acq-meta { display: flex; flex-direction: column; gap: 0.5rem; }
   .acq-meta-item {
-    font-family: var(--font-mono); font-size: 0.48rem; letter-spacing: 0.15em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.45;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
   }
   .acq-btn {
     display: inline-block; align-self: flex-start; margin-top: 0.5rem;
-    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.25em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     text-transform: uppercase; text-decoration: none;
     color: var(--void); background: var(--bone);
     padding: 1rem 2rem; transition: opacity 0.2s;
@@ -318,9 +318,9 @@
     border-bottom: 1px solid rgba(232,224,208,0.06);
   }
   .doc-nav-link {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone-dim); text-transform: uppercase; text-decoration: none;
-    opacity: 0.5; transition: opacity 0.2s;
+    opacity: 1; transition: opacity 0.2s;
   }
   .doc-nav-link:hover { opacity: 1; }
   .doc-nav-link.primary:hover { opacity: 1; }
@@ -332,20 +332,20 @@
     border-top: 1px solid rgba(232,224,208,0.06);
   }
   .footer-mark {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.3;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
   }
-  .footer-mark em { color: var(--red); font-style: normal; }
+  .footer-mark em { color: #e0675c; font-style: normal; }
   .footer-links { display: flex; gap: 2rem; list-style: none; }
   .footer-links a {
-    font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
     color: var(--bone-dim); text-decoration: none; text-transform: uppercase;
-    opacity: 0.4; transition: opacity 0.2s;
+    opacity: 1; transition: opacity 0.2s;
   }
   .footer-links a:hover { opacity: 0.8; }
   .footer-doctrine {
-    font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.2em;
-    color: var(--bone-dim); text-transform: uppercase; opacity: 0.25;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em;
+    color: var(--bone-dim); text-transform: uppercase; opacity: 1;
     text-align: right; line-height: 1.8;
   }
 
@@ -376,9 +376,9 @@
 <div class="mobile-overlay" id="mobile-overlay">
   <div class="mobile-nav-ref">PHC // ARCHIVE // SYM-02 // THE SIGNAL TOWER</div>
   <ul class="mobile-nav-links">
-    <li><a href="/files.html">Files</a></li>
+    <li><a href="/shop">Shop</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
-    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/about">About</a></li>
     <li><a href="/archive.html">Archive</a></li>
   </ul>
 </div>
@@ -387,9 +387,9 @@
 <nav>
   <a href="/" class="nav-mark">PHC <span>·</span> Pale Horse Collective</a>
   <ul class="nav-links">
-    <li><a href="/files.html">Files</a></li>
+    <li><a href="/shop">Shop</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
-    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/about">About</a></li>
     <li><a href="/archive.html" class="active">Archive</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -539,7 +539,7 @@
 <!-- ─── ACQUISITION STRIP ─── -->
 <div class="acq-strip">
   <div class="acq-image reveal">
-    <img src="/002-worn.webp" alt="File 002 — The Signal Tower">
+    <img src="/img/products/signal-tower-tee-1.webp" alt="File 002 — The Signal Tower">
   </div>
   <div class="acq-info reveal">
     <span class="acq-label">Now Declassified // Outer Court // Edition of 500</span>
@@ -549,7 +549,7 @@
       <span class="acq-meta-item">Edition of 500 // Never reprinted</span>
       <span class="acq-meta-item">AU$59 // Free shipping worldwide</span>
     </div>
-    <a href="/002.html" class="acq-btn">Acquire File 002 →</a>
+    <a href="/products/signal-tower-tee" class="acq-btn">Shop the Signal Tower Tee →</a>
   </div>
 </div>
 
@@ -562,9 +562,9 @@
 <footer>
   <div class="footer-mark">PHC <em>·</em> ARCHIVE <em>·</em> SYM-02 <em>·</em> THE SIGNAL TOWER <em>·</em> OUTER COURT</div>
   <ul class="footer-links">
-    <li><a href="/files.html">Files</a></li>
+    <li><a href="/shop">Shop</a></li>
     <li><a href="/doctrine.html">Doctrine</a></li>
-    <li><a href="/transmissions.html">Transmissions</a></li>
+    <li><a href="/about">About</a></li>
     <li><a href="/archive.html">Archive</a></li>
     <li><a href="https://www.tiktok.com/@palehorsecollective" target="_blank" rel="noopener">TikTok</a></li>
   </ul>

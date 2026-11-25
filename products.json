@@ -1,0 +1,106 @@
+{
+  "site": {
+    "announcement": "Free shipping on every order. Printed to order, ships in 10 to 14 days.",
+    "heroImage": "/img/products/capstone-tee-1.webp",
+    "heroAlt": "The Capstone Tee being worn",
+    "heroLine": "Graphic clothing drawn from the symbols hiding in plain sight.",
+    "heroButton": "Shop the range",
+    "shipping": "Free shipping on every order. Each piece is printed to order, so allow 10 to 14 days for it to reach you.",
+    "returns": "Because everything is printed to order, we can't take returns for change of mind. If your order arrives damaged or misprinted, email us within 30 days with a photo and we'll replace it.",
+    "contactEmail": "palehorsecollective@proton.me"
+  },
+  "products": [
+    {
+      "slug": "capstone-tee",
+      "code": "PHC-001",
+      "name": "The Capstone Tee",
+      "category": "Tees",
+      "price": 59,
+      "colour": "Black",
+      "status": "live",
+      "isNew": false,
+      "checkoutId": "001",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ],
+      "images": [
+        {
+          "src": "/img/products/capstone-tee-1.webp",
+          "alt": "The Capstone Tee being worn, front view"
+        },
+        {
+          "src": "/img/products/capstone-tee-2.svg",
+          "alt": "The Capstone graphic: an upright and an inverted pyramid with an eye between them"
+        }
+      ],
+      "blurb": "The unfinished pyramid, split in two, with the eye sitting between the triangles.",
+      "details": [
+        "Bella+Canvas 3001 tee in black",
+        "100% combed ring-spun cotton, retail fit",
+        "Direct-to-garment print, centre chest",
+        "Printed to order"
+      ],
+      "story": "The unfinished pyramid has been on the back of the US one-dollar bill since 1935. It was first drawn for the Great Seal of the United States in 1782, with the floating capstone and the eye above it. We split it into an upright and an inverted triangle and put the eye between the two.",
+      "storyLink": "/archive/unfinished-pyramid.html",
+      "printfulVariants": {
+        "XS": 5244725100,
+        "S": 5244725101,
+        "M": 5244725102,
+        "L": 5244725103,
+        "XL": 5244725104,
+        "2XL": 5244725105
+      }
+    },
+    {
+      "slug": "signal-tower-tee",
+      "code": "PHC-002",
+      "name": "Signal Tower Tee",
+      "category": "Tees",
+      "price": 59,
+      "colour": "Black",
+      "status": "live",
+      "isNew": true,
+      "checkoutId": "002",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL"
+      ],
+      "images": [
+        {
+          "src": "/img/products/signal-tower-tee-1.webp",
+          "alt": "Signal Tower Tee being worn, front view"
+        },
+        {
+          "src": "/img/products/signal-tower-tee-2.svg",
+          "alt": "Signal Tower graphic: a broadcast tower inside a signal circle and crosshair grid"
+        }
+      ],
+      "blurb": "A broadcast tower drawn like an old surveillance schematic.",
+      "details": [
+        "Bella+Canvas 3001 tee in black",
+        "100% combed ring-spun cotton, retail fit",
+        "Direct-to-garment print, centre chest",
+        "Printed to order"
+      ],
+      "story": "Whoever owns the tower decides what gets broadcast and who hears it. In the US, licensing of the airwaves has run through the FCC since 1934. The design draws the tower as a recovered schematic, with its broadcast circle and the crosshair grid around it.",
+      "storyLink": "/archive/signal-tower.html",
+      "printfulVariants": {
+        "XS": 5245672404,
+        "S": 5245672405,
+        "M": 5245672406,
+        "L": 5245672407,
+        "XL": 5245672408,
+        "2XL": 5245672409
+      }
+    }
+  ]
+}
