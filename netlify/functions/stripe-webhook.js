@@ -5,35 +5,19 @@
 // SETUP REQUIRED:
 //   1. Set STRIPE_WEBHOOK_SECRET in Netlify env vars (from Stripe Dashboard → Webhooks)
 //   2. Set PRINTFUL_API_KEY in Netlify env vars (from Printful → Settings → API)
-//   3. Fill in PRINTFUL_VARIANT_IDS below (from Printful API or dashboard)
+//   3. Add each product's Printful sync variant IDs to products.json
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PRINTFUL SYNC VARIANT IDs
-// Find these via: GET https://api.printful.com/sync/products (with API key)
-// Or: Printful Dashboard → your store → each product → each variant
-//
-// Format: PRINTFUL_VARIANT_IDS['fileId']['SIZE'] = sync_variant_id (number)
-// ─────────────────────────────────────────────────────────────────────────────
-const PRINTFUL_VARIANT_IDS = {
-  '001': {
-    'XS':  5244725100,
-    'S':   5244725101,
-    'M':   5244725102,
-    'L':   5244725103,
-    'XL':  5244725104,
-    '2XL': 5244725105,
-  },
-  '002': {
-    'XS':  5245672404,
-    'S':   5245672405,
-    'M':   5245672406,
-    'L':   5245672407,
-    'XL':  5245672408,
-    '2XL': 5245672409,
-  },
-};
+// PRINTFUL SYNC VARIANT IDs live in products.json under each product's
+// "printfulVariants" (size -> sync_variant_id). Find them via
+// GET https://api.printful.com/sync/products or the Printful dashboard.
+const catalogue = require('../../products.json');
+
+function variantFor(fileId, size) {
+  const product = catalogue.products.find((p) => p.checkoutId === fileId || p.slug === fileId);
+  return product && product.printfulVariants ? product.printfulVariants[size] : undefined;
+}
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -85,7 +69,7 @@ async function createPrintfulOrder(session) {
     throw new Error(`Missing session data: file_id=${file_id} size=${size} shipping=${!!shipping}`);
   }
 
-  const variantId = PRINTFUL_VARIANT_IDS[file_id]?.[size];
+  const variantId = variantFor(file_id, size);
   if (!variantId) {
     throw new Error(`No Printful variant ID configured for file ${file_id} size ${size}`);
   }
@@ -125,6 +109,6 @@ async function createPrintfulOrder(session) {
     throw new Error(`Printful API error ${response.status}: ${JSON.stringify(result)}`);
   }
 
-  console.log(`Printful order created — file:${file_id} size:${size} order_id:${result.result?.id} archivist:${customerEmail}`);
+  console.log(`Printful order created — file:${file_id} size:${size} order_id:${result.result?.id} customer:${customerEmail}`);
   return result;
 }
