@@ -1,7 +1,7 @@
 {
   "site": {
     "announcement": "Free shipping on every order. Printed to order, ships in 10 to 14 days.",
-    "heroImage": "/001-worn.webp",
+    "heroImage": "/img/products/capstone-tee-1.webp",
     "heroAlt": "The Capstone Tee being worn",
     "heroLine": "Graphic clothing drawn from the symbols hiding in plain sight.",
     "heroButton": "Shop the range",
@@ -30,11 +30,11 @@
       ],
       "images": [
         {
-          "src": "/001-worn.webp",
+          "src": "/img/products/capstone-tee-1.webp",
           "alt": "The Capstone Tee being worn, front view"
         },
         {
-          "src": "/001.svg",
+          "src": "/img/products/capstone-tee-2.svg",
           "alt": "The Capstone graphic: an upright and an inverted pyramid with an eye between them"
         }
       ],
@@ -76,11 +76,11 @@
       ],
       "images": [
         {
-          "src": "/002-worn.webp",
+          "src": "/img/products/signal-tower-tee-1.webp",
           "alt": "Signal Tower Tee being worn, front view"
         },
         {
-          "src": "/002.svg",
+          "src": "/img/products/signal-tower-tee-2.svg",
           "alt": "Signal Tower graphic: a broadcast tower inside a signal circle and crosshair grid"
         }
       ],

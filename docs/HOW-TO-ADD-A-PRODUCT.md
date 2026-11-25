@@ -4,10 +4,10 @@ You only touch two things: your photos and `products.json`. Every page (home, sh
 
 ## 1. Export your photos
 
-- Portrait, 4:5 ratio (for example 1600 x 2000 px)
+- Portrait, 3:4 ratio (for example 1500 x 2000 px)
 - `.webp` or `.jpg`, under about 400 KB each
 - First photo is the main one. Second photo shows when someone hovers the card on desktop, so a worn shot first and a flat or graphic shot second works well
-- Name them after the product, e.g. `img/eagle-hood-1.webp`, `img/eagle-hood-2.webp`
+- Put them in `img/products/` and name them after the product: `eagle-hood-1.webp`, `eagle-hood-2.webp`
 - A design file (`.svg`) also works. It gets shown on the dark background with padding instead of cropped
 
 ## 2. Set it up in Printful
@@ -32,8 +32,8 @@ Copy an existing product block, paste it at the top of the `products` list, and 
   "sizes": ["S", "M", "L", "XL", "2XL"],
   "printfulVariants": { "S": 5300000001, "M": 5300000002, "L": 5300000003, "XL": 5300000004, "2XL": 5300000005 },
   "images": [
-    { "src": "/img/eagle-hood-1.webp", "alt": "Double Eagle Hood being worn, front view" },
-    { "src": "/img/eagle-hood-2.webp", "alt": "Back print of the double-headed eagle" }
+    { "src": "/img/products/eagle-hood-1.webp", "alt": "Double Eagle Hood being worn, front view" },
+    { "src": "/img/products/eagle-hood-2.webp", "alt": "Back print of the double-headed eagle" }
   ],
   "blurb": "One line about the design.",
   "details": ["Garment and colour", "Fabric", "Print method and placement", "Printed to order"],

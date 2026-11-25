@@ -10,6 +10,7 @@
   var FORM_URL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScbL0a4nv4ue-dwSqw80OGy2jozCfvxrfasKMJL2U6TApn6ag/formResponse";
   var FORM_FIELD = "entry.565332746";
   var TIKTOK = "https://www.tiktok.com/@palehorsecollective";
+  var MARK = "/assets/brand/horse-mark.svg";
 
   // ---------- helpers ----------
 
@@ -20,7 +21,7 @@
   }
   function catSlug(c) { return String(c).toLowerCase().replace(/[^a-z0-9]+/g, "-"); }
   function productUrl(p) { return LIVE ? "/products/" + p.slug : "product.html#" + p.slug; }
-  function money(n) { return "$" + Number(n).toFixed(0) + " AUD"; }
+  function money(n) { return "AU$" + Number(n).toFixed(0); }
   function isGraphic(src) { return /\.svg($|\?)/i.test(src); }
   function visible(list) { return list.filter(function (p) { return p.status !== "hidden"; }); }
   function categories(list) {
@@ -79,28 +80,34 @@
       }).join("");
     }
 
+    var newest = list.filter(function (p) { return p.isNew && p.status === "live"; })[0];
+    var signal = newest
+      ? '<a class="signal header-signal" href="' + productUrl(newest) + '" style="text-decoration:none">New: ' + esc(newest.name) + "</a>"
+      : '<span class="signal header-signal">Signal active</span>';
+
     var header = document.getElementById("site-header");
     if (header) {
-            header.innerHTML =
+      header.innerHTML =
         (data.site.announcement ? '<div class="announce">' + esc(data.site.announcement) + "</div>" : "") +
         '<header class="site-header"><div class="wrap header-inner">' +
-          '<a class="logo" href="index.html"><img src="/horse-mark.svg" alt="" data-fallback-hide>Pale Horse Collective</a>' +
+          '<a class="logo" href="index.html" aria-label="Pale Horse Collective, home"><img src="' + MARK + '" alt="">PHC<span class="sep">//</span><span class="full">Pale Horse Collective</span></a>' +
           '<nav aria-label="Main"><ul class="nav">' + navItems() + "</ul></nav>" +
+          signal +
           '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>' +
           "</button>" +
         "</div></header>" +
         '<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu">' +
-          '<div class="mobile-nav-top"><a class="logo" href="index.html">Pale Horse Collective</a>' +
+          '<div class="mobile-nav-top"><a class="logo" href="index.html"><img src="' + MARK + '" alt="">PHC<span class="sep">//</span>Menu</a>' +
           '<button class="menu-btn" type="button" data-close aria-label="Close menu" style="display:inline-flex">' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>' +
           "</button></div>" +
-          "<ul>" + navItems() + "</ul>" +
-          '<p class="mobile-nav-foot">' + esc(data.site.announcement || "") + "</p>" +
+          "<ul>" + links.map(function (l, i) {
+            return '<li><a href="' + l.href + '">' + esc(l.label) + "<span>" + (i < 9 ? "0" : "") + (i + 1) + "</span></a></li>";
+          }).join("") + "</ul>" +
+          '<div class="mobile-nav-foot"><p>' + esc(data.site.announcement || "") + "</p>" + signal.replace("signal header-signal", "signal") + "</div>" +
         "</div>";
       wireMenu(header);
-      var logoImg = header.querySelector("[data-fallback-hide]");
-      if (logoImg) logoImg.addEventListener("error", function () { logoImg.remove(); });
     }
 
     var footer = document.getElementById("site-footer");
@@ -109,8 +116,9 @@
       footer.className = "site-footer";
       footer.innerHTML =
         '<div class="wrap footer-grid">' +
-          '<div class="footer-brand"><a class="logo" href="index.html">Pale Horse Collective</a>' +
-          "<p>Graphic clothing drawn from the symbols hiding in plain sight. Printed to order.</p></div>" +
+          '<div class="footer-brand"><img src="' + MARK + '" alt="Pale Horse Collective">' +
+          '<a class="logo" href="index.html">PHC<span class="sep">//</span>Pale Horse Collective</a>' +
+          "<p>Graphic clothing drawn from the symbols hiding in plain sight.</p></div>" +
           '<div class="footer-col"><h2>Shop</h2><ul>' +
             '<li><a href="shop.html">Shop all</a></li>' +
             cats.map(function (c) { return '<li><a href="shop.html#' + catSlug(c) + '">' + esc(c) + "</a></li>"; }).join("") +
@@ -125,7 +133,7 @@
             '<li><a href="' + TIKTOK + '" rel="noopener">TikTok</a></li>' +
           "</ul></div>" +
         "</div>" +
-        '<div class="wrap footer-base"><span>&copy; ' + new Date().getFullYear() + " Pale Horse Collective</span><span>Prices in Australian dollars</span></div>";
+        '<div class="wrap footer-base"><span>&copy; ' + new Date().getFullYear() + " Pale Horse Collective</span><span>Printed to order</span><span>Prices in AUD</span></div>";
     }
   }
 
@@ -171,7 +179,8 @@
         imgTag(first.src, first.alt, "main-img" + (second ? " has-alt" : ""), p.code) +
         (second ? imgTag(second.src, "", "alt-img", p.code, ' aria-hidden="true"') : "") +
       "</div>" +
-      '<div class="card-info"><span class="card-name">' + esc(p.name) + "</span>" +
+      '<div class="card-info"><span class="card-code">' + esc(p.code) + "</span>" +
+      '<span class="card-name">' + esc(p.name) + "</span>" +
       '<span class="card-meta"><span>' + esc(p.colour) + '</span><span class="card-price">' + money(p.price) + "</span></span></div>" +
     "</a></li>";
   }
@@ -190,6 +199,7 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!input.value || !input.checkValidity()) {
+        note.classList.remove("ok"); note.classList.add("error");
         note.textContent = "Enter a valid email address, like name@example.com.";
         input.setAttribute("aria-invalid", "true");
         input.focus();
@@ -200,7 +210,8 @@
       fetch(FORM_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body })
         .catch(function () {});
       input.value = "";
-      note.textContent = "You're on the list. We'll email you when something new goes up.";
+      note.classList.remove("error"); note.classList.add("ok");
+      note.textContent = "Channel open. You'll hear from us when something new goes up.";
     });
   }
 
@@ -214,9 +225,11 @@
     if (hero) {
       hero.innerHTML =
         '<img class="hero-img" src="' + esc(s.heroImage) + '" alt="' + esc(s.heroAlt) + '" data-fallback data-label="">' +
-        '<div class="hero-copy wrap"><h1 class="wordmark">Pale<br>Horse</h1>' +
-        '<div class="hero-row"><p class="hero-line">' + esc(s.heroLine) + "</p>" +
-        '<a class="btn" href="shop.html">' + esc(s.heroButton) + "</a></div></div>";
+        '<div class="hero-copy wrap">' +
+          '<h1 class="hero-title"><img class="hero-mark" src="' + MARK + '" alt="Pale Horse Collective"></h1>' +
+          '<div class="hero-row"><p class="lede">' + esc(s.heroLine) + "</p>" +
+          '<a class="btn" href="shop.html">' + esc(s.heroButton) + "</a></div>" +
+        "</div>";
     }
 
     var grid = document.getElementById("new-grid");
@@ -325,10 +338,10 @@
           (n > 1 ? '<p class="gallery-count">Swipe for ' + (n - 1) + " more photo" + (n > 2 ? "s" : "") + "</p>" : "") +
         "</div>" +
         '<div class="buy">' +
+          '<span class="label">' + esc(p.code) + " // " + esc(p.category) + " // " + esc(p.colour) + "</span>" +
           '<h1 class="h1">' + esc(p.name) + "</h1>" +
-          '<span class="code">' + esc(p.code) + " · " + esc(p.colour) + "</span>" +
           '<p class="price">' + money(p.price) + "<small>Free shipping</small></p>" +
-          '<p class="buy-blurb">' + esc(p.blurb) + "</p>" +
+          '<p class="lede">' + esc(p.blurb) + "</p>" +
           '<form id="buy-form" novalidate>' +
             '<fieldset class="sizes"><legend>Size <span id="size-chosen"></span></legend><div class="size-row">' +
               p.sizes.map(function (s, i) {
@@ -339,7 +352,7 @@
             '<button class="btn btn-block" type="submit"' + (buyable ? "" : ' disabled aria-disabled="true"') + ">" + btnLabel + "</button>" +
             '<p class="buy-msg" id="buy-msg" role="status" aria-live="polite"></p>' +
           "</form>" +
-          '<p class="buy-note">Printed to order. Ships in 10 to 14 days. Secure checkout with Stripe.</p>' +
+          '<p class="buy-note">Printed to order // Ships in 10 to 14 days // Secure checkout with Stripe</p>' +
           '<div class="accordion">' +
             '<details open><summary>Details and fit</summary><div class="acc-body"><ul>' +
               p.details.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") +
