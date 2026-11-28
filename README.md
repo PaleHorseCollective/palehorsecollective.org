@@ -33,3 +33,18 @@ See [docs/HOW-TO-ADD-A-PRODUCT.md](docs/HOW-TO-ADD-A-PRODUCT.md). Short version:
 ## Checking it before it goes live
 
 Push to a branch and open a pull request. Netlify builds a preview link for it. Merge when it looks right.
+
+## When a paid order does not reach Printful
+
+If Printful rejects an order for a reason that will not fix itself, or if Printful is still down when Stripe is about to stop retrying, the site emails palehorsecollective@proton.me. The same payment is tagged so a retry does not create a second shirt. The customer thanks page is unchanged.
+
+That email needs one new Netlify environment variable. The key is not stored in this repo. If the variable is missing, the site keeps running and writes the failure in the function log instead.
+
+| Variable | Required | What it is |
+|---|---|---|
+| `ALERT_EMAIL_API_KEY` | To send the email | API key from a free [Resend](https://resend.com) account created with palehorsecollective@proton.me |
+| `ALERT_EMAIL_FROM` | No | Sender address, after you verify a domain in Resend. Leave this unset until then |
+
+Setup steps are in [docs/ORDER-ALERTS.md](docs/ORDER-ALERTS.md).
+
+To run the order-failure checks on your own machine: `npm install`, then `npm test`.
