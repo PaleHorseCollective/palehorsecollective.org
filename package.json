@@ -2,6 +2,9 @@
   "name": "palehorsecollective",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "test": "node --test tests/stripe-webhook.test.js"
+  },
   "dependencies": {
     "stripe": "^14.21.0"
   }

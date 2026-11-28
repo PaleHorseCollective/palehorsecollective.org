@@ -71,3 +71,5 @@ The top of `products.json` has a `site` section. Change `heroImage` to swap the 
 ## How checkout works
 
 The Buy button sends the product's `checkoutId` and the size to the `create-checkout` function. It looks the product up in products.json, charges that price in Stripe, and after payment sends the customer to `/thanks`. The `stripe-webhook` function then finds the Printful variant for that size in products.json and places the order. Nothing in the functions needs editing when you add products.
+
+If Printful rejects a paid order, or it is still down when Stripe is about to stop retrying, the site emails palehorsecollective@proton.me. That mail is sent only after `ALERT_EMAIL_API_KEY` is set in Netlify. See [Order alerts](ORDER-ALERTS.md).
