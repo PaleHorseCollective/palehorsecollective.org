@@ -391,6 +391,57 @@ button { font: inherit; color: inherit; }
 .prose a:not(.btn):hover { color: var(--bone); }
 .prose .btn { margin-top: 28px; }
 
+/* ---------- about: copy left, portrait right ---------- */
+/* Narrow screens put the portrait first, full width, then the label.
+   From 900px up, both columns share the page-head top padding so the
+   frame lines up with the mono label, and the pair fills the wrap. */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  row-gap: 36px;
+  padding-top: clamp(32px, 5vw, 64px);
+  padding-bottom: 80px;
+}
+.about-layout .page-head { padding-top: 0; }
+.about-layout .prose { max-width: 680px; padding-bottom: 0; }
+.about-portrait {
+  order: -1;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--well);
+  position: relative;
+  overflow: hidden;
+}
+.about-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+/* The horse mark is a stand-in. Padding keeps it off the frame edges.
+   A 4:5 photo (src no longer ending in .svg) fills the frame instead. */
+.about-portrait img[src$=".svg"] { padding: 12%; }
+
+@media (min-width: 900px) {
+  .about-layout {
+    grid-template-columns: minmax(0, 680px) minmax(340px, 1fr);
+    column-gap: clamp(48px, 4vw, 72px);
+    row-gap: 0;
+  }
+  .about-copy { grid-column: 1; }
+  .about-portrait {
+    order: 0;
+    grid-column: 2;
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+  }
+}
+
 /* ---------- footer ---------- */
 
 .site-footer { border-top: 1px solid var(--line); margin-top: 40px; }
