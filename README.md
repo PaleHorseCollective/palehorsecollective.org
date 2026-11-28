@@ -20,10 +20,8 @@ img/products/          product photos and design files (name them <slug>-1.webp,
 archive.html           the archive (stories behind the designs), reads archive.json
 archive/               full write-ups for each symbol
 doctrine.html          the doctrine page
-ops.html               private mission control (password protected)
 
 netlify/functions/     checkout (Stripe) and order sending (Printful). Both read products.json
-netlify/edge-functions ops page password
 _redirects             clean URLs, plus old links (001, files, transmissions) pointing to the new pages
 docs/                  how-to guides
 ```
