@@ -45,4 +45,8 @@ This does not replace them. They stay in Netlify, not in git.
 
 ## Why the same payment cannot make two shirts
 
-Each Printful order is tagged with the Stripe payment id. Printful only allows 32 characters in that tag, and a Stripe id is longer, so the site keeps the start and the end of the same id. The same payment always gets the same tag. If Stripe tries again and Printful says that tag is already used, the site tells Stripe the order is done.
+Each Printful order is tagged with the Stripe payment id. Printful only allows 32 characters in that tag, and a Stripe id is longer, so the site keeps the start and the end of the same id. The same payment always gets the same tag.
+
+Before placing an order, the site asks Printful whether that tag already has one (`GET /orders/@{tag}`). If it does, the site tells Stripe the order is done and places nothing. This check does not depend on how Printful words its errors. If two tries land at the same moment and Printful refuses the second one as already existing, that also counts as done.
+
+If the order Printful already has is stuck (draft, failed or on hold), you get an email telling you to sort it out in Printful, not to place a second one.

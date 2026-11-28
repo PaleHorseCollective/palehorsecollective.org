@@ -74,6 +74,8 @@ function errorText(body) {
 function isExistingOrderError(status, body) {
   if (status !== 400 && status !== 409 && status !== 422) return false;
   const text = errorText(body).toLowerCase();
+  // Printful's usual wording does not name the external id at all.
+  if (/\border already exists\b/.test(text)) return true;
   const aboutExternalId = text.includes('external_id')
     || text.includes('external id')
     || text.includes('external-id');
@@ -100,6 +102,56 @@ function isFinalDelivery(options) {
   if (ageMs < 0) return false;
   const livemode = options.livemode !== false;
   return ageMs >= (livemode ? LIVE_FINAL_AGE_MS : TEST_FINAL_AGE_MS);
+}
+
+// Printful order statuses that mean the order exists but will not ship
+// until a person does something.
+const STUCK_STATUSES = ['draft', 'failed', 'onhold'];
+
+function printfulHeaders(env) {
+  return {
+    'Authorization': `Bearer ${env.PRINTFUL_API_KEY}`,
+    'Content-Type': 'application/json',
+    'X-PF-Store-Id': env.PRINTFUL_STORE_ID || '',
+  };
+}
+
+// Ask Printful directly whether this payment already has an order.
+// GET /orders/@{external_id} returns the order, or 404 if there is none.
+// This does not depend on how Printful words its errors.
+async function findExistingOrder(externalId, fetchImpl, env) {
+  let response;
+  try {
+    response = await fetchImpl(`https://api.printful.com/orders/@${encodeURIComponent(externalId)}`, {
+      method: 'GET',
+      headers: printfulHeaders(env),
+    });
+  } catch (err) {
+    throw new PrintfulOrderError(`Printful order lookup failed: ${err.message}`, true);
+  }
+
+  if (response.status === 404) return null;
+
+  let raw = '';
+  try {
+    raw = await response.text();
+  } catch (err) {
+    throw new PrintfulOrderError(`Printful order lookup could not be read: ${err.message}`, true);
+  }
+
+  if (!response.ok) {
+    throw new PrintfulOrderError(
+      `Printful order lookup error ${response.status}: ${raw.slice(0, 500)}`,
+      isTransientHttpStatus(response.status)
+    );
+  }
+
+  try {
+    const body = JSON.parse(raw);
+    return (body && body.result) || {};
+  } catch (err) {
+    throw new PrintfulOrderError(`Printful order lookup returned ${response.status} with an unreadable body`, true);
+  }
 }
 
 async function createPrintfulOrder(session, deps = {}) {
@@ -132,6 +184,19 @@ async function createPrintfulOrder(session, deps = {}) {
     throw new PrintfulOrderError(`No Printful variant ID configured for file ${fileId} size ${size}`, false);
   }
 
+  const existing = await findExistingOrder(externalId, fetchImpl, env);
+  if (existing) {
+    const status = existing.status ? String(existing.status).toLowerCase() : 'unknown';
+    return {
+      duplicate: true,
+      externalId,
+      status,
+      orderId: existing.id,
+      needsAttention: STUCK_STATUSES.includes(status),
+      result: existing,
+    };
+  }
+
   const orderPayload = {
     external_id: externalId,
     recipient: {
@@ -157,11 +222,7 @@ async function createPrintfulOrder(session, deps = {}) {
   try {
     response = await fetchImpl('https://api.printful.com/orders', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${env.PRINTFUL_API_KEY}`,
-        'Content-Type': 'application/json',
-        'X-PF-Store-Id': env.PRINTFUL_STORE_ID || '',
-      },
+      headers: printfulHeaders(env),
       body: JSON.stringify(orderPayload),
     });
   } catch (err) {
@@ -227,9 +288,12 @@ function formatAlert(details) {
   const fileId = metadata.file_id;
   const size = metadata.size || 'unknown';
   const email = (session.customer_details && session.customer_details.email) || 'unknown';
-  const intro = details.reason === 'final'
-    ? 'Someone paid, but Printful has been failing for a long time. Stripe retries for up to three days and is near the end of those retries. This site is still asking Stripe to try again. If a later try works, the order will show up in Printful on its own. Look there before you place a second one.'
-    : 'Someone paid, but the order was not created and retrying will not fix it. Stripe will stop trying. The customer has been charged. Place the order in Printful by hand, or fix the problem and resend this event from Stripe.';
+  const intros = {
+    final: 'Someone paid, but Printful has been failing for a long time. Stripe retries for up to three days and is near the end of those retries. This site is still asking Stripe to try again. If a later try works, the order will show up in Printful on its own. Look there before you place a second one.',
+    stuck: 'Someone paid and the order is in Printful, but it is stuck and will not ship until you sort it out. Open the order in Printful and fix or confirm it. Do not place a second order.',
+    permanent: 'Someone paid, but the order was not created and retrying will not fix it. Stripe will stop trying. The customer has been charged. Check Printful first in case it is there, then place the order by hand, or fix the problem and resend this event from Stripe.',
+  };
+  const intro = intros[details.reason] || intros.permanent;
   const errorMessage = details.error && details.error.message ? details.error.message : String(details.error || 'unknown error');
   return [
     intro,
@@ -249,9 +313,12 @@ function alertSubject(session, reason) {
   const metadata = (session && session.metadata) || {};
   const size = metadata.size || '?';
   const name = productLabel(metadata.file_id);
-  const lead = reason === 'final'
-    ? 'Printful still failing for a paid order'
-    : 'Paid order was not sent to Printful';
+  const leads = {
+    final: 'Printful still failing for a paid order',
+    stuck: 'Paid order is stuck in Printful',
+    permanent: 'Paid order was not sent to Printful',
+  };
+  const lead = leads[reason] || leads.permanent;
   return `${lead}: ${name}, size ${size}`.slice(0, 180);
 }
 
@@ -321,7 +388,14 @@ async function handlePaidCheckout(session, options = {}) {
       env: options.env,
     });
     if (result.duplicate) {
-      console.log(`Printful order already exists — external_id:${result.externalId} session:${session.id}`);
+      console.log(`Printful order already exists — external_id:${result.externalId} order_id:${result.orderId} status:${result.status} session:${session.id}`);
+      if (result.needsAttention) {
+        await alertSafely(alertImpl, {
+          session,
+          error: new Error(`Printful order ${result.orderId || ''} is in status "${result.status}"`),
+          reason: 'stuck',
+        });
+      }
       return { statusCode: 200, body: JSON.stringify({ received: true, duplicate: true }) };
     }
     return { statusCode: 200, body: JSON.stringify({ received: true }) };

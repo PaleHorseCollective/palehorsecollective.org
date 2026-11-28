@@ -45,14 +45,25 @@ function jsonResponse(status, body) {
   };
 }
 
-function recordingFetch(responder) {
+function isLookup(url) {
+  return String(url).startsWith('https://api.printful.com/orders/@');
+}
+
+// Printful's "does this payment already have an order" lookup answers 404
+// (no order yet) unless a test passes its own lookup responder.
+function recordingFetch(responder, lookupResponder) {
   const calls = [];
+  const lookups = [];
   const impl = async (url, opts) => {
+    if (isLookup(url)) {
+      lookups.push({ url, opts });
+      return lookupResponder ? lookupResponder({ url, opts }) : jsonResponse(404, { code: 404, result: 'Not found' });
+    }
     const parsed = opts && opts.body ? JSON.parse(opts.body) : null;
     calls.push({ url, opts, body: parsed });
     return responder({ url, opts, body: parsed, calls });
   };
-  return { impl, calls };
+  return { impl, calls, lookups };
 }
 
 function alertSpy() {
@@ -407,6 +418,7 @@ test('the handler treats a duplicate Printful order as success', async () => {
   await withWebhookEnv(async () => {
     const calls = [];
     global.fetch = async (url, opts) => {
+      if (isLookup(url)) return jsonResponse(404, { code: 404, result: 'Not found' });
       calls.push(url);
       assert.equal(url, 'https://api.printful.com/orders');
       return jsonResponse(400, duplicateBody("Order with external_id 'x' already exists"));
@@ -428,6 +440,7 @@ test('the handler returns 500 for a fresh Printful outage and 200 for a permanen
   await withWebhookEnv(async () => {
     const urls = [];
     global.fetch = async (url) => {
+      if (isLookup(url)) return jsonResponse(404, { code: 404, result: 'Not found' });
       urls.push(url);
       if (url === 'https://api.resend.com/emails') return jsonResponse(200, { id: 'email_1' });
       return jsonResponse(503, { code: 503, result: 'down' });
@@ -446,6 +459,7 @@ test('the handler returns 500 for a fresh Printful outage and 200 for a permanen
 
     urls.length = 0;
     global.fetch = async (url) => {
+      if (isLookup(url)) return jsonResponse(404, { code: 404, result: 'Not found' });
       urls.push(url);
       if (url === 'https://api.resend.com/emails') return jsonResponse(200, { id: 'email_2' });
       return jsonResponse(400, duplicateBody('Recipient: Address line 1 is required'));
@@ -467,6 +481,7 @@ test('the handler emails on the last stretch of test-mode retries and still retu
   await withWebhookEnv(async () => {
     const urls = [];
     global.fetch = async (url) => {
+      if (isLookup(url)) return jsonResponse(404, { code: 404, result: 'Not found' });
       urls.push(url);
       if (url === 'https://api.resend.com/emails') return jsonResponse(200, { id: 'email_3' });
       return jsonResponse(503, { code: 503, result: 'down' });
@@ -488,4 +503,98 @@ test('the handler emails on the last stretch of test-mode retries and still retu
 test('non-POST requests are rejected', async () => {
   const response = await webhook.handler({ httpMethod: 'GET', headers: {}, body: '' });
   assert.equal(response.statusCode, 405);
+});
+
+test('an order Printful already has for this payment is not placed again', async () => {
+  const seen = recordingFetch(
+    () => { throw new Error('should not POST a second order'); },
+    () => jsonResponse(200, { code: 200, result: { id: 77, status: 'pending' } })
+  );
+  const alerts = alertSpy();
+  const session = paidSession();
+  const response = await webhook.handlePaidCheckout(session, checkoutOptions({
+    fetchImpl: seen.impl,
+    alertImpl: alerts.impl,
+  }));
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(JSON.parse(response.body).duplicate, true);
+  assert.equal(seen.calls.length, 0);
+  assert.equal(alerts.alerts.length, 0);
+  assert.equal(seen.lookups.length, 1);
+  assert.equal(
+    seen.lookups[0].url,
+    'https://api.printful.com/orders/@' + webhook.externalIdForSession(session.id)
+  );
+  assert.equal(seen.lookups[0].opts.method, 'GET');
+  assert.equal(seen.lookups[0].opts.headers.Authorization, 'Bearer test-printful-key');
+  assert.equal(seen.lookups[0].opts.headers['X-PF-Store-Id'], 'store-1');
+});
+
+test('an existing order stuck in draft, failed or on hold emails once and is not placed again', async () => {
+  for (const status of ['draft', 'failed', 'onhold']) {
+    const seen = recordingFetch(
+      () => { throw new Error('should not POST a second order'); },
+      () => jsonResponse(200, { code: 200, result: { id: 78, status } })
+    );
+    const alerts = alertSpy();
+    const response = await webhook.handlePaidCheckout(paidSession(), checkoutOptions({
+      fetchImpl: seen.impl,
+      alertImpl: alerts.impl,
+    }));
+
+    assert.equal(response.statusCode, 200, status);
+    assert.equal(seen.calls.length, 0, status);
+    assert.equal(alerts.alerts.length, 1, status);
+    assert.equal(alerts.alerts[0].reason, 'stuck', status);
+  }
+});
+
+test('a Printful outage during the lookup retries without placing an order', async () => {
+  const seen = recordingFetch(
+    () => { throw new Error('should not POST while the lookup is failing'); },
+    () => jsonResponse(503, { code: 503, result: 'down' })
+  );
+  const alerts = alertSpy();
+  const response = await webhook.handlePaidCheckout(paidSession(), checkoutOptions({
+    fetchImpl: seen.impl,
+    alertImpl: alerts.impl,
+  }));
+
+  assert.equal(response.statusCode, 500);
+  assert.equal(seen.calls.length, 0);
+  assert.equal(alerts.alerts.length, 0);
+});
+
+test("Printful's usual 'Order already exists' wording counts as a duplicate", async () => {
+  assert.equal(
+    webhook.isExistingOrderError(400, duplicateBody('Order already exists and cannot be updated')),
+    true
+  );
+
+  // Two deliveries at once: both lookups say no order, then the second POST is refused.
+  const seen = recordingFetch(() => jsonResponse(400, duplicateBody('Order already exists and cannot be updated')));
+  const alerts = alertSpy();
+  const response = await webhook.handlePaidCheckout(paidSession(), checkoutOptions({
+    fetchImpl: seen.impl,
+    alertImpl: alerts.impl,
+  }));
+  assert.equal(response.statusCode, 200);
+  assert.equal(JSON.parse(response.body).duplicate, true);
+  assert.equal(alerts.alerts.length, 0);
+});
+
+test('the stuck-order email says not to place a second order', () => {
+  const sent = [];
+  return webhook.sendOwnerAlert(
+    { session: paidSession(), error: new Error('status "draft"'), reason: 'stuck' },
+    {
+      env: { ALERT_EMAIL_API_KEY: 're_test_key' },
+      fetchImpl: async (url, opts) => { sent.push(JSON.parse(opts.body)); return jsonResponse(200, { id: 'e' }); },
+    }
+  ).then(() => {
+    assert.equal(sent.length, 1);
+    assert.match(sent[0].subject, /^Paid order is stuck in Printful/);
+    assert.match(sent[0].text, /Do not place a second order/);
+  });
 });
