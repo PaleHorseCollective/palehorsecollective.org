@@ -16,3 +16,8 @@
 # Still live, just no longer in the main menu
 /archive          /archive.html               301
 /doctrine         /doctrine.html              301
+
+# Mission control was removed on 28 Nov 2026. Force 404 so these
+# paths cannot serve a page (including if a file is ever put back).
+/ops              /404.html                   404
+/ops.html         /404.html                   404!

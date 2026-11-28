@@ -5,7 +5,3 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["stripe"]
-
-[[edge_functions]]
-  path = "/ops"
-  function = "ops-auth"
